@@ -1,0 +1,23 @@
+name: InfoboardReloaded
+main: com.ktar5.infoboard.InfoBoard
+version: 0.0.1
+author: pixar02
+description: Show an info board
+depend: [PlaceholderAPI, Vault, Worldguard]
+
+commands:
+  InfoBoard:
+    usage: /<command>
+    description: The main command for this plugin
+    aliases: [ibr, ib, iboard, infob, InfobroardReloaded]
+    
+permissions:
+  ibr.*:
+    default: op
+    children:
+      ibr.Set: true
+      ibr.Toggle: true
+      ibr.Reload: true
+      ibr.View: true
+  ibr.View:
+    default: true
