@@ -1,6 +1,6 @@
 name: InfoboardReloaded
 main: com.ktar5.infoboard.InfoBoard
-version: 0.0.5
+version: 1.0.0
 author: pixar02
 description: Show an info board
 depend: [PlaceholderAPI, Vault, Worldguard]
