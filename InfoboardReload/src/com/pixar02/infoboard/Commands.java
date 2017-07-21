@@ -84,7 +84,7 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage("Invalid Permissions.");
 
 					else {
-						sender.sendMessage("" + ChatColor.GREEN + "Configs been reloaded");
+						sender.sendMessage(ChatColor.GREEN + "Configs been reloaded");
 						Bukkit.getScheduler().cancelTasks(plugin);
 						for (Player player : Bukkit.getOnlinePlayers())
 							ScrollManager.reset(player);
@@ -107,7 +107,7 @@ public class Commands implements CommandExecutor {
 						+ ChatColor.BOLD + " InfoBoardReloaded " + ChatColor.ITALIC + " v"
 						+ plugin.getDescription().getVersion() + ChatColor.GOLD + " " + ChatColor.STRIKETHROUGH
 						+ "]========");
-				sender.sendMessage("/IB Hide      " + ChatColor.YELLOW + "- Hide the board");
+				sender.sendMessage("/IB Hide     " + ChatColor.YELLOW + "- Hide the board");
 				sender.sendMessage("/IB Show     " + ChatColor.YELLOW + "- Show the board");
 				sender.sendMessage("/IB Reload   " + ChatColor.YELLOW + "- Reload the config");
 				sender.sendMessage("/IB Set <Pg> " + ChatColor.YELLOW + "- Set the page to view");
