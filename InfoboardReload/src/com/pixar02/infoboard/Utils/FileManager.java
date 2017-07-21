@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -21,8 +18,11 @@ public class FileManager {
 	// Files & configs
 	private FileConfiguration board;
 	private FileConfiguration variable;
+
 	private File boardFile;
 	private File variableFile;
+
+	// TODO Setting default values of Board
 
 	public void setup() {
 		if (!plugin.getDataFolder().exists()) {
@@ -36,7 +36,6 @@ public class FileManager {
 		if (!boardFile.exists()) {
 			try {
 				boardFile.createNewFile();
-				// TODO Setting default values of Board
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.GREEN + "The board.yml file has been created");
 			} catch (IOException e) {
@@ -63,9 +62,14 @@ public class FileManager {
 
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
+		reloadBoard();
+		reloadVariable();
 	}
 
 	public FileConfiguration getBoard() {
+		if (board == null) {
+			reloadBoard();
+		}
 		return board;
 	}
 
@@ -102,6 +106,13 @@ public class FileManager {
 
 	public void reloadBoard() {
 		board = YamlConfiguration.loadConfiguration(boardFile);
+		
+		//look for defaults in the jar
+		InputStream defConfigStream = plugin.getResource("board.yml");
+		if (defConfigStream != null) {
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
+			board.setDefaults(defConfig);
+		}
 		Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The board.yml file has been reload");
 	}
 
@@ -114,8 +125,4 @@ public class FileManager {
 		plugin.reloadConfig();
 	}
 
-	/*
-	 * public void setDefaultValues() { getBoard().setDefaults((Configuration)
-	 * plugin.getResource("Board.yml")); saveBoard(); }
-	 */
 }

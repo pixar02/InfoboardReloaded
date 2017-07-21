@@ -82,22 +82,58 @@ public class Commands implements CommandExecutor {
 				else if (args[0].equalsIgnoreCase("Reload"))
 					if (!sender.hasPermission("InfoBoard.Reload"))
 						sender.sendMessage("Invalid Permissions.");
+				if (args.length == 2) {
+					if (args[1].equalsIgnoreCase("Board")) {
 
-					else {
-						sender.sendMessage(ChatColor.GREEN + "Configs been reloaded");
+						Bukkit.getScheduler().cancelTasks(plugin);
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "canceled tasks");
+
+						for (Player player : Bukkit.getOnlinePlayers()) {
+							ScrollManager.reset(player);
+							Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reset ScrollManager");
+						}
+						plugin.fm.reloadBoard();
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reloaded board");
+						plugin.timers.reset();
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reset timers");
+
+						for (Player player : Bukkit.getOnlinePlayers())
+							if (player.hasPermission("InfoBoard.View"))
+								Create.createScoreBoard(player);
+						sender.sendMessage(ChatColor.GREEN + "board.yml has been reloaded");
+
+					} else if (args[1].equalsIgnoreCase("config")) {
+						sender.sendMessage(ChatColor.GREEN + "Config.yml has been reloaded");
 						Bukkit.getScheduler().cancelTasks(plugin);
 						for (Player player : Bukkit.getOnlinePlayers())
 							ScrollManager.reset(player);
 
-						plugin.fm.reloadBoard();
 						plugin.fm.reloadConfig();
-
 						plugin.timers.reset();
+
 						for (Player player : Bukkit.getOnlinePlayers())
 							if (player.hasPermission("InfoBoard.View"))
 								Create.createScoreBoard(player);
 
 					}
+				}
+
+				else if (args.length == 1 && args.length != 2 && args[0].equalsIgnoreCase("Reload")) {
+
+					sender.sendMessage(ChatColor.GREEN + "All configs have been reloaded");
+					Bukkit.getScheduler().cancelTasks(plugin);
+					for (Player player : Bukkit.getOnlinePlayers())
+						ScrollManager.reset(player);
+
+					plugin.fm.reloadBoard();
+					plugin.fm.reloadConfig();
+
+					plugin.timers.reset();
+					for (Player player : Bukkit.getOnlinePlayers())
+						if (player.hasPermission("InfoBoard.View"))
+							Create.createScoreBoard(player);
+
+				}
 
 			}
 			// ====================================================================================
@@ -107,10 +143,10 @@ public class Commands implements CommandExecutor {
 						+ ChatColor.BOLD + " InfoBoardReloaded " + ChatColor.ITALIC + " v"
 						+ plugin.getDescription().getVersion() + ChatColor.GOLD + " " + ChatColor.STRIKETHROUGH
 						+ "]========");
-				sender.sendMessage("/IB Hide     " + ChatColor.YELLOW + "- Hide the board");
-				sender.sendMessage("/IB Show     " + ChatColor.YELLOW + "- Show the board");
-				sender.sendMessage("/IB Reload   " + ChatColor.YELLOW + "- Reload the config");
-				sender.sendMessage("/IB Set <Pg> " + ChatColor.YELLOW + "- Set the page to view");
+				sender.sendMessage("/IBR Hide     " + ChatColor.YELLOW + "- Hide the board");
+				sender.sendMessage("/IBR Show     " + ChatColor.YELLOW + "- Show the board");
+				sender.sendMessage("/IBR Reload   " + ChatColor.YELLOW + "- Reload the config");
+				sender.sendMessage("/IBR Set <Pg> " + ChatColor.YELLOW + "- Set the page to view");
 				sender.sendMessage(
 						"" + ChatColor.GOLD + ChatColor.STRIKETHROUGH + "--------------------------------------------");
 				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Authors: " + ChatColor.WHITE
@@ -127,7 +163,7 @@ public class Commands implements CommandExecutor {
 				}
 
 			}
+
 		return true;
 	}
-
 }
