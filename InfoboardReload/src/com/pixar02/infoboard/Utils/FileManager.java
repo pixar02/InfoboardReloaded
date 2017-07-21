@@ -32,8 +32,10 @@ public class FileManager {
 		if (!boardFile.exists()) {
 			try {
 				boardFile.createNewFile();
+				// look for default file in .jar
+
 				Bukkit.getServer().getConsoleSender()
-						.sendMessage(ChatColor.GREEN + "The players.yml file has been created");
+						.sendMessage(ChatColor.GREEN + "The board.yml file has been created");
 			} catch (IOException e) {
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.RED + "Could not create the board.yml file" + e);
@@ -46,6 +48,8 @@ public class FileManager {
 		if (!variableFile.exists()) {
 			try {
 				variableFile.createNewFile();
+				// look for default file in .jar
+
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.GREEN + "The variables.yml file has been created");
 			} catch (IOException e) {
@@ -54,11 +58,9 @@ public class FileManager {
 			}
 		}
 		variable = YamlConfiguration.loadConfiguration(variableFile);
-		
+
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
-		getBoard().options().copyDefaults(true);
-		saveBoard();
 	}
 
 	public FileConfiguration getBoard() {
