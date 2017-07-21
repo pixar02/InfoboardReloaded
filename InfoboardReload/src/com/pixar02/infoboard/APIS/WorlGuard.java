@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class WorlGuard {
-	public static boolean boardsAreAllowedHere(Location loc) {
+	public static boolean boardsAllowedHere(Location loc) {
 		boolean allowed = true;
 		if (serverHasWorldGuard()) {
 
@@ -13,12 +13,6 @@ public class WorlGuard {
 		return false;
 	}
 
-	
-	
-	
-	
-	
-	
 	
 	
 	/*

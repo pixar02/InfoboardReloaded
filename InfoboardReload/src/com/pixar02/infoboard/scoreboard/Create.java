@@ -1,14 +1,12 @@
 package com.pixar02.infoboard.scoreboard;
 
-
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-
 import com.ktar5.infoboard.scroll.Scroll;
 import com.ktar5.infoboard.scroll.ScrollManager;
-import com.ktar5.infoboard.utils.Messages;
-import com.ktar5.infoboard.utils.Settings;
+import com.pixar02.infoboard.Utils.Messages;
+import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.InfoBoard;
 import com.pixar02.infoboard.APIS.WorlGuard;
 import com.pixar02.infoboard.APIS.Vault;
@@ -75,7 +73,7 @@ public class Create {
 				if (set.getBoolean())
 					// If the line is empty just assume it's an empty line
 					if (line.equals(" ") || line.equals("")) {
-					String space = "ยง" + spaces;
+					String space = "ง" + spaces;
 					spaces++;
 					board.add(Messages.getColored(space), row);
 					} else // Manage all scrolling lines
