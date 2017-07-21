@@ -3,11 +3,12 @@ package com.pixar02.infoboard.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import com.pixar02.infoboard.GetVariables;
 import com.pixar02.infoboard.InfoBoard;
 import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
-
+private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class); 
 	/**
 	 * Get the message in color
 	 *
@@ -59,8 +60,8 @@ public class Messages {
 	 */
 	public static String getTitle(Player player, String worldName, String rankName) {
 
-		String title = InfoBoard.getFileManager().getBoard().getString("Info Board."
-				+ String.valueOf(InfoBoard.getTimers().getPage()) + "." + worldName + "." + rankName + ".Title");
+		String title = plugin.fm.getBoard().getString("Info Board."
+				+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
 
 		if (title.startsWith("<scroll>") && Settings.scrollingEnabled()) {
 			title = title.replaceAll("<scroll>", "");

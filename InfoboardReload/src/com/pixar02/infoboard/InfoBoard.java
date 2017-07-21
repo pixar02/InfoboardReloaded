@@ -1,5 +1,6 @@
 package com.pixar02.infoboard;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -9,10 +10,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pixar02.infoboard.Utils.FileManager;
 
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
+
 public class InfoBoard extends JavaPlugin {
 	public FileManager fm;
 	public boolean update = false;
-
+	public Timers timers;
+	public Permission permission;
+	public Economy economy;
+    public static boolean economyB;
+    public static boolean permissionB;
+    public static ArrayList<String> hidefrom = new ArrayList<String>();
 	public void onEnable() {
 
 		PluginDescriptionFile pdfFile = getDescription();
@@ -31,7 +40,7 @@ public class InfoBoard extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PlayerListener(this), this);
 		getCommand("InfoBoard").setExecutor(new Commands(this));
-		
+
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}

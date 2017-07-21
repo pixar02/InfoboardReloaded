@@ -3,16 +3,17 @@ package com.pixar02.infoboard.scoreboard;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.ktar5.infoboard.scroll.Scroll;
-import com.ktar5.infoboard.scroll.ScrollManager;
+import com.pixar02.infoboard.Scroll.Scroll;
+import com.pixar02.infoboard.Scroll.ScrollManager;
 import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.InfoBoard;
-import com.pixar02.infoboard.APIS.WorlGuard;
+import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.APIS.Vault;
 import java.util.List;
 
 public class Create {
+	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
 
 	public static boolean createScoreBoard(Player player) {
 		// Set the default variable values
@@ -21,14 +22,14 @@ public class Create {
 		int row, spaces = 0;
 
 		// Make sure the player is allowed to see the scoreboard
-		if (WorlGuard.boardsAllowedHere(player.getLocation()) && !Settings.isWorldDisabled(player.getWorld().getName())
+		if (WorldGuard.boardsAllowedHere(player.getLocation()) && !Settings.isWorldDisabled(player.getWorld().getName())
 				&& player.hasPermission("InfoBoard.View") && !InfoBoard.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name
-			if (Settings.doesWorldHaveScoreBoard(InfoBoard.getTimers().getPage(), player.getWorld().getName()))
+			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName()))
 				worldName = player.getWorld().getName();
-			else if (Settings.doesGlobalHaveScoreBoard(InfoBoard.getTimers().getPage()))
+			else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage()))
 				worldName = "global";
 			else
 				return false;
@@ -38,11 +39,11 @@ public class Create {
 
 			// Make sure the rank is on the board, if it is set that to the
 			// player's rankName
-			if (Settings.doesRankHaveScoreBoard(InfoBoard.getTimers().getPage(), worldName, rank))
+			if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank))
 				rankName = rank;
 
 			// Make sure there is a default for the board
-			if (!Settings.doesRankHaveScoreBoard(InfoBoard.getTimers().getPage(), worldName, rankName))
+			if (!Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName))
 				return false;
 
 			// Remove any old objective from the sidebar
@@ -60,8 +61,8 @@ public class Create {
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
 
 			// Loop through the lines
-			List<String> lines = InfoBoard.getFileManager().getBoard().getStringList("Info Board."
-					+ String.valueOf(InfoBoard.getTimers().getPage()) + "." + worldName + "." + rankName + ".Rows");
+			List<String> lines = plugin.fm.getBoard().getStringList("Info Board."
+					+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows");
 
 			for (row = 0; row != lines.size(); row++) {
 				String line = lines.get(row);
