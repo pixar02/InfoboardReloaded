@@ -57,6 +57,8 @@ public class FileManager {
 		
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
+		getBoard().options().copyDefaults(true);
+		saveBoard();
 	}
 
 	public FileConfiguration getBoard() {
