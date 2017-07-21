@@ -2,6 +2,7 @@ package com.pixar02.infoboard.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,9 +34,8 @@ public class FileManager {
 			try {
 				boardFile.createNewFile();
 				// look for default file in .jar
-
-				Bukkit.getServer().getConsoleSender()
-						.sendMessage(ChatColor.GREEN + "The board.yml file has been created");
+				getBoard().options().copyDefaults(true);
+				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The board.yml file has been created");
 			} catch (IOException e) {
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.RED + "Could not create the board.yml file" + e);
@@ -49,7 +49,7 @@ public class FileManager {
 			try {
 				variableFile.createNewFile();
 				// look for default file in .jar
-
+				getVariable().options().copyDefaults(true);
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.GREEN + "The variables.yml file has been created");
 			} catch (IOException e) {
