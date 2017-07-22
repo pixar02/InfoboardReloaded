@@ -86,17 +86,12 @@ public class Commands implements CommandExecutor {
 					if (args[1].equalsIgnoreCase("Board")) {
 
 						Bukkit.getScheduler().cancelTasks(plugin);
-						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "canceled tasks");
 
 						for (Player player : Bukkit.getOnlinePlayers()) {
 							ScrollManager.reset(player);
-							Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reset ScrollManager");
 						}
 						plugin.fm.reloadBoard();
-						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reloaded board");
-
 						plugin.timers.reset();
-						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reset timers");
 
 						for (Player player : Bukkit.getOnlinePlayers())
 							if (player.hasPermission("InfoBoard.View"))
@@ -104,7 +99,7 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage(ChatColor.GREEN + "board.yml has been reloaded");
 
 					} else if (args[1].equalsIgnoreCase("config")) {
-						sender.sendMessage(ChatColor.GREEN + "Config.yml has been reloaded");
+
 						Bukkit.getScheduler().cancelTasks(plugin);
 						for (Player player : Bukkit.getOnlinePlayers())
 							ScrollManager.reset(player);
@@ -113,10 +108,12 @@ public class Commands implements CommandExecutor {
 						plugin.timers.reset();
 
 						for (Player player : Bukkit.getOnlinePlayers())
-							if (player.hasPermission("InfoBoard.View"))
+							if (player.hasPermission("InfoBoard.View")) {
 								Create.createScoreBoard(player);
-
+							}
+						sender.sendMessage(ChatColor.GREEN + "Config.yml has been reloaded");
 					}
+
 				}
 
 				else if (args.length == 1 && args.length != 2 && args[0].equalsIgnoreCase("Reload")) {
@@ -144,10 +141,10 @@ public class Commands implements CommandExecutor {
 						+ ChatColor.BOLD + " InfoBoardReloaded " + ChatColor.ITALIC + " v"
 						+ plugin.getDescription().getVersion() + ChatColor.GOLD + " " + ChatColor.STRIKETHROUGH
 						+ "]========");
-				sender.sendMessage("/IBR Hide     " + ChatColor.YELLOW + "- Hide the board");
-				sender.sendMessage("/IBR Show     " + ChatColor.YELLOW + "- Show the board");
-				sender.sendMessage("/IBR Reload   " + ChatColor.YELLOW + "- Reload the config");
-				sender.sendMessage("/IBR Set <Pg> " + ChatColor.YELLOW + "- Set the page to view");
+				sender.sendMessage("/IBR Hide         " + ChatColor.YELLOW + "- Hide the board");
+				sender.sendMessage("/IBR Show         " + ChatColor.YELLOW + "- Show the board");
+				sender.sendMessage("/IBR Reload [FILE]" + ChatColor.YELLOW + "- Reload the config");
+				sender.sendMessage("/IBR Set <Pg>     " + ChatColor.YELLOW + "- Set the page to view");
 				sender.sendMessage(
 						"" + ChatColor.GOLD + ChatColor.STRIKETHROUGH + "--------------------------------------------");
 				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Authors: " + ChatColor.WHITE

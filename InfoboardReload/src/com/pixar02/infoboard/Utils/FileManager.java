@@ -116,16 +116,17 @@ public class FileManager {
 			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
 			board.setDefaults(defConfig);
 		}
-		Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The board.yml file has been reload");
+		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The board.yml file has been reload");
 	}
 
 	public void reloadVariable() {
 		variable = YamlConfiguration.loadConfiguration(variableFile);
-		Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The variables.yml file has been reload");
+		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The variables.yml file has been reload");
 	}
 
 	public void reloadConfig() {
 		plugin.reloadConfig();
+		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The config.yml file has been reload");
 	}
 
 	private void copy(InputStream in, File file) {
