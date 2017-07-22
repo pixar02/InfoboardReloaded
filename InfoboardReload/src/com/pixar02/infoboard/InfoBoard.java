@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
+import com.pixar02.infoboard.PlayerListener;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -20,12 +21,11 @@ public class InfoBoard extends JavaPlugin {
 	public FileManager fm;
 	public boolean update = false;
 	public static ArrayList<String> hidefrom = new ArrayList<String>();
-	
+
 	public Permission permission;
 	public Economy economy;
 	public static boolean economyB;
 	public static boolean permissionB;
-
 
 	public void onEnable() {
 
@@ -40,12 +40,16 @@ public class InfoBoard extends JavaPlugin {
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
 		}
-		
+
 		loadFileManager();
 		Vault.load();
-
+		timers.start();
+		
+		// events
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PlayerListener(this), this);
+		
+		// commands
 		getCommand("InfoBoard").setExecutor(new Commands(this));
 
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
@@ -53,6 +57,7 @@ public class InfoBoard extends JavaPlugin {
 	}
 
 	public void onDisable() {
+		Bukkit.getScheduler().cancelTasks(this);
 		PluginDescriptionFile pdfFile = getDescription();
 		Logger logger = getLogger();
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
