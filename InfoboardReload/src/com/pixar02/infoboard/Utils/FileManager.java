@@ -1,9 +1,11 @@
 package com.pixar02.infoboard.Utils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -36,6 +38,7 @@ public class FileManager {
 		if (!boardFile.exists()) {
 			try {
 				boardFile.createNewFile();
+				copy(plugin.getResource("board.yml"), boardFile);
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.GREEN + "The board.yml file has been created");
 			} catch (IOException e) {
@@ -106,8 +109,8 @@ public class FileManager {
 
 	public void reloadBoard() {
 		board = YamlConfiguration.loadConfiguration(boardFile);
-		
-		//look for defaults in the jar
+
+		// look for defaults in the jar
 		InputStream defConfigStream = plugin.getResource("board.yml");
 		if (defConfigStream != null) {
 			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
@@ -125,4 +128,18 @@ public class FileManager {
 		plugin.reloadConfig();
 	}
 
+	private void copy(InputStream in, File file) {
+		try {
+	        OutputStream out = new FileOutputStream(file);
+	        byte[] buf = new byte[1024];
+	        int len;
+	        while((len=in.read(buf))>0){
+	            out.write(buf,0,len);
+	        }
+	        out.close();
+	        in.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }
