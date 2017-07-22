@@ -39,7 +39,7 @@ public class Update {
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard")))
 			// If the player no longer has permissions to see the board, remove
 			// it
-			if (!player.hasPermission("InfoBoard.View") || !WorldGuard.boardsAllowedHere(player.getLocation()))
+			if (!player.hasPermission("ibr.View") || !WorldGuard.boardsAllowedHere(player.getLocation()))
 			player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 			else // If the player doesn't have a scoreboard, then just create
 					// one

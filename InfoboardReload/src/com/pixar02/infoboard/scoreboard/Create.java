@@ -23,7 +23,7 @@ public class Create {
 
 		// Make sure the player is allowed to see the scoreboard
 		if (WorldGuard.boardsAllowedHere(player.getLocation()) && !Settings.isWorldDisabled(player.getWorld().getName())
-				&& player.hasPermission("InfoBoard.View") && !InfoBoard.hidefrom.contains(player.getName())
+				&& player.hasPermission("ibr.View") && !InfoBoard.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name

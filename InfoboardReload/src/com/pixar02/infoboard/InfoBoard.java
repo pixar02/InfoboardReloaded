@@ -28,26 +28,42 @@ public class InfoBoard extends JavaPlugin {
 	public static boolean permissionB;
 
 	public void onEnable() {
-
+		Bukkit.getConsoleSender().sendMessage("Check !");
 		PluginDescriptionFile pdfFile = getDescription();
+		Bukkit.getConsoleSender().sendMessage("Check 2");
 		Logger logger = getLogger();
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
+		}else{
+			Bukkit.getConsoleSender().sendMessage("Check 3");
 		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
 			throw new RuntimeException("Could not find WorldGuard!! Plugin can not work without it!");
+		}else{
+			Bukkit.getConsoleSender().sendMessage("Check 4");
 		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
+		}else{
+			Bukkit.getConsoleSender().sendMessage("Check 5");
 		}
 
 		loadFileManager();
+		Bukkit.getConsoleSender().sendMessage("Check 6");
+		
 		Vault.load();
+		Bukkit.getConsoleSender().sendMessage("Check 7");
+		
 		timers.start();
+		Bukkit.getConsoleSender().sendMessage("Check 8");
+		
 		
 		// events
 		PluginManager pm = getServer().getPluginManager();
+		Bukkit.getConsoleSender().sendMessage("Check 9");
+		
 		pm.registerEvents(new PlayerListener(this), this);
+		Bukkit.getConsoleSender().sendMessage("Check 10");
 		
 		// commands
 		getCommand("InfoBoard").setExecutor(new Commands(this));

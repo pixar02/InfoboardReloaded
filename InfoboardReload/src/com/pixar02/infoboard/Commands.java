@@ -27,7 +27,7 @@ public class Commands implements CommandExecutor {
 				// ====================================================================================
 				// HIDE =====================================
 				if (args[0].equalsIgnoreCase("Hide")) {
-					if (!sender.hasPermission("InfoBoard.Toggle")) {
+					if (!sender.hasPermission("ibr.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
 					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
@@ -43,7 +43,7 @@ public class Commands implements CommandExecutor {
 				// ====================================================================================
 				// SHOW =====================================
 				else if (args[0].equalsIgnoreCase("Show")) {
-					if (!sender.hasPermission("InfoBoard.Toggle")) {
+					if (!sender.hasPermission("ibr.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
 					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
@@ -58,7 +58,7 @@ public class Commands implements CommandExecutor {
 				// ====================================================================================
 				// SET =====================================
 				else if (args[0].equalsIgnoreCase("Set")) {
-					if (!sender.hasPermission("InfoBoard.Set"))
+					if (!sender.hasPermission("ibr.Set"))
 						sender.sendMessage("Invalid Permissions.");
 
 					else if (args.length == 2) {
@@ -70,7 +70,7 @@ public class Commands implements CommandExecutor {
 							sender.sendMessage("");
 							sender.sendMessage("Rotation set to: " + args[1]);
 							for (Player p : Bukkit.getOnlinePlayers())
-								if (p.hasPermission("InfoBoard.View"))
+								if (p.hasPermission("ibr.View"))
 									Create.createScoreBoard(p);
 						} else {
 							sender.sendMessage("Page not found: " + args[1]);
@@ -80,7 +80,7 @@ public class Commands implements CommandExecutor {
 				// ====================================================================================
 				// RELOAD =====================================
 				else if (args[0].equalsIgnoreCase("Reload"))
-					if (!sender.hasPermission("InfoBoard.Reload"))
+					if (!sender.hasPermission("ibr.Reload"))
 						sender.sendMessage("Invalid Permissions.");
 				if (args.length == 2) {
 					if (args[1].equalsIgnoreCase("Board")) {
@@ -131,7 +131,7 @@ public class Commands implements CommandExecutor {
 
 					plugin.timers.reset();
 					for (Player player : Bukkit.getOnlinePlayers())
-						if (player.hasPermission("InfoBoard.View"))
+						if (player.hasPermission("ibr.View"))
 							Create.createScoreBoard(player);
 
 				}
