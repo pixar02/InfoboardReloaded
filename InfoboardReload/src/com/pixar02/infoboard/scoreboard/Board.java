@@ -2,12 +2,7 @@ package com.pixar02.infoboard.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
-
+import org.bukkit.scoreboard.*;
 public class Board {
 
 	private Scoreboard scoreboard;

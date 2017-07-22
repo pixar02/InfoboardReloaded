@@ -30,7 +30,8 @@ public class Timers {
 
 	public void start() {
 		/*
-		 * ============================================== Page Rotation
+		 * ==============================================
+		 *  Page Rotation
 		 * ==============================================
 		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -73,7 +74,7 @@ public class Timers {
 	public void stop() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getBoard().getInt("Info Board." + String.valueOf(rotation) + ".Show Time");
+		showtime = plugin.fm.getBoard().getInt("InfoBoard." + String.valueOf(rotation) + ".Show Time");
 
 		Bukkit.getScheduler().cancelTasks(plugin);
 	}
@@ -81,7 +82,7 @@ public class Timers {
 	public void reset() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getBoard().getInt("Info Board." + String.valueOf(rotation) + ".Show Time");
+		showtime = plugin.fm.getBoard().getInt("InfoBoard." + String.valueOf(rotation) + ".Show Time");
 
 		Bukkit.getScheduler().cancelTasks(plugin);
 		start();

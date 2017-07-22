@@ -27,7 +27,7 @@ public class Settings {
 
     public static boolean doesRankHaveScoreBoard(int rotation, String world, String rank) {
         boolean hasBoard = false;
-        for (String s : plugin.fm.getBoard().getConfigurationSection("Info Board." + String.valueOf(rotation) + "." + world).getKeys(true))
+        for (String s : plugin.fm.getBoard().getConfigurationSection("InfoBoard." + String.valueOf(rotation) + "." + world).getKeys(true))
             if (!s.contains("."))
                 if (s.equals(rank)) {
                     hasBoard = true;
@@ -45,7 +45,7 @@ public class Settings {
      */
     public static boolean doesWorldHaveScoreBoard(int rotation, String world) {
         boolean hasBoard = false;
-        for (String s : plugin.fm.getBoard().getConfigurationSection("Info Board." + String.valueOf(rotation)).getKeys(true))
+        for (String s : plugin.fm.getBoard().getConfigurationSection("InfoBoard." + String.valueOf(rotation)).getKeys(true))
             if (!s.contains("."))
                 if (s.equalsIgnoreCase(world)) {
                     hasBoard = true;

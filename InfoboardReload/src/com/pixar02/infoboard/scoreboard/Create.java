@@ -61,7 +61,7 @@ public class Create {
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
 
 			// Loop through the lines
-			List<String> lines = plugin.fm.getBoard().getStringList("Info Board."
+			List<String> lines = plugin.fm.getBoard().getStringList("InfoBoard."
 					+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows");
 
 			for (row = 0; row != lines.size(); row++) {

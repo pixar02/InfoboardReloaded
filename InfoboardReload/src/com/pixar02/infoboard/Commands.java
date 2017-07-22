@@ -27,30 +27,30 @@ public class Commands implements CommandExecutor {
 				// ====================================================================================
 				// HIDE =====================================
 				if (args[0].equalsIgnoreCase("Hide")) {
-					if (!sender.hasPermission("InfoBoard.Toggle"))
+					if (!sender.hasPermission("InfoBoard.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
-					else if (!(sender instanceof Player))
+					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
-					else if (InfoBoard.hidefrom.contains(sender.getName()))
+					} else if (InfoBoard.hidefrom.contains(sender.getName())) {
 						sender.sendMessage("Already hidden");
 
-					else {
+					} else {
 						InfoBoard.hidefrom.add(sender.getName());
-						sender.sendMessage("Hiding Info Board.");
+						sender.sendMessage("Hiding InfoBoard.");
 						((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
 				}
 				// ====================================================================================
 				// SHOW =====================================
 				else if (args[0].equalsIgnoreCase("Show")) {
-					if (!sender.hasPermission("InfoBoard.Toggle"))
+					if (!sender.hasPermission("InfoBoard.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
-					else if (!(sender instanceof Player))
+					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
-					else if (!InfoBoard.hidefrom.contains(sender.getName()))
+					} else if (!InfoBoard.hidefrom.contains(sender.getName())) {
 						sender.sendMessage("Not hidden");
 
-					else {
+					} else {
 						InfoBoard.hidefrom.remove(sender.getName());
 						sender.sendMessage("Showing Info Board.");
 					}
@@ -64,7 +64,7 @@ public class Commands implements CommandExecutor {
 					else if (args.length == 2) {
 						String rotate = args[1];
 
-						if (plugin.fm.getBoard().getInt("Info Board." + rotate + ".Show Time") != 0) {
+						if (plugin.fm.getBoard().getInt("InfoBoard." + rotate + ".Show Time") != 0) {
 
 							plugin.timers.setPage(Integer.valueOf(args[1]));
 							sender.sendMessage("");
@@ -72,9 +72,9 @@ public class Commands implements CommandExecutor {
 							for (Player p : Bukkit.getOnlinePlayers())
 								if (p.hasPermission("InfoBoard.View"))
 									Create.createScoreBoard(p);
-						} else
+						} else {
 							sender.sendMessage("Page not found: " + args[1]);
-
+						}
 					}
 				}
 				// ====================================================================================
@@ -94,6 +94,7 @@ public class Commands implements CommandExecutor {
 						}
 						plugin.fm.reloadBoard();
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reloaded board");
+
 						plugin.timers.reset();
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "reset timers");
 

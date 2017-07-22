@@ -25,90 +25,91 @@ import java.util.UUID;
  */
 public class FastOfflinePlayer implements OfflinePlayer {
 
-    private final String playerName;
+	private final String playerName;
 
-    /**
-     * Creates a new instance based of this name
-     *
-     * @param playerName the player name
-     */
-    public FastOfflinePlayer(String playerName) {
-        this.playerName = playerName;
-    }
+	/**
+	 * Creates a new instance based of this name
+	 *
+	 * @param playerName
+	 *            the player name
+	 */
+	public FastOfflinePlayer(String playerName) {
+		this.playerName = playerName;
+	}
 
-    @Override
-    public boolean isOnline() {
-        // it's a fake player, so it won't be online
-        return false;
-    }
+	@Override
+	public boolean isOnline() {
+		// it's a fake player, so it won't be online
+		return false;
+	}
 
-    @Override
-    public String getName() {
-        return playerName;
-    }
+	@Override
+	public String getName() {
+		return playerName;
+	}
 
-    @Override
-    public UUID getUniqueId() {
-        return UUID.nameUUIDFromBytes(playerName.getBytes(Charsets.UTF_8));
-    }
+	@Override
+	public UUID getUniqueId() {
+		return UUID.nameUUIDFromBytes(playerName.getBytes(Charsets.UTF_8));
+	}
 
-    @Override
-    public boolean isBanned() {
-        return false;
-    }
+	@Override
+	public boolean isBanned() {
+		return false;
+	}
 
-    @Override
-    public void setBanned(boolean banned) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void setBanned(boolean banned) {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public boolean isWhitelisted() {
-        return false;
-    }
+	@Override
+	public boolean isWhitelisted() {
+		return false;
+	}
 
-    @Override
-    public void setWhitelisted(boolean value) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void setWhitelisted(boolean value) {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public Player getPlayer() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public Player getPlayer() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public long getFirstPlayed() {
-        return System.currentTimeMillis();
-    }
+	@Override
+	public long getFirstPlayed() {
+		return System.currentTimeMillis();
+	}
 
-    @Override
-    public long getLastPlayed() {
-        return System.currentTimeMillis();
-    }
+	@Override
+	public long getLastPlayed() {
+		return System.currentTimeMillis();
+	}
 
-    @Override
-    public boolean hasPlayedBefore() {
-        return false;
-    }
+	@Override
+	public boolean hasPlayedBefore() {
+		return false;
+	}
 
-    @Override
-    public Location getBedSpawnLocation() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public Location getBedSpawnLocation() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public boolean isOp() {
-        return false;
-    }
+	@Override
+	public boolean isOp() {
+		return false;
+	}
 
-    @Override
-    public void setOp(boolean value) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void setOp(boolean value) {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public Map<String, Object> serialize() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public Map<String, Object> serialize() {
+		throw new UnsupportedOperationException();
+	}
 }

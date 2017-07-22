@@ -40,7 +40,7 @@
 # |         - 'Your Level:'                                                                     |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 # |         - '~!%player_level%' # Will only display if %player_level% isn't "0" or "Unknown" or one of many other empty values |
 # ===============================================================================================================================
-Info Board:
+InfoBoard:
   '1':
     ShowTime: 20
     global:
