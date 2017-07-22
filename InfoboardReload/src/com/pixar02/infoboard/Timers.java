@@ -2,6 +2,7 @@ package com.pixar02.infoboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
@@ -12,7 +13,16 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-	private InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	// private InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+
+	public InfoBoard plugin;
+
+	public Timers(InfoBoard pl) {
+		plugin = pl;
+		time = 0;
+		rotation = 1;
+		showtime = plugin.fm.getBoard().getInt("InfoBoard." + rotation + ".ShowTime");
+	}
 
 	public Timers() {
 		time = 0;
@@ -36,27 +46,31 @@ public class Timers {
 		 * =========================================================== PAGE
 		 * ROTATION ===========================================================
 		 */
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-			@Override
-			public void run() {
-				if (time >= showtime) {
-					// TODO check if current page is last page
-					// if so set to first page
-					setPage(getPage() + 1);
 
-					if (showtime == 0) {
-						setPage(1);
-					}
-					for (Player p : Bukkit.getOnlinePlayers()) {
-						if (p.hasPermission("ibr.view")) {
-							Create.createScoreBoard(p);
+
+		Bukkit.getServer().getScheduler()
+				.scheduleSyncRepeatingTask(plugin, new Runnable() {
+
+					@Override
+					public void run() {
+						if (time >= showtime) {
+							// TODO checkif current page is last page
+							// if so set to first page
+							setPage(getPage() + 1);
+
+							if (showtime == 0) {
+								setPage(1);
+							}
+							for (Player p : Bukkit.getOnlinePlayers()) {
+								if (p.hasPermission("ibr.view")) {
+									Create.createScoreBoard(p);
+								}
+							}
+
 						}
+						time++;
 					}
-
-				}
-				time++;
-			}
-		}, 0, 20);
+				}, 0, 20);
 
 		/*
 		 * =========================================================== UPDATES
@@ -108,7 +122,7 @@ public class Timers {
 		rotation = 1;
 		showtime = plugin.fm.getBoard().getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
 
-		Bukkit.getScheduler().cancelTasks(plugin);
+		// Bukkit.getScheduler().cancelTasks(plugin);
 		start();
 	}
 }

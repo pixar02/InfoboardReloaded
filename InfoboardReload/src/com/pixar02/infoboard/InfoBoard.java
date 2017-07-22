@@ -15,21 +15,18 @@ import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
-
-
 public class InfoBoard extends JavaPlugin {
-
 
 	public Timers timers;
 	public FileManager fm;
 	public boolean update = false;
 	public static ArrayList<String> hidefrom = new ArrayList<String>();
 
-    public static Economy economy;
-    public static Permission permission;
-    public static boolean economyB;
-    public static boolean permissionB;
-    
+	public static Economy economy;
+	public static Permission permission;
+	public static boolean economyB;
+	public static boolean permissionB;
+
 	@Override
 	public void onEnable() {
 
@@ -38,27 +35,27 @@ public class InfoBoard extends JavaPlugin {
 
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
-		} 
+		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
 			throw new RuntimeException("Could not find WorldGuard!! Plugin can not work without it!");
-		} 
+		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
-		} 
-
+		}
 
 		loadFileManager();
-		Vault.load();
 
-		timers = new Timers();
-		//timers.start();
+		timers = new Timers(this);
+		timers.start();
 
 		// events
-		registerEvents();
+		 registerEvents();
 
 		// commands
 		getCommand("InfoBoard").setExecutor(new Commands(this));
-
+		
+		Vault.load();
+		
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}
@@ -76,10 +73,16 @@ public class InfoBoard extends JavaPlugin {
 		fm = new FileManager();
 		fm.setup();
 	}
-	private  void registerEvents(){
+
+	private void registerEvents() {
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new PlayerJoin(this), this);
+		
 		pm.registerEvents(new ChangeWorld(), this);
+		pm.registerEvents(new PlayerJoin(this), this);
+	}
+
+	public void registerConfig() {
+		reloadConfig();
 	}
 
 }
