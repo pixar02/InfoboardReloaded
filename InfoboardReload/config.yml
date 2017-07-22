@@ -1,6 +1,6 @@
-# InfoBoard Config, Last Edited in v1.0.0
+# InfoBoardReloaded Config, Last Edited in v1.0.0
 # =============================================================================
-# |        Check for Updates  - Checks for updates on enable                  |
+# |        Updater  - Checks for updates on enable                            |
 # |---------------------------------------------------------------------------|
 # |       Custom Variables allow for you to create your own variables         |
 # |                  <Variable>: What it gets replaced to                     |
@@ -14,6 +14,7 @@
 # |---------------------------------------------------------------------------|
 # | Update Time how fast you scoreboard updates in seconds                    |
 # =============================================================================
+Updater: true
 
 Custom Variables:
   <website>: yoursitehere.net

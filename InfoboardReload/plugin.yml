@@ -9,7 +9,7 @@ commands:
   InfoBoardReloaded:
     usage: /<command>
     description: The main command for this plugin
-    aliases: [ibr, ib, iboard, infob, Infobroard]
+    aliases: [ibr, ib, iboard, infob, Infoboard]
     
 permissions:
   ibr.*:
