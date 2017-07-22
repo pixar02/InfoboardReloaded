@@ -8,20 +8,25 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 public class InfoBoard extends JavaPlugin {
+
+	public Timers timers;
 	public FileManager fm;
 	public boolean update = false;
-	public Timers timers;
+	public static ArrayList<String> hidefrom = new ArrayList<String>();
+	
 	public Permission permission;
 	public Economy economy;
-    public static boolean economyB;
-    public static boolean permissionB;
-    public static ArrayList<String> hidefrom = new ArrayList<String>();
+	public static boolean economyB;
+	public static boolean permissionB;
+
+
 	public void onEnable() {
 
 		PluginDescriptionFile pdfFile = getDescription();
@@ -35,7 +40,9 @@ public class InfoBoard extends JavaPlugin {
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
 		}
+		
 		loadFileManager();
+		Vault.load();
 
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PlayerListener(this), this);
