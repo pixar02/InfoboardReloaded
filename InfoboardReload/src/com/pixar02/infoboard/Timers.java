@@ -15,9 +15,9 @@ public class Timers {
 	private int rotation;
 	// private InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
 
-	public InfoBoard plugin;
+	public InfoBoardReloaded plugin;
 
-	public Timers(InfoBoard pl) {
+	public Timers(InfoBoardReloaded pl) {
 		plugin = pl;
 		time = 0;
 		rotation = 1;

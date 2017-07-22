@@ -4,13 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 public class Vault {
-	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	/**
 	 * Gets the players rank
@@ -22,7 +22,7 @@ public class Vault {
 		String rank = "default";
 		if (hasVaultOnServer())
 			try {
-				rank = InfoBoard.permission.getPlayerGroups(player.getWorld().getName(), player.getPlayer())[0];
+				rank = InfoBoardReloaded.permission.getPlayerGroups(player.getWorld().getName(), player.getPlayer())[0];
 			} catch (UnsupportedOperationException ignored) {
 			}
 		return rank;
@@ -34,7 +34,7 @@ public class Vault {
 	 * @return true/false
 	 */
 	private static boolean hasVaultOnServer() {
-		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (InfoBoard.permission != null) && (InfoBoard.permissionB);
+		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (InfoBoardReloaded.permission != null) && (InfoBoardReloaded.permissionB);
 	}
 
 	/**
@@ -62,13 +62,13 @@ public class Vault {
 				.getRegistration(net.milkbowl.vault.economy.Economy.class);
 
 		if (economyProvider != null) {
-			InfoBoard.economy = economyProvider.getProvider();
+			InfoBoardReloaded.economy = economyProvider.getProvider();
 		}
 
-		if (InfoBoard.economy != null) {
-			InfoBoard.economyB = true;
+		if (InfoBoardReloaded.economy != null) {
+			InfoBoardReloaded.economyB = true;
 		}
-		return (InfoBoard.economy != null);
+		return (InfoBoardReloaded.economy != null);
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class Vault {
 		RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager()
 				.getRegistration(net.milkbowl.vault.permission.Permission.class);
 		if (permissionProvider != null)
-			InfoBoard.permission = permissionProvider.getProvider();
-		if (InfoBoard.permission != null)
-			InfoBoard.permissionB = true;
+			InfoBoardReloaded.permission = permissionProvider.getProvider();
+		if (InfoBoardReloaded.permission != null)
+			InfoBoardReloaded.permissionB = true;
 
-		return (InfoBoard.permission != null);
+		return (InfoBoardReloaded.permission != null);
 	}
 }

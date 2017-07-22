@@ -13,15 +13,15 @@ import com.pixar02.infoboard.scoreboard.Create;
 
 public class Commands implements CommandExecutor {
 
-	InfoBoard plugin;
+	InfoBoardReloaded plugin;
 
-	public Commands(InfoBoard plugin) {
+	public Commands(InfoBoardReloaded plugin) {
 		this.plugin = plugin;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("InfoBoard"))
+		if (cmd.getName().equalsIgnoreCase("InfoBoardReloaded"))
 			if (args.length > 0) {
 				sender.sendMessage("");
 				// ====================================================================================
@@ -31,11 +31,11 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage("Invalid Permissions.");
 					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
-					} else if (InfoBoard.hidefrom.contains(sender.getName())) {
+					} else if (InfoBoardReloaded.hidefrom.contains(sender.getName())) {
 						sender.sendMessage("Already hidden");
 
 					} else {
-						InfoBoard.hidefrom.add(sender.getName());
+						InfoBoardReloaded.hidefrom.add(sender.getName());
 						sender.sendMessage("Hiding InfoBoard.");
 						((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
@@ -47,11 +47,11 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage("Invalid Permissions.");
 					} else if (!(sender instanceof Player)) {
 						sender.sendMessage("Expected a player");
-					} else if (!InfoBoard.hidefrom.contains(sender.getName())) {
+					} else if (!InfoBoardReloaded.hidefrom.contains(sender.getName())) {
 						sender.sendMessage("Not hidden");
 
 					} else {
-						InfoBoard.hidefrom.remove(sender.getName());
+						InfoBoardReloaded.hidefrom.remove(sender.getName());
 						sender.sendMessage("Showing Info Board.");
 					}
 				}

@@ -5,12 +5,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class PlayerJoin implements Listener {
-	public InfoBoard plugin;
+	public InfoBoardReloaded plugin;
 
-	public PlayerJoin(InfoBoard pl) {
+	public PlayerJoin(InfoBoardReloaded pl) {
 		plugin = pl;
 	}
 

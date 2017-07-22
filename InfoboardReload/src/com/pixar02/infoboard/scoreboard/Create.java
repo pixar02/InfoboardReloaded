@@ -7,13 +7,13 @@ import com.pixar02.infoboard.Scroll.Scroll;
 import com.pixar02.infoboard.Scroll.ScrollManager;
 import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.APIS.Vault;
 import java.util.List;
 
 public class Create {
-	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static boolean createScoreBoard(Player player) {
 		// Set the default variable values
@@ -23,7 +23,7 @@ public class Create {
 
 		// Make sure the player is allowed to see the scoreboard
 		if (WorldGuard.boardsAllowedHere(player.getLocation()) && !Settings.isWorldDisabled(player.getWorld().getName())
-				&& player.hasPermission("ibr.View") && !InfoBoard.hidefrom.contains(player.getName())
+				&& player.hasPermission("ibr.View") && !InfoBoardReloaded.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name

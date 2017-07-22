@@ -4,10 +4,10 @@ package com.pixar02.infoboard.Utils;
 
 import java.util.List;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Settings {
-	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
     /**
      * Determines if the rank has valid scoreboard
      *

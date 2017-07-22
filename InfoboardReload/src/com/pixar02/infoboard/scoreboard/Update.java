@@ -7,14 +7,14 @@ import java.util.Map.Entry;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Settings;
 
 public class Update {
-	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static HashMap<Integer, String> getLines(List<String> list) {
 		HashMap<Integer, String> toAdd = new HashMap<Integer, String>();

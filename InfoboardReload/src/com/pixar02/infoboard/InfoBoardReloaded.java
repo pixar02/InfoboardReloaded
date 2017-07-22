@@ -15,7 +15,7 @@ import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
-public class InfoBoard extends JavaPlugin {
+public class InfoBoardReloaded extends JavaPlugin {
 
 	public Timers timers;
 	public FileManager fm;
@@ -52,7 +52,7 @@ public class InfoBoard extends JavaPlugin {
 		 registerEvents();
 
 		// commands
-		getCommand("InfoBoard").setExecutor(new Commands(this));
+		getCommand("InfoBoardReloaded").setExecutor(new Commands(this));
 		
 		Vault.load();
 		

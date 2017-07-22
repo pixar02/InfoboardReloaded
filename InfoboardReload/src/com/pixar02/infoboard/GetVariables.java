@@ -8,7 +8,7 @@ import com.pixar02.infoboard.Utils.Messages;
 import me.clip.placeholderapi.PlaceholderAPI;
 
 public class GetVariables {
-	private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static String replaceVariables(String string, Player player) {
 		//setting all placeholders that are hooked in placehodler API

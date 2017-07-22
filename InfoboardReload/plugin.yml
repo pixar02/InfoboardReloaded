@@ -1,15 +1,15 @@
 name: InfoBoardReloaded
-main: com.pixar02.infoboard.InfoBoard
+main: com.pixar02.infoboard.InfoBoardReloaded
 version: 1.2.5
 author: pixar02
-description: Show an info board
+description: Show a scoreboard
 depend: [PlaceholderAPI, Vault, WorldGuard]
 
 commands:
-  InfoBoard:
+  InfoBoardReloaded:
     usage: /<command>
     description: The main command for this plugin
-    aliases: [ibr, ib, iboard, infob, InfobroardReloaded]
+    aliases: [ibr, ib, iboard, infob, Infobroard]
     
 permissions:
   ibr.*:

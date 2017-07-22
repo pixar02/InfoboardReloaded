@@ -12,10 +12,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class FileManager {
-	private InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
+	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	// Files & configs
 	private FileConfiguration board;

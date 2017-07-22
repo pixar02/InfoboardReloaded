@@ -4,11 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.GetVariables;
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
-private static InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class); 
+private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class); 
 	/**
 	 * Get the message in color
 	 *

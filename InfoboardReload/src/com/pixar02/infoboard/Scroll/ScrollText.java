@@ -3,7 +3,7 @@ package com.pixar02.infoboard.Scroll;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.pixar02.infoboard.InfoBoard;
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.scoreboard.Board;
 
@@ -11,7 +11,7 @@ public class ScrollText {
 
 	public static void scroll(Player player) {
 		// Make sure the user can see the board
-		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !InfoBoard.hidefrom.contains(player.getName())
+		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !InfoBoardReloaded.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			if (ScrollManager.getScrollers(player) != null)
