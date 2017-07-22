@@ -26,9 +26,9 @@ public class InfoBoard extends JavaPlugin {
 	public Economy economy;
 	public static boolean economyB;
 	public static boolean permissionB;
-
+    @Override
 	public void onEnable() {
-		Bukkit.getConsoleSender().sendMessage("Check !");
+		Bukkit.getConsoleSender().sendMessage("Check 1");
 		PluginDescriptionFile pdfFile = getDescription();
 		Bukkit.getConsoleSender().sendMessage("Check 2");
 		Logger logger = getLogger();
@@ -54,8 +54,11 @@ public class InfoBoard extends JavaPlugin {
 		Vault.load();
 		Bukkit.getConsoleSender().sendMessage("Check 7");
 		
+		timers = new Timers();
+		Bukkit.getConsoleSender().sendMessage("Check 8.1");
+		
 		timers.start();
-		Bukkit.getConsoleSender().sendMessage("Check 8");
+		Bukkit.getConsoleSender().sendMessage("Check 8.2");
 		
 		
 		// events
@@ -71,7 +74,7 @@ public class InfoBoard extends JavaPlugin {
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}
-
+    @Override
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
 		PluginDescriptionFile pdfFile = getDescription();

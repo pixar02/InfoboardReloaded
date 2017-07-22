@@ -2,6 +2,9 @@ package com.pixar02.infoboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
@@ -32,14 +35,18 @@ public class Timers {
 
 	public void start() {
 		/*
-		 * ============================================== Page Rotation
-		 * ==============================================
+		 * =========================================================== PAGE
+		 * ROTATION ===========================================================
 		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+
 			@Override
 			public void run() {
 				if (time >= showtime) {
+					// TODO check ifcurrent page is last page
+					// if so set to first page
 					setPage(getPage() + 1);
+
 					if (showtime == 0) {
 						setPage(1);
 					}
@@ -52,10 +59,12 @@ public class Timers {
 				}
 				time++;
 			}
-		}, 0, 20L);
+		}, 0L, 20L);
+
 		/*
-		 * ============================================== updates board's value
-		 * ==============================================
+		 * =========================================================== UPDATES
+		 * BOARD'S VALUE
+		 * ===========================================================
 		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -69,21 +78,24 @@ public class Timers {
 			}
 
 		}, 0, (long) plugin.fm.getConfig().getDouble("Update Time") * 20);
-
-		if(Settings.scrollingEnabled()){
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
+		/*
+		 * =========================================================== SCROLLING
+		 * TEXT ===========================================================
+		 */
+		if (Settings.scrollingEnabled()) {
+			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 
 				@Override
 				public void run() {
-					for(Player p :Bukkit.getOnlinePlayers()){
-						if(p.hasPermission("ibr.view")){
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						if (p.hasPermission("ibr.view")) {
 							ScrollText.scroll(p);
 						}
 					}
-					
+
 				}
-				
-			}, 0, (long) (plugin.fm.getConfig().getDouble("Scrolling texxt.Shift Time") *20));
+
+			}, 0, (long) (plugin.fm.getConfig().getDouble("Scrolling Text.Shift Time") * 20));
 		}
 	}
 
