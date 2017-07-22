@@ -13,7 +13,7 @@ public class GetVariables {
 	public static String replaceVariables(String string, Player player) {
 		//setting all placeholders that are hooked in placehodler API
 		String newString = PlaceholderAPI.setPlaceholders(player, string);
-		Bukkit.broadcastMessage(newString);
+	//	Bukkit.broadcastMessage(newString);
 
 		// Custom Variables
 		for (String custom : plugin.fm.getConfig().getConfigurationSection("Custom Variables").getKeys(true)) {

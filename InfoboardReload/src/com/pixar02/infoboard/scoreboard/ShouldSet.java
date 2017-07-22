@@ -10,8 +10,8 @@ public class ShouldSet {
 	private Player player;
 
 	public ShouldSet(Player player, String line) {
-		line = line;
-		player = player;
+		this.line = line;
+		this.player = player;
 	}
 
 	/**
