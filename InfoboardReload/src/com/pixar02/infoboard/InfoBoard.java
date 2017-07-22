@@ -10,71 +10,60 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
-import com.pixar02.infoboard.PlayerListener;
-
+import com.pixar02.infoboard.events.PlayerJoin;
+import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
+
+
 public class InfoBoard extends JavaPlugin {
+
 
 	public Timers timers;
 	public FileManager fm;
 	public boolean update = false;
 	public static ArrayList<String> hidefrom = new ArrayList<String>();
 
-	public Permission permission;
-	public Economy economy;
-	public static boolean economyB;
-	public static boolean permissionB;
-    @Override
+    public static Economy economy;
+    public static Permission permission;
+    public static boolean economyB;
+    public static boolean permissionB;
+    
+	@Override
 	public void onEnable() {
-		Bukkit.getConsoleSender().sendMessage("Check 1");
+
 		PluginDescriptionFile pdfFile = getDescription();
-		Bukkit.getConsoleSender().sendMessage("Check 2");
 		Logger logger = getLogger();
+
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
-		}else{
-			Bukkit.getConsoleSender().sendMessage("Check 3");
-		}
+		} 
 		if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
 			throw new RuntimeException("Could not find WorldGuard!! Plugin can not work without it!");
-		}else{
-			Bukkit.getConsoleSender().sendMessage("Check 4");
-		}
+		} 
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
-		}else{
-			Bukkit.getConsoleSender().sendMessage("Check 5");
-		}
+		} 
+
 
 		loadFileManager();
-		Bukkit.getConsoleSender().sendMessage("Check 6");
-		
 		Vault.load();
-		Bukkit.getConsoleSender().sendMessage("Check 7");
-		
+
 		timers = new Timers();
-		Bukkit.getConsoleSender().sendMessage("Check 8.1");
-		
-		timers.start();
-		Bukkit.getConsoleSender().sendMessage("Check 8.2");
-		
-		
+		//timers.start();
+
 		// events
-		PluginManager pm = getServer().getPluginManager();
-		Bukkit.getConsoleSender().sendMessage("Check 9");
-		
-		pm.registerEvents(new PlayerListener(this), this);
-		Bukkit.getConsoleSender().sendMessage("Check 10");
-		
+		registerEvents();
+
 		// commands
 		getCommand("InfoBoard").setExecutor(new Commands(this));
 
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}
-    @Override
+
+	@Override
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
 		PluginDescriptionFile pdfFile = getDescription();
@@ -86,6 +75,11 @@ public class InfoBoard extends JavaPlugin {
 	private void loadFileManager() {
 		fm = new FileManager();
 		fm.setup();
+	}
+	private  void registerEvents(){
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(new PlayerJoin(this), this);
+		pm.registerEvents(new ChangeWorld(), this);
 	}
 
 }

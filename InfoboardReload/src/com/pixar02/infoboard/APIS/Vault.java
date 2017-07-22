@@ -22,7 +22,7 @@ public class Vault {
 		String rank = "default";
 		if (hasVaultOnServer())
 			try {
-				rank = plugin.permission.getPlayerGroups(player.getWorld().getName(), player.getPlayer())[0];
+				rank = InfoBoard.permission.getPlayerGroups(player.getWorld().getName(), player.getPlayer())[0];
 			} catch (UnsupportedOperationException ignored) {
 			}
 		return rank;
@@ -34,8 +34,7 @@ public class Vault {
 	 * @return true/false
 	 */
 	private static boolean hasVaultOnServer() {
-		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (plugin.permission != null)
-				&& (InfoBoard.permissionB);
+		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (InfoBoard.permission != null) && (InfoBoard.permissionB);
 	}
 
 	/**
@@ -61,12 +60,15 @@ public class Vault {
 	private static boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager()
 				.getRegistration(net.milkbowl.vault.economy.Economy.class);
-		if (economyProvider != null)
-			plugin.economy = economyProvider.getProvider();
-		if (plugin.economy != null)
-			plugin.economyB = true;
 
-		return (plugin.economy != null);
+		if (economyProvider != null) {
+			InfoBoard.economy = economyProvider.getProvider();
+		}
+
+		if (InfoBoard.economy != null) {
+			InfoBoard.economyB = true;
+		}
+		return (InfoBoard.economy != null);
 	}
 
 	/**
@@ -78,11 +80,10 @@ public class Vault {
 		RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager()
 				.getRegistration(net.milkbowl.vault.permission.Permission.class);
 		if (permissionProvider != null)
-			plugin.permission = permissionProvider.getProvider();
-		if (plugin.permission != null)
-			plugin.permissionB = true;
+			InfoBoard.permission = permissionProvider.getProvider();
+		if (InfoBoard.permission != null)
+			InfoBoard.permissionB = true;
 
-		return (plugin.permission != null);
+		return (InfoBoard.permission != null);
 	}
-
 }

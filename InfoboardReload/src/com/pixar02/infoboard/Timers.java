@@ -2,9 +2,6 @@ package com.pixar02.infoboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
@@ -21,6 +18,7 @@ public class Timers {
 		time = 0;
 		rotation = 1;
 		showtime = plugin.fm.getBoard().getInt("InfoBoard." + rotation + ".ShowTime");
+
 	}
 
 	public int getPage() {
@@ -39,11 +37,10 @@ public class Timers {
 		 * ROTATION ===========================================================
 		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-
 			@Override
 			public void run() {
 				if (time >= showtime) {
-					// TODO check ifcurrent page is last page
+					// TODO check if current page is last page
 					// if so set to first page
 					setPage(getPage() + 1);
 
@@ -59,7 +56,7 @@ public class Timers {
 				}
 				time++;
 			}
-		}, 0L, 20L);
+		}, 0, 20);
 
 		/*
 		 * =========================================================== UPDATES
@@ -84,7 +81,6 @@ public class Timers {
 		 */
 		if (Settings.scrollingEnabled()) {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-
 				@Override
 				public void run() {
 					for (Player p : Bukkit.getOnlinePlayers()) {
