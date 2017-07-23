@@ -1,5 +1,6 @@
 package com.pixar02.infoboard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
+import com.pixar02.infoboard.Utils.Metrics;
 import com.pixar02.infoboard.events.PlayerJoin;
 import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
@@ -42,9 +44,15 @@ public class InfoBoardReloaded extends JavaPlugin {
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
 		}
-
+	    try {
+	        Metrics metrics = new Metrics(this);
+	        metrics.start();
+	    } catch (IOException e) {
+	        // Failed to submit the stats :-(
+	    }
 		loadFileManager();
-
+		
+		loadMetrics();
 		timers = new Timers(this);
 		timers.start();
 
@@ -84,5 +92,12 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public void registerConfig() {
 		reloadConfig();
 	}
-
+	public void loadMetrics(){
+	    try {
+	        Metrics metrics = new Metrics(this);
+	        metrics.start();
+	    } catch (IOException e) {
+	        // Failed to submit the stats :-(
+	    }
+	}
 }
