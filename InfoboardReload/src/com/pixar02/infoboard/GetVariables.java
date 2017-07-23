@@ -16,13 +16,10 @@ public class GetVariables {
 
 		// setting all placeholders that are hooked in placeholder API
 		newString = PlaceholderAPI.setPlaceholders(player, string);
-		
-		
+
 		// checking if GriefPrevention is installed and there are variables used
 		if (Bukkit.getServer().getPluginManager().getPlugin("GriefPrevention") != null) {
-			Bukkit.broadcastMessage("CHECK");
 			if (newString.contains("%griefprevention_")) {
-				Bukkit.broadcastMessage("CHECK");
 				newString = GriefPreventionVariables.replaceVariables(string, player);
 			}
 		}

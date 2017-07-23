@@ -17,7 +17,8 @@ public class GriefPreventionVariables {
 			newString = newString.replaceAll("%" + prefix + "claims%", String.valueOf(pd.getClaims().size()));
 		}
 		// if (newString.contains("%" + prefix + "spamcount%")) {
-		// newString = newString.replaceAll("%" + prefix + "spamcount%",String.valueOf(pd.));
+		// newString = newString.replaceAll("%" + prefix +
+		// "spamcount%",String.valueOf(pd.));
 		// }
 		if (newString.contains("%" + prefix + "bonusclaims%")) {
 			newString = newString.replaceAll("%" + prefix + "bonusclaims%", String.valueOf(pd.getBonusClaimBlocks()));
