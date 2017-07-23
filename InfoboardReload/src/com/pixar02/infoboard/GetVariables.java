@@ -11,7 +11,7 @@ public class GetVariables {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static String replaceVariables(String string, Player player) {
-		//setting all placeholders that are hooked in placehodler API
+		//setting all placeholders that are hooked in placeholder API
 		String newString = PlaceholderAPI.setPlaceholders(player, string);
 	//	Bukkit.broadcastMessage(newString);
 

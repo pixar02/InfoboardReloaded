@@ -26,7 +26,7 @@
 # |        - 'This board is only'                                                               |
 # |        - 'seen by Admins'                                                                   |
 # |  '2':                                                                                       |
-# |    ShowTime: 5                                                                             |
+# |    ShowTime: 5                                                                              |
 # |    world:                                                                                   |
 # |      default:                                                                               |
 # |        Title: '&a&lStats'                                                                   |

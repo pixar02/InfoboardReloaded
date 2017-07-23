@@ -53,7 +53,7 @@ public class FileManager {
 		if (!variableFile.exists()) {
 			try {
 				variableFile.createNewFile();
-
+				copy(plugin.getResource("variables.yml"), variableFile);
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.GREEN + "The variables.yml file has been created");
 			} catch (IOException e) {
@@ -65,8 +65,6 @@ public class FileManager {
 
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
-		reloadBoard();
-		reloadVariable();
 	}
 
 	public FileConfiguration getBoard() {
