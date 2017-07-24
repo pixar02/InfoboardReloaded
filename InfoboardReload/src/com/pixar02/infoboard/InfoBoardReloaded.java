@@ -2,6 +2,8 @@ package com.pixar02.infoboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -29,7 +31,9 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public static boolean economyB;
 	public static boolean permissionB;
 
-	@Override
+	public HashMap<String, List<String>> ChangeableText = new HashMap<>();
+	public HashMap<String, Integer> ChangeableInt = new HashMap<>();
+
 	public void onEnable() {
 
 		PluginDescriptionFile pdfFile = getDescription();
@@ -44,31 +48,33 @@ public class InfoBoardReloaded extends JavaPlugin {
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
 		}
-	    try {
-	        Metrics metrics = new Metrics(this);
-	        metrics.start();
-	    } catch (IOException e) {
-	        // Failed to submit the stats :-(
-	    }
+		try {
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e) {
+			// Failed to submit the stats :-(
+		}
+
 		loadFileManager();
-		
 		loadMetrics();
+
 		timers = new Timers(this);
 		timers.start();
 
+		loadChangeables();
+
 		// events
-		 registerEvents();
+		registerEvents();
 
 		// commands
 		getCommand("InfoBoardReloaded").setExecutor(new Commands(this));
-		
+
 		Vault.load();
-		
+
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}
 
-	@Override
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
 		PluginDescriptionFile pdfFile = getDescription();
@@ -84,20 +90,31 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	private void registerEvents() {
 		PluginManager pm = getServer().getPluginManager();
-		
+
 		pm.registerEvents(new ChangeWorld(), this);
 		pm.registerEvents(new PlayerJoin(this), this);
 	}
 
-	public void registerConfig() {
-		reloadConfig();
+	public void loadMetrics() {
+		try {
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e) {
+			// Failed to submit the stats :-(
+		}
 	}
-	public void loadMetrics(){
-	    try {
-	        Metrics metrics = new Metrics(this);
-	        metrics.start();
-	    } catch (IOException e) {
-	        // Failed to submit the stats :-(
-	    }
+
+	public void loadChangeables() {
+		if (fm.getConfig().getConfigurationSection("Changeable Text.Changeables") != null) {
+			for (String s : fm.getBoard().getConfigurationSection("Changeable Text.Changeables").getKeys(true)) {
+				if (fm.getBoard().getConfigurationSection("Changeable Text.Changeables." + s + ".text") == null) {
+					break;
+				} else {
+					ChangeableText.put(s, fm.getBoard().getStringList("Changeable Text.Changeables" + s + ".text"));
+					ChangeableInt.put(s, fm.getBoard().getInt("Changeable Text.Changeables" + s + ".interval"));
+				}
+			}
+		}
 	}
+
 }

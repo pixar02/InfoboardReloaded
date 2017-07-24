@@ -83,7 +83,21 @@ public class Settings {
 	public static boolean scrollingEnabled() {
 		return plugin.fm.getConfig().getBoolean("Scrolling Text.Enable");
 	}
-
+	
+	/*
+	 * Get if changeable text is enabled
+	 * 
+	 * @return true/false
+	 */
+	public static boolean changeableTextEnabled() {
+		return plugin.fm.getConfig().getBoolean("Changeable Text.Enabled");
+	}
+	
+	/*
+	 * Get if updater is enabled
+	 * 
+	 * @return true/false
+	 */
 	public boolean updater() {
 		return plugin.fm.getConfig().getBoolean("Updater");
 

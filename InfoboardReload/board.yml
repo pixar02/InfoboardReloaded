@@ -1,3 +1,5 @@
+
+
 # InfoBoardReloaded Board file
 # ===============================================================================================
 # |                               Max Rows for a board is 15                                    |
@@ -52,8 +54,7 @@ InfoBoard:
         - '&e&lWelcome!'
         - '&l%player_name%'
         - ' '
-        - '&a&lHealth:'
-        - '&e%player_health%&a/&c%player_max_health%'
+        - '%changeable_heathloc%'
         - ' '
         - '&5&lCoded by:'
         - '<plugindev>'

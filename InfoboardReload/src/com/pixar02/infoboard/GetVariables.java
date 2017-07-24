@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Utils.Messages;
+import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.variables.GriefPreventionVariables;
 
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -21,6 +22,12 @@ public class GetVariables {
 		if (Bukkit.getServer().getPluginManager().getPlugin("GriefPrevention") != null) {
 			if (newString.contains("%griefprevention_")) {
 				newString = GriefPreventionVariables.replaceVariables(string, player);
+			}
+		}
+
+		if (Settings.changeableTextEnabled() == true) {
+			if (newString.contains("%changeable_")) {
+				newString =  null;
 			}
 		}
 

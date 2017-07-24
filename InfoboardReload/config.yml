@@ -9,10 +9,14 @@
 # | WorldGuard.Prevent Showing In - A List of regions the board won't show in |
 # |---------------------------------------------------------------------------|
 # | Scrolling Text is a cool feature where text will scroll across the board  |
-# |    Currently format codes aren't supported                                |
-# |            Shift Time - How long between the text scrolling in seconds    |
+# |                Currently format codes aren't supported                    |
+# |       Shift Time - How long between the text scrolling in seconds         |
 # |---------------------------------------------------------------------------|
-# | Update Time how fast you scoreboard updates in seconds                    |
+# |                             Changeable text:                              |
+# |                       Enabled- enable or disable                          |
+# |                  Changeables - Custom Changeable lines                   |
+# |---------------------------------------------------------------------------|
+# |          Update Time how fast you scoreboard updates in seconds           |
 # =============================================================================
 Updater: true
 
@@ -32,5 +36,17 @@ WorldGuard:
 Scrolling Text:
   Enable: false
   Shift Time: 0.25
-  
+#
+#Comming soon:  
+#
+Changeable Text:
+  Enabled : false   
+  Changeables:
+    healthloc:
+      text:
+      - '&a&lHealth: ; &e%player_health%&a/&c%player_max_health%'
+      - '&5&lLocation: ; &a%player_x%&7, &a%player_y%&7, &a%player_z%'
+      - '&e&lDate Joined: ; &l%player_first_join_date%'
+      interval: 5 
+        
 Update Time: 2
