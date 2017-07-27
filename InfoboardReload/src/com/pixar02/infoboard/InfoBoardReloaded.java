@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
 import com.pixar02.infoboard.Utils.Metrics;
+import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.events.PlayerJoin;
 import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
@@ -35,38 +36,23 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public static boolean economyB;
 	public static boolean permissionB;
 
-	public HashMap<String, List<String>> ChangeableText = new HashMap<>();
-	public HashMap<String, Integer> ChangeableInt = new HashMap<>();
+	// public HashMap<String, List<String>> ChangeableText = new HashMap<>();
+	// public HashMap<String, Integer> ChangeableInt = new HashMap<>();
 	PluginDescriptionFile pdfFile = getDescription();
 	Logger logger = getLogger();
+
 	public void onEnable() {
 
-
-
-		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
-		}
-		if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-			throw new RuntimeException("Could not find WorldGuard!! Plugin can not work without it!");
-		}
-		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
-			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
-		}
-		try {
-			Metrics metrics = new Metrics(this);
-			metrics.start();
-		} catch (IOException e) {
-			// Failed to submit the stats :-(
-		}
-
+		dependencies();
 		loadFileManager();
 		loadMetrics();
+
 		check();
 
 		timers = new Timers(this);
 		timers.start();
 
-		loadChangeables();
+		// loadChangeables();
 
 		// events
 		registerEvents();
@@ -107,22 +93,21 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 	}
 
-	public void loadChangeables() {
-		if (fm.getConfig().getConfigurationSection("Changeable Text.Changeables") != null) {
-			for (String s : fm.getBoard().getConfigurationSection("Changeable Text.Changeables").getKeys(true)) {
-				if (fm.getBoard().getConfigurationSection("Changeable Text.Changeables." + s + ".text") == null) {
-					break;
-				} else {
-					ChangeableText.put(s, fm.getBoard().getStringList("Changeable Text.Changeables" + s + ".text"));
-					ChangeableInt.put(s, fm.getBoard().getInt("Changeable Text.Changeables" + s + ".interval"));
-				}
-			}
-		}
-	}
+	/*
+	 * public void loadChangeables() { if
+	 * (fm.getConfig().getConfigurationSection("Changeable Text.Changeables") !=
+	 * null) { for (String s :
+	 * fm.getBoard().getConfigurationSection("Changeable Text.Changeables").getKeys(
+	 * true)) { if
+	 * (fm.getBoard().getConfigurationSection("Changeable Text.Changeables." + s +
+	 * ".text") == null) { break; } else { ChangeableText.put(s,
+	 * fm.getBoard().getStringList("Changeable Text.Changeables" + s + ".text"));
+	 * ChangeableInt.put(s, fm.getBoard().getInt("Changeable Text.Changeables" + s +
+	 * ".interval")); } } } }
+	 */
 
 	public void check() {
-
-		if (fm.getConfig().getBoolean("Updater") == true) {
+		if (Settings.updater()) {
 			try {
 				HttpURLConnection c = (HttpURLConnection) new URL("http://www.spigotmc.org/api/general.php")
 						.openConnection();
@@ -135,10 +120,10 @@ public class InfoBoardReloaded extends JavaPlugin {
 				String newVersion = new BufferedReader(new InputStreamReader(c.getInputStream())).readLine()
 						.replaceAll("[a-zA-Z ]", "");
 
-				int cur = Integer.valueOf(current.replaceAll(".", ""));
+				int curv = Integer.valueOf(current.replaceAll(".", ""));
 				int newv = Integer.valueOf(newVersion.replaceAll(".", ""));
 
-				if ((!(cur >= newv)) && cur < newv) {
+				if ((!(curv >= newv)) && curv < newv) {
 					// there is a new version
 					setEnabled(update);
 					logger.warning("There is an update for InFoboardReloaded!");
@@ -149,6 +134,24 @@ public class InfoBoardReloaded extends JavaPlugin {
 				// internet connection
 
 			}
+		}
+	}
+
+	public void dependencies() {
+		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
+		}
+		if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
+			throw new RuntimeException("Could not find WorldGuard!! Plugin can not work without it!");
+		}
+		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
+			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
+		}
+		try {
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e) {
+			// Failed to submit the stats :-(
 		}
 	}
 }

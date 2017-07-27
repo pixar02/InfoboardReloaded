@@ -98,7 +98,7 @@ public class Settings {
 	 * 
 	 * @return true/false
 	 */
-	public boolean updater() {
+	public static boolean updater() {
 		return plugin.fm.getConfig().getBoolean("Updater");
 
 	}

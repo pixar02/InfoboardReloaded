@@ -24,8 +24,11 @@ public class Commands implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("InfoBoardReloaded"))
 			if (args.length > 0) {
 				sender.sendMessage("");
-				// ====================================================================================
-				// HIDE =====================================
+				/*
+				 * =============================================================================
+				 * HIDE
+				 * =============================================================================
+				 */
 				if (args[0].equalsIgnoreCase("Hide")) {
 					if (!sender.hasPermission("ibr.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
@@ -40,8 +43,11 @@ public class Commands implements CommandExecutor {
 						((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
 				}
-				// ====================================================================================
-				// SHOW =====================================
+				/*
+				 * =============================================================================
+				 * SHOW
+				 * =============================================================================
+				 */
 				else if (args[0].equalsIgnoreCase("Show")) {
 					if (!sender.hasPermission("ibr.Toggle")) {
 						sender.sendMessage("Invalid Permissions.");
@@ -55,8 +61,11 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage("Showing Info Board.");
 					}
 				}
-				// ====================================================================================
-				// SET =====================================
+				/*
+				 * =============================================================================
+				 * Set <page>
+				 * =============================================================================
+				 */
 				else if (args[0].equalsIgnoreCase("Set")) {
 					if (!sender.hasPermission("ibr.Set"))
 						sender.sendMessage("Invalid Permissions.");
@@ -77,8 +86,11 @@ public class Commands implements CommandExecutor {
 						}
 					}
 				}
-				// ====================================================================================
-				// RELOAD =====================================
+				/*
+				 * =============================================================================
+				 * RELOAD [file]
+				 * =============================================================================
+				 */
 				else if (args[0].equalsIgnoreCase("Reload"))
 					if (!sender.hasPermission("ibr.Reload"))
 						sender.sendMessage("Invalid Permissions.");
@@ -134,8 +146,11 @@ public class Commands implements CommandExecutor {
 				}
 
 			}
-			// ====================================================================================
-			// HELP =====================================
+			/*
+			 * =============================================================================
+			 * HELP
+			 * =============================================================================
+			 */
 			else {
 				sender.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "========[" + ChatColor.DARK_AQUA
 						+ ChatColor.BOLD + " InfoBoardReloaded " + ChatColor.ITALIC + " v"

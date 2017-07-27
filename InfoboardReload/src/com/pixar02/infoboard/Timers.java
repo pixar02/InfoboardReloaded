@@ -16,16 +16,11 @@ public class Timers {
 	private int rotation;
 	private HashMap<String, String> chanText = new HashMap<>();
 	private HashMap<String, Integer> chanTextInt = new HashMap<>();
-	// private InfoBoard plugin = InfoBoard.getPlugin(InfoBoard.class);
 
 	public InfoBoardReloaded plugin;
 
 	public Timers(InfoBoardReloaded pl) {
 		plugin = pl;
-		// time = 0;
-		// rotation = 1;
-		// showtime = plugin.fm.getBoard().getInt("InfoBoard." + rotation +
-		// ".ShowTime");
 	}
 
 	public Timers() {
@@ -47,9 +42,9 @@ public class Timers {
 
 	public void start() {
 		/*
-		 * ===================================================================
+		 * =========================================================================
 		 * PAGE ROTATION
-		 * ===================================================================
+		 * =========================================================================
 		 */
 
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -76,9 +71,9 @@ public class Timers {
 		}, 0, 20);
 
 		/*
-		 * ===================================================================
+		 * =========================================================================
 		 * UPDATES BOARD'S VALUE
-		 * ===================================================================
+		 * =========================================================================
 		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -93,9 +88,9 @@ public class Timers {
 
 		}, 0, (long) plugin.fm.getConfig().getDouble("Update Time") * 20);
 		/*
-		 * ===================================================================
+		 * =========================================================================
 		 * SCROLLING TEXT
-		 * ===================================================================
+		 * =========================================================================
 		 */
 		if (Settings.scrollingEnabled()) {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -112,9 +107,9 @@ public class Timers {
 			}, 0, (long) (plugin.fm.getConfig().getDouble("Scrolling Text.Shift Time") * 20));
 		}
 		/*
-		 * ===================================================================
+		 * =========================================================================
 		 * CHANGEABLE TEXT UPDATE
-		 * ===================================================================
+		 * =========================================================================
 		 */
 		if (Settings.changeableTextEnabled()) {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -123,7 +118,7 @@ public class Timers {
 
 				}
 
-			}, 0, (long) (plugin.fm.getBoard().getDouble("InfoBoard." + rotation + ".Changeable.interval") * 20));
+			}, 0, (long) (plugin.fm.getBoard().getDouble("InfoBoard." + rotation + ".Changeable" + "" + ".interval") * 20));
 		}
 	}
 
