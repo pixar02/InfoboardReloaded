@@ -1,6 +1,10 @@
 package com.pixar02.infoboard;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,11 +37,11 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public HashMap<String, List<String>> ChangeableText = new HashMap<>();
 	public HashMap<String, Integer> ChangeableInt = new HashMap<>();
-
+	PluginDescriptionFile pdfFile = getDescription();
+	Logger logger = getLogger();
 	public void onEnable() {
 
-		PluginDescriptionFile pdfFile = getDescription();
-		Logger logger = getLogger();
+
 
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
@@ -57,6 +61,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 		loadFileManager();
 		loadMetrics();
+		check();
 
 		timers = new Timers(this);
 		timers.start();
@@ -77,8 +82,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public void onDisable() {
 		Bukkit.getScheduler().cancelTasks(this);
-		PluginDescriptionFile pdfFile = getDescription();
-		Logger logger = getLogger();
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
 
 	}
@@ -117,4 +120,35 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 	}
 
+	public void check() {
+
+		if (fm.getConfig().getBoolean("Updater") == true) {
+			try {
+				HttpURLConnection c = (HttpURLConnection) new URL("http://www.spigotmc.org/api/general.php")
+						.openConnection();
+				c.setDoOutput(true);
+				c.setRequestMethod("POST");
+				c.getOutputStream()
+						.write(("key=98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4&resource=44270")
+								.getBytes("UTF-8"));
+				String current = getDescription().getVersion();
+				String newVersion = new BufferedReader(new InputStreamReader(c.getInputStream())).readLine()
+						.replaceAll("[a-zA-Z ]", "");
+
+				int cur = Integer.valueOf(current.replaceAll(".", ""));
+				int newv = Integer.valueOf(newVersion.replaceAll(".", ""));
+
+				if ((!(cur >= newv)) && cur < newv) {
+					// there is a new version
+					setEnabled(update);
+					logger.warning("There is an update for InFoboardReloaded!");
+					logger.warning("Pleas Download it at bit.ly/InfoBoardReloaded");
+				}
+			} catch (Exception e) {
+				// update failed, most likely to spigot being down or the server not having
+				// internet connection
+
+			}
+		}
+	}
 }
