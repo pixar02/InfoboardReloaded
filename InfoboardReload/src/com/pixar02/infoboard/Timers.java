@@ -108,7 +108,7 @@ public class Timers {
 		}
 		/*
 		 * =========================================================================
-		 * CHANGEABLE TEXT UPDATE
+		 * CHANGEABLE TEXT UPDATE.
 		 * =========================================================================
 		 */
 		if (Settings.changeableTextEnabled()) {
