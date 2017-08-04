@@ -2,16 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/PlaceholderAPI-2.8.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/Vault.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldedit-bukkit-6.1.7.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldguard-6.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/MVdWPlaceholderAPI.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Test-server/plugins/GriefPrevention.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/Update 1.10.2/Test-mini/plugins/PlaceholderAPI-2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/Update 1.10.2/Test-mini/plugins/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/Update 1.10.2/Test-mini/plugins/worldedit-bukkit-6.1.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/Update 1.10.2/Test-mini/plugins/worldguard-6.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/server Buildtools/craftbukkit-1.10.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/server Buildtools/craftbukkit-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/server Buildtools/craftbukkit-1.11.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/server Buildtools/craftbukkit-1.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fp000103/Documents/Private/Server_files/server Buildtools/craftbukkit-1.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

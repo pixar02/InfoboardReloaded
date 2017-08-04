@@ -1,7 +1,6 @@
 package com.pixar02.infoboard;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -85,12 +84,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 	}
 
 	public void loadMetrics() {
-		try {
-			Metrics metrics = new Metrics(this);
-			metrics.start();
-		} catch (IOException e) {
-			// Failed to submit the stats :-(
-		}
+		Metrics metrics = new Metrics(this);
 	}
 
 	/*
@@ -146,12 +140,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
-		}
-		try {
-			Metrics metrics = new Metrics(this);
-			metrics.start();
-		} catch (IOException e) {
-			// Failed to submit the stats :-(
 		}
 	}
 }
