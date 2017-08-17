@@ -24,7 +24,6 @@ public class Commands implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("InfoBoardReloaded"))
 			if (args.length > 0) {
-				sender.sendMessage("");
 				/*
 				 * =============================================================================
 				 * HIDE
@@ -74,10 +73,9 @@ public class Commands implements CommandExecutor {
 					else if (args.length == 2) {
 						String rotate = args[1];
 
-						if (plugin.fm.getFile("board").getInt("InfoBoard." + rotate + ".Show Time") != 0) {
+						if (plugin.fm.getFile("board").getInt("InfoBoard." + rotate + ".ShowTime") != 0) {
 
-							plugin.timers.setPage(Integer.valueOf(args[1]));
-							sender.sendMessage("");
+							plugin.timers.setPage(Integer.valueOf(rotate));
 							sender.sendMessage(plugin.fm.getFile("messages").getString("set-page") + args[1]);
 							for (Player p : Bukkit.getOnlinePlayers())
 								if (p.hasPermission("ibr.View"))
@@ -200,7 +198,7 @@ public class Commands implements CommandExecutor {
 						"" + ChatColor.GOLD + ChatColor.STRIKETHROUGH + "--------------------------------------------");
 				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Authors: " + ChatColor.WHITE
 						+ ChatColor.BOLD + "pixar02 and Ktar5");
-				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Spiggot: " + ChatColor.WHITE
+				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Spigot: " + ChatColor.WHITE
 						+ ChatColor.BOLD + "http://bit.ly/InfoBoardReloaded");
 
 				sender.sendMessage(

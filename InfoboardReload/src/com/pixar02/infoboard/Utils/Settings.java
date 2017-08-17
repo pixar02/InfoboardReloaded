@@ -15,7 +15,7 @@ public class Settings {
 	 */
 	public static boolean doesGlobalHaveScoreBoard(int rotation) {
 		boolean hasBoard = false;
-		for (String s : plugin.fm.getFile("config").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
+		for (String s : plugin.fm.getFile("board").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
 				.getKeys(true))
 			if (!s.contains("."))
 				if (s.equals("global")) {

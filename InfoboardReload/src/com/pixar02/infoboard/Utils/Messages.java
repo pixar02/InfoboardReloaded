@@ -8,7 +8,8 @@ import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
-private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class); 
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+
 	/**
 	 * Get the message in color
 	 *
@@ -32,6 +33,8 @@ private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardR
 	public static String getLine(String line, Player player) {
 
 		if (line.contains("%"))
+			line = getReplacements(line, player);
+		if (line.contains("<") && line.contains(">"))
 			line = getReplacements(line, player);
 
 		line = getColored(line);
@@ -60,8 +63,8 @@ private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardR
 	 */
 	public static String getTitle(Player player, String worldName, String rankName) {
 
-		String title = plugin.fm.getFile("board").getString("InfoBoard."
-				+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
+		String title = plugin.fm.getFile("board").getString(
+				"InfoBoard." + String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
 
 		if (title.startsWith("<scroll>") && Settings.scrollingEnabled()) {
 			title = title.replaceAll("<scroll>", "");
