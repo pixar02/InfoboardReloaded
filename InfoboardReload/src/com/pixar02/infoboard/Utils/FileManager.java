@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import org.bukkit.Bukkit;
@@ -20,11 +19,11 @@ public class FileManager {
 	// Files & configs
 	private FileConfiguration board;
 	private FileConfiguration variable;
+	private FileConfiguration messages;
 
 	private File boardFile;
 	private File variableFile;
-
-	// TODO Setting default values of Board
+	private File messagesFile;
 
 	public void setup() {
 		if (!plugin.getDataFolder().exists()) {
@@ -32,6 +31,8 @@ public class FileManager {
 		}
 		boardFile = new File(plugin.getDataFolder(), "board.yml");
 		variableFile = new File(plugin.getDataFolder(), "varaibles.yml");
+		messagesFile = new File(plugin.getDataFolder(), "messages.yml");
+
 		/*
 		 * Checking if board.yml exists creating it if not
 		 */
@@ -63,82 +64,101 @@ public class FileManager {
 		}
 		variable = YamlConfiguration.loadConfiguration(variableFile);
 
+		if (!messagesFile.exists()) {
+			try {
+				messagesFile.createNewFile();
+				copy(plugin.getResource("messages.yml"), messagesFile);
+				Bukkit.getServer().getConsoleSender()
+						.sendMessage(ChatColor.GREEN + "The messages.yml file has been created");
+			} catch (IOException e) {
+				Bukkit.getServer().getConsoleSender()
+						.sendMessage(ChatColor.RED + "Could not create the messages.yml file" + e);
+			}
+		}
+		messages = YamlConfiguration.loadConfiguration(messagesFile);
+
 		plugin.getConfig().options().copyDefaults(true);
 		plugin.saveConfig();
 	}
 
-	public FileConfiguration getBoard() {
-		if (board == null) {
-			reloadBoard();
-		}
-		return board;
-	}
+	/*
+	 * saveBoard -> saveFile(board,boardFile) _____________________________
+	 * saveMessages -> saveFile(messages,messagesFile) ____________________
+	 * saveVariable -> saveFile(variable, variableFile)____________________
+	 * saveConfig -> saveFile(config)______________________________________
+	 */
+	public void saveFile(String s) {
 
-	public FileConfiguration getVariable() {
-		return variable;
-	}
-
-	public FileConfiguration getConfig() {
-		return plugin.getConfig();
-	}
-
-	public void saveBoard() {
 		try {
-			board.save(boardFile);
-			Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "The board.yml file has been saved");
-		} catch (IOException e) {
-			Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Could not save the board.yml file" + e);
-		}
-	}
+			if (s == "board") {
+				board.save(boardFile);
+			} else if (s == "variable") {
+				variable.save(variableFile);
+			} else if (s == "messages") {
+				messages.save(messagesFile);
+			} else if (s == "config") {
+				plugin.saveConfig();
+			}
 
-	public void saveVariable() {
-		try {
-			variable.save(variableFile);
-			Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "The variables.yml file has been saved");
+			Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "The" + s + ".yml file has been saved");
 		} catch (IOException e) {
 			Bukkit.getServer().getConsoleSender()
-					.sendMessage(ChatColor.RED + "Could not save the variables.yml file" + e);
+					.sendMessage(ChatColor.RED + "Could not save the " + s + ".yml file" + e);
+
 		}
 	}
 
-	public void saveConfig() {
-		plugin.saveConfig();
-	}
-
-	public void reloadBoard() {
-		board = YamlConfiguration.loadConfiguration(boardFile);
-
-		// look for defaults in the jar
-		InputStream defConfigStream = plugin.getResource("board.yml");
-		if (defConfigStream != null) {
-			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
-			board.setDefaults(defConfig);
+	/*
+	 * reloadBoard -> reloadFile(board) ___________________________________
+	 * reloadMessages -> reloadFile(messages) _____________________________
+	 * reloadVariable -> reloadFile(variable)______________________________
+	 * reloadConfig -> reloadFile(config)__________________________________
+	 */
+	public void reloadFile(String s) {
+		if (s == "board") {
+			board = YamlConfiguration.loadConfiguration(boardFile);
+		} else if (s == "config") {
+			plugin.reloadConfig();
+		} else if (s == "messages") {
+			messages = YamlConfiguration.loadConfiguration(messagesFile);
+		} else if (s == "variable") {
+			variable = YamlConfiguration.loadConfiguration(variableFile);
 		}
-		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The board.yml file has been reload");
 	}
 
-	public void reloadVariable() {
-		variable = YamlConfiguration.loadConfiguration(variableFile);
-		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The variables.yml file has been reload");
-	}
+	/*
+	 * getBoard -> getFile(board) _________________________________________
+	 * getMessages -> getFile(messages) ___________________________________
+	 * getVariable -> getFile(variable)____________________________________
+	 * getConfig -> getFile(config)________________________________________
+	 */
+	public FileConfiguration getFile(String s) {
+		if (s == "board") {
+			return board;
+		} else if (s == "config") {
+			return plugin.getConfig();
+		} else if (s == "messages") {
+			return messages;
+		} else if (s == "variable") {
+			return variable;
+		} else {
+			return null;
+		}
 
-	public void reloadConfig() {
-		plugin.reloadConfig();
-		//Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "The config.yml file has been reload");
 	}
 
 	private void copy(InputStream in, File file) {
 		try {
-	        OutputStream out = new FileOutputStream(file);
-	        byte[] buf = new byte[1024];
-	        int len;
-	        while((len=in.read(buf))>0){
-	            out.write(buf,0,len);
-	        }
-	        out.close();
-	        in.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+			OutputStream out = new FileOutputStream(file);
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0) {
+				out.write(buf, 0, len);
+			}
+			out.close();
+			in.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

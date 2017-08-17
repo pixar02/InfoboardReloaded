@@ -18,6 +18,6 @@ public class PlayerJoin implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 
 		if (event.getPlayer().isOp() && plugin.update)
-			event.getPlayer().sendMessage(ChatColor.DARK_AQUA + "Theres a new update for InfoBoard");
+			event.getPlayer().sendMessage(ChatColor.DARK_AQUA + plugin.fm.getFile("messages").getString("update"));
 	}
 }

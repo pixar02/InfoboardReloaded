@@ -83,7 +83,9 @@ public class InfoBoardReloaded extends JavaPlugin {
 		pm.registerEvents(new PlayerJoin(this), this);
 	}
 
+	@SuppressWarnings("unused")
 	public void loadMetrics() {
+		
 		Metrics metrics = new Metrics(this);
 	}
 

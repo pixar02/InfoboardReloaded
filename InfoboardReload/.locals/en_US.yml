@@ -1,0 +1,23 @@
+no-permission: 'You do not have permission for this command!'
+not-player: 'You have to be a player to perform this command!'
+update: 'There is a new update for InfoBoardReloaded'
+
+#Hide command
+already-hidden: 'The scoreboard is already hidden!'
+hiding: 'Hiding the scoreboard'
+
+#Show command
+already-shown: 'The scoreboard is already shown!'
+showing: 'Showing the scoreboard'
+
+#Set command
+#these lines send the line and the nubber you put in the command
+#example: /ibr set 5 -> 'Page not found: 5' or 'Page set to: 5'
+invalid-page: 'Page not found: '
+set-page: 'Page set to: '
+
+#Reload command
+board-reload: 'board.yml have been reloaded'
+config-reload: 'config.yml have been reloaded'
+messages-reload: 'messages.yml have been reloaded'
+all-reload: 'All configs have been reloaded'

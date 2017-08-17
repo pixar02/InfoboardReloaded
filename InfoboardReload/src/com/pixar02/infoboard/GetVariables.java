@@ -25,10 +25,10 @@ public class GetVariables {
 		// Bukkit.broadcastMessage(newString);
 
 		// Custom Variables
-		for (String custom : plugin.fm.getConfig().getConfigurationSection("Custom Variables").getKeys(true)) {
+		for (String custom : plugin.fm.getFile("config").getConfigurationSection("Custom Variables").getKeys(true)) {
 			if (newString.contains(custom)) {
 				newString = newString.replaceAll(custom,
-						Messages.getColored(plugin.fm.getConfig().getString("Custom Variables." + custom)));
+						Messages.getColored(plugin.fm.getFile("config").getString("Custom Variables." + custom)));
 			}
 		}
 

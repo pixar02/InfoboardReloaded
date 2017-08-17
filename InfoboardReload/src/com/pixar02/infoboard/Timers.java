@@ -26,7 +26,7 @@ public class Timers {
 	public Timers() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getBoard().getInt("InfoBoard." + rotation + ".ShowTime");
+		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
 
 	}
 
@@ -37,7 +37,7 @@ public class Timers {
 	public void setPage(int page) {
 		rotation = page;
 		time = -1;
-		showtime = plugin.fm.getBoard().getInt("InfoBoard." + rotation + ".ShowTime");
+		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
 	}
 
 	public void start() {
@@ -52,7 +52,7 @@ public class Timers {
 			@Override
 			public void run() {
 				if (time >= showtime) {
-					// TODO checkif current page is last page
+					// TODO check if current page is last page
 					// if so set to first page
 					setPage(getPage() + 1);
 
@@ -86,7 +86,7 @@ public class Timers {
 				}
 			}
 
-		}, 0, (long) plugin.fm.getConfig().getDouble("Update Time") * 20);
+		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Lines") * 20);
 		/*
 		 * =========================================================================
 		 * SCROLLING TEXT
@@ -104,7 +104,7 @@ public class Timers {
 
 				}
 
-			}, 0, (long) (plugin.fm.getConfig().getDouble("Scrolling Text.Shift Time") * 20));
+			}, 0, (long) (plugin.fm.getFile("config").getDouble("Scrolling Text.Shift Time") * 20));
 		}
 		/*
 		 * =========================================================================
@@ -118,14 +118,15 @@ public class Timers {
 
 				}
 
-			}, 0, (long) (plugin.fm.getBoard().getDouble("InfoBoard." + rotation + ".Changeable" + "" + ".interval") * 20));
+			}, 0, (long) (plugin.fm.getFile("board")
+					.getDouble("InfoBoard." + rotation + ".Changeable" + "" + ".interval") * 20));
 		}
 	}
 
 	public void stop() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getBoard().getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
+		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
 
 		Bukkit.getScheduler().cancelTasks(plugin);
 	}
@@ -133,9 +134,9 @@ public class Timers {
 	public void reset() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getBoard().getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
+		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
 
-		// Bukkit.getScheduler().cancelTasks(plugin);
+		Bukkit.getScheduler().cancelTasks(plugin);
 		start();
 	}
 }

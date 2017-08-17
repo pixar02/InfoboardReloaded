@@ -49,4 +49,6 @@ Changeable Text:
       - '&e&lDate Joined: ; &l%player_first_join_date%'
       interval: 5 
         
-Update Time: 2
+Update Time:
+  Lines: 2
+  

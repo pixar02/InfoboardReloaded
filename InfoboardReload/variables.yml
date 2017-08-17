@@ -25,9 +25,4 @@
 # |  dev.bukkit.org/bukkit-plugins/grief-prevention/ | #
 # +--------------------------------------------------+ #
 # ######################################################
-# %griefprevention_claims%                | The player's claims          
-# %griefprevention_bonusclaims%           | The player's bonus claims    
-# %griefprevention_accruedclaims%         | The player's accrued claims  
-# %griefprevention_remainingclaims%       | The player's remaining claims
-# %griefprevention_currentclaim_ownername | the Owner name of the current claim the player is standing in
-#
+# Spigot extension link: https://www.spigotmc.org/resources/griefprevention-expansion.44640/

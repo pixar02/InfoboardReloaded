@@ -1,0 +1,23 @@
+no-permission: 'U hebt geen toestemming om dit uit te voeren!'
+not-player: 'Je moet een speler zijn om dit te doen!'
+update: 'Er is een update voorInfoBoardReloaded'
+
+#Hide command
+already-hidden: 'Het scorebord is al verborgen'
+hiding: 'scorebord verbergen'
+
+#Show command
+already-shown: 'Het scorebord is al zichtbaar'
+showing: 'scorebord zichtbaar'
+
+#Set command
+#deze lijnen sturen the lijn en the nummer dat je hebt ingevoerd
+#voorbeeld: /ibr set 5 -> 'Pagina niet gevonden: 5' or 'Pagina getzet naar: 5'
+invalid-page: 'Pagina niet gevonden:'
+set-page: 'Pagina getzet naar:'
+
+#Reload command
+board-reload: 'board.yml is herladen'
+config-reload: 'config.yml is herladen'
+messages-reload: 'messages.yml is herladen'
+all-reload: 'Alle configs zijn herladen'

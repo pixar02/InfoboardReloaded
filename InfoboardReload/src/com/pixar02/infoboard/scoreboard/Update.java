@@ -71,7 +71,7 @@ public class Update {
 					}
 					Board board = new Board(player);
 
-					HashMap<Integer, String> toAdd = getLines(plugin.fm.getBoard().getStringList("InfoBoard."
+					HashMap<Integer, String> toAdd = getLines(plugin.fm.getFile("board").getStringList("InfoBoard."
 							+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows"));
 
 					for (Entry<Integer, String> e : toAdd.entrySet()) {

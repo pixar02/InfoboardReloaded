@@ -60,7 +60,7 @@ private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardR
 	 */
 	public static String getTitle(Player player, String worldName, String rankName) {
 
-		String title = plugin.fm.getBoard().getString("InfoBoard."
+		String title = plugin.fm.getFile("board").getString("InfoBoard."
 				+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
 
 		if (title.startsWith("<scroll>") && Settings.scrollingEnabled()) {
