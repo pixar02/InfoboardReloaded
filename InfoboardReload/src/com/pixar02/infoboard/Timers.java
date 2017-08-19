@@ -89,6 +89,22 @@ public class Timers {
 		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Lines") * 20);
 		/*
 		 * =========================================================================
+		 * UPDATES BOARD TITLE VALUE
+		 * =========================================================================
+		 */
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+			@Override
+			public void run() {
+
+				/*
+				 * for (Player p : Bukkit.getOnlinePlayers()) { if (p.hasPermission("ibr.View"))
+				 * { Update.updateScoreBoard(p); } }
+				 */
+			}
+
+		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Title") * 20);
+		/*
+		 * =========================================================================
 		 * SCROLLING TEXT
 		 * =========================================================================
 		 */

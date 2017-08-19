@@ -100,6 +100,14 @@ public class Settings {
 	 */
 	public static boolean updater() {
 		return plugin.fm.getFile("config").getBoolean("Updater");
+	}
 
+	/*
+	 * Get if Debugger is enabled
+	 * 
+	 * @return true/false
+	 */
+	public static boolean debug() {
+		return plugin.fm.getFile("config").getBoolean("Debug");
 	}
 }

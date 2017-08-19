@@ -1,9 +1,5 @@
 package com.pixar02.infoboard;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +24,8 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public Timers timers;
 	public FileManager fm;
 	public boolean update = false;
+	public boolean debug = false;
+
 	public static ArrayList<String> hidefrom = new ArrayList<String>();
 
 	public static Economy economy;
@@ -85,7 +83,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	@SuppressWarnings("unused")
 	public void loadMetrics() {
-		
 		Metrics metrics = new Metrics(this);
 	}
 
@@ -104,32 +101,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public void check() {
 		if (Settings.updater()) {
-			try {
-				HttpURLConnection c = (HttpURLConnection) new URL("http://www.spigotmc.org/api/general.php")
-						.openConnection();
-				c.setDoOutput(true);
-				c.setRequestMethod("POST");
-				c.getOutputStream()
-						.write(("key=98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4&resource=44270")
-								.getBytes("UTF-8"));
-				String current = getDescription().getVersion();
-				String newVersion = new BufferedReader(new InputStreamReader(c.getInputStream())).readLine()
-						.replaceAll("[a-zA-Z ]", "");
-
-				int curv = Integer.valueOf(current.replaceAll(".", ""));
-				int newv = Integer.valueOf(newVersion.replaceAll(".", ""));
-
-				if ((!(curv >= newv)) && curv < newv) {
-					// there is a new version
-					setEnabled(update);
-					logger.warning("There is an update for InFoboardReloaded!");
-					logger.warning("Pleas Download it at bit.ly/InfoBoardReloaded");
-				}
-			} catch (Exception e) {
-				// update failed, most likely to spigot being down or the server not having
-				// internet connection
-
-			}
+			
 		}
 	}
 

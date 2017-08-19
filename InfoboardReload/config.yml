@@ -19,6 +19,7 @@
 # |          Update Time how fast you scoreboard updates in seconds           |
 # =============================================================================
 Updater: true
+Debug: false
 
 Custom Variables:
   <website>: yoursitehere.net

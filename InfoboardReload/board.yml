@@ -49,7 +49,7 @@ InfoBoard:
       default:
         Title: '&lLookie here!'
         Rows:
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'
         - ' '
         - '&e&lWelcome!'
         - '&l%player_name%'
@@ -62,14 +62,14 @@ InfoBoard:
         - ' '
         - '&e&lWebsite:'
         - '<website>'
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'
   '2':
     ShowTime: 10
     global:
       default:
         Title: '&e&lPlayer Stats'
         Rows:
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'
         - ' '
         - '&e&lDate Joined:'
         - '&l%player_first_join_date%'
@@ -82,11 +82,11 @@ InfoBoard:
         - ' '
         - '&e&lWebsite:'
         - '<website>'
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'
       Admin:
         Title: '&e&lServer Stats'
         Rows:
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'
         - ' '
         - '&a&lMemory:'
         - '&e%server_ram_used%&7/&e%server_ram_max%'
@@ -94,4 +94,4 @@ InfoBoard:
         - '&d&lUptime'
         - '&f%server_uptime%'
         - ' '
-        - '&6----~Info-Board~----'
+        - '&6----~InfoBoard~----'

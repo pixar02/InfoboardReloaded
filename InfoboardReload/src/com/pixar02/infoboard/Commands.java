@@ -1,5 +1,8 @@
 package com.pixar02.infoboard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,164 +25,49 @@ public class Commands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("InfoBoardReloaded"))
+		if (cmd.getName().equalsIgnoreCase("InfoBoardReloaded")) {
 			if (args.length > 0) {
-				/*
-				 * =============================================================================
-				 * HIDE
-				 * =============================================================================
-				 */
+				// HIDE
 				if (args[0].equalsIgnoreCase("Hide")) {
-					if (!sender.hasPermission("ibr.Toggle")) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("no-permission"));
-					} else if (!(sender instanceof Player)) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
-					} else if (InfoBoardReloaded.hidefrom.contains(sender.getName())) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("Already hidden"));
-
-					} else {
-						InfoBoardReloaded.hidefrom.add(sender.getName());
-						sender.sendMessage(plugin.fm.getFile("messages").getString("hiding"));
-						((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
-					}
+					hideCmd(sender);
 				}
-				/*
-				 * =============================================================================
-				 * SHOW
-				 * =============================================================================
-				 */
+				// SHOW
 				else if (args[0].equalsIgnoreCase("Show")) {
-					if (!sender.hasPermission("ibr.Toggle")) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("no-permission"));
-					} else if (!(sender instanceof Player)) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
-					} else if (!InfoBoardReloaded.hidefrom.contains(sender.getName())) {
-						sender.sendMessage(plugin.fm.getFile("messages").getString("already-shown"));
-
-					} else {
-						InfoBoardReloaded.hidefrom.remove(sender.getName());
-						sender.sendMessage(plugin.fm.getFile("messages").getString("showing"));
-					}
+					showCmd(sender);
 				}
-				/*
-				 * =============================================================================
-				 * Set <page>
-				 * =============================================================================
-				 */
+				// SET <PAGE>
 				else if (args[0].equalsIgnoreCase("Set")) {
-					if (!sender.hasPermission("ibr.Set"))
-						sender.sendMessage(plugin.fm.getFile("messages").getString("no-permission"));
-
-					else if (args.length == 2) {
-						String rotate = args[1];
-
-						if (plugin.fm.getFile("board").getInt("InfoBoard." + rotate + ".ShowTime") != 0) {
-
-							plugin.timers.setPage(Integer.valueOf(rotate));
-							sender.sendMessage(plugin.fm.getFile("messages").getString("set-page") + args[1]);
-							for (Player p : Bukkit.getOnlinePlayers())
-								if (p.hasPermission("ibr.View"))
-									Create.createScoreBoard(p);
+					setCmd(sender, args);
+				}
+				// RELOAD [FILE]
+				else if (args[0].equalsIgnoreCase("Reload")) {
+					if (args.length > 1) {
+						if (args[1].equalsIgnoreCase("board")) {
+							reloadCmd(sender, "board");
+						} else if (args[1].equalsIgnoreCase("config")) {
+							reloadCmd(sender, "config");
+						} else if (args[1].equalsIgnoreCase("messages")) {
+							reloadCmd(sender, "messages");
+						} else if (args[1].equalsIgnoreCase("All")) {
+							reloadCmd(sender, "all");
 						} else {
-							sender.sendMessage(plugin.fm.getFile("messages").getString("invalid-page") + args[1]);
+							reloadCmd(sender, "error");
 						}
+					} else {
+						reloadCmd(sender, "all");
 					}
 				}
-				/*
-				 * =============================================================================
-				 * RELOAD [file]
-				 * =============================================================================
-				 */
-				else if (args[0].equalsIgnoreCase("Reload"))
-					if (!sender.hasPermission("ibr.Reload"))
-						sender.sendMessage(plugin.fm.getFile("messages").getString("no-permission"));
-
-				if (args.length == 2) {
-					/*
-					 * =============================================================================
-					 * RELOAD board
-					 * =============================================================================
-					 */
-					if (args[1].equalsIgnoreCase("Board")) {
-
-						Bukkit.getScheduler().cancelTasks(plugin);
-
-						for (Player player : Bukkit.getOnlinePlayers()) {
-							ScrollManager.reset(player);
-						}
-						plugin.fm.reloadFile("board");
-						plugin.timers.reset();
-
-						for (Player player : Bukkit.getOnlinePlayers())
-							if (player.hasPermission("InfoBoard.View"))
-								Create.createScoreBoard(player);
-						sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("board-reload"));
-
-						/*
-						 * =============================================================================
-						 * RELOAD config
-						 * =============================================================================
-						 */
-					} else if (args[1].equalsIgnoreCase("Config")) {
-
-						Bukkit.getScheduler().cancelTasks(plugin);
-						for (Player player : Bukkit.getOnlinePlayers())
-							ScrollManager.reset(player);
-
-						plugin.fm.reloadFile("config");
-						plugin.timers.reset();
-
-						for (Player player : Bukkit.getOnlinePlayers())
-							if (player.hasPermission("InfoBoard.View")) {
-								Create.createScoreBoard(player);
-							}
-						sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("config-reload"));
-					}
-					/*
-					 * =============================================================================
-					 * RELOAD messages
-					 * =============================================================================
-					 */
-					else if (args[1].equalsIgnoreCase("Messages")) {
-						Bukkit.getScheduler().cancelTasks(plugin);
-						for (Player player : Bukkit.getOnlinePlayers())
-							ScrollManager.reset(player);
-
-						plugin.fm.reloadFile("messages");
-						plugin.timers.reset();
-
-						for (Player player : Bukkit.getOnlinePlayers())
-							if (player.hasPermission("InfoBoard.View")) {
-								Create.createScoreBoard(player);
-							}
-						sender.sendMessage(
-								ChatColor.GREEN + plugin.fm.getFile("messages").getString("messages-reload"));
-
-					}
-				}
-				/*
-				 * =============================================================================
-				 * RELOAD
-				 * =============================================================================
-				 */
-				else if (args.length == 1 && args.length != 2 && args[0].equalsIgnoreCase("Reload")) {
-
-					sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("all-reload"));
-					Bukkit.getScheduler().cancelTasks(plugin);
-					for (Player player : Bukkit.getOnlinePlayers())
-						ScrollManager.reset(player);
-
-					plugin.fm.reloadFile("board");
-					plugin.fm.reloadFile("config");
-
-					plugin.timers.reset();
-					for (Player player : Bukkit.getOnlinePlayers())
-						if (player.hasPermission("ibr.View"))
-							Create.createScoreBoard(player);
+				// CREATE <PAGE> <SHOWTIME>
+				else if (args[0].equalsIgnoreCase("Create")) {
+					createCmd(sender, args);
 
 				}
-
+				// ADD <PAGE> <WORLD> <RANK> <LINE/TITLE> <WORDS>
+				else if (args[0].equalsIgnoreCase("Add")) {
+					addCmd(sender, args);
+				}
 			}
+
 			/*
 			 * =============================================================================
 			 * HELP
@@ -190,10 +78,19 @@ public class Commands implements CommandExecutor {
 						+ ChatColor.BOLD + " InfoBoardReloaded " + ChatColor.ITALIC + " v"
 						+ plugin.getDescription().getVersion() + ChatColor.GOLD + " " + ChatColor.STRIKETHROUGH
 						+ "]========");
-				sender.sendMessage("/IBR Hide         " + ChatColor.YELLOW + "- Hide the board");
-				sender.sendMessage("/IBR Show         " + ChatColor.YELLOW + "- Show the board");
-				sender.sendMessage("/IBR Reload [FILE]" + ChatColor.YELLOW + "- Reload the config");
-				sender.sendMessage("/IBR Set <Pg>     " + ChatColor.YELLOW + "- Set the page to view");
+				sender.sendMessage("/IBR Hide");
+				sender.sendMessage(ChatColor.YELLOW + "- Hide the board");
+				sender.sendMessage("/IBR Show");
+				sender.sendMessage(ChatColor.YELLOW + "- Show the board");
+				sender.sendMessage("/IBR Reload [FILE]");
+				sender.sendMessage(ChatColor.YELLOW + "- Reloads the given file");
+				sender.sendMessage("/IBR Set <Pg>");
+				sender.sendMessage(ChatColor.YELLOW + "- Set the page to view");
+				sender.sendMessage("/IBR Create <Pg> <ShowTime>");
+				sender.sendMessage(ChatColor.YELLOW + "- Creates a page with showtime");
+				sender.sendMessage("/IBR Add <Line/Title> <Pg> [World] [Rank] <Line>");
+				sender.sendMessage(ChatColor.YELLOW + "- Adds a line to given page, rank and world");
+
 				sender.sendMessage(
 						"" + ChatColor.GOLD + ChatColor.STRIKETHROUGH + "--------------------------------------------");
 				sender.sendMessage("" + ChatColor.DARK_AQUA + ChatColor.BOLD + "Authors: " + ChatColor.WHITE
@@ -211,6 +108,281 @@ public class Commands implements CommandExecutor {
 
 			}
 
+		}
 		return true;
+	}
+
+	/*
+	 * =============================================================================
+	 * ADD <LINE/TITLE> <PAGE> [WORLD] [RANK] <LINE>
+	 * =============================================================================
+	 */
+	public void addCmd(CommandSender sender, String[] args) {
+		if (!(sender.hasPermission("ibr.Create"))) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+
+		} else {
+			if (args.length >= 6) {
+				String what = args[1];
+				String rotation = args[2];
+				String world = args[3];
+				String rank = args[4];
+				String line = "";
+				for (int i = 5; i < args.length; i++) {
+					String temp = args[i] + " ";
+					line = line + temp;
+				}
+				if (args[2] == "") {
+					world = "global";
+				}
+				if (args[3] == "") {
+					rank = "default";
+				}
+				if (what.equalsIgnoreCase("Title")) {
+					// check if the Title isn't already set
+					if (plugin.fm.getFile("board")
+							.getString("InfoBoard." + rotation + "." + world + "." + rank + ".Title") == null) {
+						// Title doesn't exist
+						plugin.fm.getFile("board").set("InfoBoard." + rotation + "." + world + "." + rank + ".Title",
+								line);
+						sender.sendMessage(plugin.fm.getFile("messages").getString("add-success") + rotation);
+						sender.sendMessage("Title: " + line);
+						plugin.fm.saveFile("board");
+					} else {
+						// Title exists
+						sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("title-exists"));
+					}
+				} else if (what.equalsIgnoreCase("Line")) {
+					// check if the maximum of lines are exceeded
+					if (plugin.fm.getFile("board")
+							.getStringList("InfoBoard." + rotation + "." + world + "." + rank + ".Rows").size() <= 14) {
+						List<String> lines = plugin.fm.getFile("board")
+								.getStringList("InfoBoard." + rotation + "." + world + "." + rank + ".Rows");
+						lines.add(line);
+						plugin.fm.getFile("board").set("InfoBoard." + rotation + "." + world + "." + rank + ".Rows",
+								lines);
+						plugin.fm.getFile("board");
+						sender.sendMessage(plugin.fm.getFile("messages").getString("add-success") + rotation);
+						sender.sendMessage("Line: " + line);
+						plugin.fm.saveFile("board");
+
+					} else {
+						sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("max-lines"));
+					}
+				} else {
+					sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
+					sender.sendMessage("/ibr add <line/title> <page> [world] [rank] <line>");
+				}
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
+				sender.sendMessage("/ibr add <line/title> <page> [world] [rank] <line>");
+			}
+		}
+	}
+
+	/*
+	 * =============================================================================
+	 * CREATE <PAGE> <SHOWTIME>
+	 * =============================================================================
+	 */
+	public void createCmd(CommandSender sender, String[] args) {
+		if (!(sender.hasPermission("ibr.Create"))) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+
+		} else {
+			if (args.length >= 3) {
+				String rotation = args[1];
+				// check if the new created page doesn't already exist
+				if (rotation.equals(plugin.fm.getFile("board").getStringList("InfoBoard").size())) {
+					sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("page-exists"));
+				} else {
+					// create the new page with the given showtime
+					plugin.fm.getFile("board").set("InfoBoard." + rotation + ".ShowTime", args[2]);
+					plugin.fm.saveFile("board");
+					sender.sendMessage(plugin.fm.getFile("board").getString("create-success"));
+				}
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
+				sender.sendMessage("/ibr create <Page> <ShowTime>");
+			}
+		}
+	}
+
+	/*
+	 * =============================================================================
+	 * Set <PAGE>
+	 * =============================================================================
+	 */
+	public void setCmd(CommandSender sender, String[] args) {
+		if (!sender.hasPermission("ibr.Set")) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+		} else if (args.length == 2) {
+			String rotate = args[1];
+
+			if (plugin.fm.getFile("board").getInt("InfoBoard." + rotate + ".ShowTime") != 0) {
+
+				plugin.timers.setPage(Integer.valueOf(rotate));
+				sender.sendMessage(plugin.fm.getFile("messages").getString("set-page") + args[1]);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					if (p.hasPermission("ibr.View")) {
+						Create.createScoreBoard(p);
+					}
+				}
+			} else {
+				sender.sendMessage(plugin.fm.getFile("messages").getString("invalid-page") + args[1]);
+			}
+		} else {
+			sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
+			sender.sendMessage("/ibr set <page>");
+		}
+
+	}
+
+	/*
+	 * =============================================================================
+	 * SHOW
+	 * =============================================================================
+	 */
+	public void showCmd(CommandSender sender) {
+		if (!sender.hasPermission("ibr.Toggle")) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+		} else if (!(sender instanceof Player)) {
+			sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
+		} else if (!InfoBoardReloaded.hidefrom.contains(sender.getName())) {
+			sender.sendMessage(plugin.fm.getFile("messages").getString("already-shown"));
+
+		} else {
+			InfoBoardReloaded.hidefrom.remove(sender.getName());
+			sender.sendMessage(plugin.fm.getFile("messages").getString("showing"));
+		}
+	}
+
+	/*
+	 * =============================================================================
+	 * HIDE
+	 * =============================================================================
+	 */
+	public void hideCmd(CommandSender sender) {
+		if (!sender.hasPermission("ibr.Toggle")) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+		} else if (!(sender instanceof Player)) {
+			sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
+		} else if (InfoBoardReloaded.hidefrom.contains(sender.getName())) {
+			sender.sendMessage(plugin.fm.getFile("messages").getString("already-hidden"));
+
+		} else {
+			InfoBoardReloaded.hidefrom.add(sender.getName());
+			sender.sendMessage(plugin.fm.getFile("messages").getString("hiding"));
+			((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
+		}
+	}
+
+	/*
+	 * =============================================================================
+	 * RELOAD [file]
+	 * =============================================================================
+	 */
+	public void reloadCmd(CommandSender sender, String file) {
+		if (!sender.hasPermission("ibr.Reload")) {
+			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
+		} else {
+			/*
+			 * =============================================================================
+			 * RELOAD board
+			 * =============================================================================
+			 */
+			if (file == "board") {
+
+				Bukkit.getScheduler().cancelTasks(plugin);
+
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					ScrollManager.reset(player);
+				}
+				plugin.fm.reloadFile("board");
+				plugin.timers.reset();
+
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.hasPermission("InfoBoard.View")) {
+						Create.createScoreBoard(player);
+					}
+				}
+				sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("board-reload"));
+
+				/*
+				 * =============================================================================
+				 * RELOAD config
+				 * =============================================================================
+				 */
+			} else if (file == "config") {
+
+				Bukkit.getScheduler().cancelTasks(plugin);
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					ScrollManager.reset(player);
+				}
+
+				plugin.fm.reloadFile("config");
+				plugin.timers.reset();
+
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.hasPermission("InfoBoard.View")) {
+						Create.createScoreBoard(player);
+					}
+				}
+				sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("config-reload"));
+			}
+			/*
+			 * =============================================================================
+			 * RELOAD messages
+			 * =============================================================================
+			 */
+			else if (file == "messages") {
+				Bukkit.getScheduler().cancelTasks(plugin);
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					ScrollManager.reset(player);
+				}
+
+				plugin.fm.reloadFile("messages");
+				plugin.timers.reset();
+
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.hasPermission("InfoBoard.View")) {
+						Create.createScoreBoard(player);
+					}
+				}
+				sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("messages-reload"));
+
+			}
+
+			/*
+			 * =============================================================================
+			 * RELOAD
+			 * =============================================================================
+			 */
+			else if (file == "all") {
+
+				Bukkit.getScheduler().cancelTasks(plugin);
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					ScrollManager.reset(player);
+				}
+
+				plugin.fm.reloadFile("board");
+				plugin.fm.reloadFile("config");
+				plugin.fm.reloadFile("messages");
+
+				plugin.timers.reset();
+				for (Player player : Bukkit.getOnlinePlayers()) {
+					if (player.hasPermission("ibr.View")) {
+						Create.createScoreBoard(player);
+					}
+				}
+				sender.sendMessage(ChatColor.GREEN + plugin.fm.getFile("messages").getString("all-reload"));
+			} else if (file == "error") {
+				sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("wrong-usage"));
+				sender.sendMessage("/ibr reload [File]");
+			} else {
+				sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("wrong-usage"));
+				sender.sendMessage("/ibr reload [File]");
+			}
+		}
 	}
 }
