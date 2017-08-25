@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
+import com.pixar02.infoboard.Utils.UpdateChecker;
 import com.pixar02.infoboard.scoreboard.Create;
 import com.pixar02.infoboard.scoreboard.Update;
 
@@ -128,6 +129,7 @@ public class Timers {
 		 * =========================================================================
 		 */
 		if (Settings.changeableTextEnabled()) {
+
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
 				public void run() {
@@ -137,6 +139,14 @@ public class Timers {
 			}, 0, (long) (plugin.fm.getFile("board")
 					.getDouble("InfoBoard." + rotation + ".Changeable" + "" + ".interval") * 20));
 		}
+
+		/*
+		 * =========================================================================
+		 * CHECKING FOR UPDATES ON SPIGOT
+		 * =========================================================================
+		 */
+		
+
 	}
 
 	public void stop() {

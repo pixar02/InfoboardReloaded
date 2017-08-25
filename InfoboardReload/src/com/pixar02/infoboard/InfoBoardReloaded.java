@@ -14,6 +14,7 @@ import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
 import com.pixar02.infoboard.Utils.Metrics;
 import com.pixar02.infoboard.Utils.Settings;
+import com.pixar02.infoboard.Utils.UpdateChecker;
 import com.pixar02.infoboard.events.PlayerJoin;
 import com.pixar02.infoboard.events.ChangeWorld;
 import net.milkbowl.vault.economy.Economy;
@@ -43,9 +44,20 @@ public class InfoBoardReloaded extends JavaPlugin {
 		dependencies();
 		loadFileManager();
 		loadMetrics();
+		UpdateChecker updateChecker = new UpdateChecker(this);
+		if (Settings.updater()) {
+			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+				public void run() {
+					logger.info("Checking for updates...");
+					try {
+						updateChecker.checkUpdate("v" + pdfFile.getVersion());
+					} catch (Exception e) {
+						logger.warning("Failed to check for updates, because: " + e);
 
-		check();
-
+					}
+				}
+			}, 0, 15 * 20);
+		}
 		timers = new Timers(this);
 		timers.start();
 
@@ -58,7 +70,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		getCommand("InfoBoardReloaded").setExecutor(new Commands(this));
 
 		Vault.load();
-
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
 
 	}
@@ -98,12 +109,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 	 * ChangeableInt.put(s, fm.getBoard().getInt("Changeable Text.Changeables" + s +
 	 * ".interval")); } } } }
 	 */
-
-	public void check() {
-		if (Settings.updater()) {
-			
-		}
-	}
 
 	public void dependencies() {
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
