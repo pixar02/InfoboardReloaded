@@ -35,7 +35,7 @@ public class UpdateChecker {
 			plugin.update = true;
 		} else {
 			if (Settings.debug()) {
-				plugin.getLogger().info("There is an update aviable");
+				plugin.getLogger().info("There is an update aviable!");
 			}
 			plugin.update = false;
 		}
@@ -52,7 +52,7 @@ public class UpdateChecker {
 			version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
 		} catch (IOException ex) {
 			if (Settings.debug()) {
-				plugin.getLogger().warning("Could not connect to Spigot");
+				plugin.getLogger().warning("Could not connect to Spigot!");
 			}
 			ex.printStackTrace();
 		}
