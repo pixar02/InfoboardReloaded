@@ -1,5 +1,9 @@
 package com.pixar02.infoboard;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,20 +48,8 @@ public class InfoBoardReloaded extends JavaPlugin {
 		dependencies();
 		loadFileManager();
 		loadMetrics();
-		UpdateChecker updateChecker = new UpdateChecker(this);
-		if (Settings.updater()) {
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-				public void run() {
-					logger.info("Checking for updates...");
-					try {
-						updateChecker.checkUpdate("v" + pdfFile.getVersion());
-					} catch (Exception e) {
-						logger.warning("Failed to check for updates, because: " + e);
+		UpdateCheck();
 
-					}
-				}
-			}, 0, 15 * 20);
-		}
 		timers = new Timers(this);
 		timers.start();
 
@@ -119,6 +111,23 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
+		}
+	}
+
+	public void UpdateCheck() {
+		UpdateChecker updateChecker = new UpdateChecker(this);
+		if (Settings.updater()) {
+			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+				public void run() {
+					logger.info("Checking for updates...");
+					try {
+						updateChecker.checkUpdate(pdfFile.getVersion());
+					} catch (Exception e) {
+						logger.warning("Failed to check for updates, because: " + e);
+
+					}
+				}
+			}, 0, 3600 * 20);
 		}
 	}
 }

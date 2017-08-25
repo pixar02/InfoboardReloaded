@@ -88,7 +88,7 @@ public class Commands implements CommandExecutor {
 				sender.sendMessage(ChatColor.YELLOW + "- Set the page to view");
 				sender.sendMessage("/IBR Create <Pg> <ShowTime>");
 				sender.sendMessage(ChatColor.YELLOW + "- Creates a page with showtime");
-				sender.sendMessage("/IBR Add <Line/Title> <Pg> [World] [Rank] <Line>");
+				sender.sendMessage("/IBR Add <Line/Title> <Pg> <World> <Rank> <Line>");
 				sender.sendMessage(ChatColor.YELLOW + "- Adds a line to given page, rank and world");
 
 				sender.sendMessage(
@@ -114,7 +114,7 @@ public class Commands implements CommandExecutor {
 
 	/*
 	 * =============================================================================
-	 * ADD <LINE/TITLE> <PAGE> [WORLD] [RANK] <LINE>
+	 * ADD <LINE/TITLE> <PAGE> <WORLD> <RANK> <LINE>
 	 * =============================================================================
 	 */
 	public void addCmd(CommandSender sender, String[] args) {
@@ -190,16 +190,17 @@ public class Commands implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
 
 		} else {
-			if (args.length >= 3) {
+			if (args.length == 3) {
 				String rotation = args[1];
+				int ShowTime = Integer.valueOf(args[2]);
 				// check if the new created page doesn't already exist
-				if (rotation.equals(plugin.fm.getFile("board").getStringList("InfoBoard").size())) {
+				if (plugin.fm.getFile("board").getString("InfoBoard." + rotation) != null) {
 					sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("page-exists"));
 				} else {
 					// create the new page with the given showtime
-					plugin.fm.getFile("board").set("InfoBoard." + rotation + ".ShowTime", args[2]);
+					plugin.fm.getFile("board").set("InfoBoard." + rotation + ".ShowTime", ShowTime);
 					plugin.fm.saveFile("board");
-					sender.sendMessage(plugin.fm.getFile("board").getString("create-success"));
+					sender.sendMessage(plugin.fm.getFile("messages").getString("create-success"));
 				}
 			} else {
 				sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
