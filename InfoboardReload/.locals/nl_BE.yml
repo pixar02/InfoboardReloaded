@@ -1,4 +1,5 @@
-#Algemeen
+#Algemene berichten
+#wrong-usage voegt het juiste gebruik van het commando er na toe
 no-permission: 'U hebt geen toestemming om dit uit te voeren!'
 not-player: 'Je moet een speler zijn om dit te doen!'
 update: 'Er is een update voor InfoBoardReloaded'

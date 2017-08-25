@@ -175,7 +175,7 @@ public class Commands implements CommandExecutor {
 				}
 			} else {
 				sender.sendMessage(ChatColor.YELLOW + plugin.fm.getFile("messages").getString("wrong-usage"));
-				sender.sendMessage("/ibr add <line/title> <page> [world] [rank] <line>");
+				sender.sendMessage("/ibr add <line/title> <page> <world> <rank> <line>");
 			}
 		}
 	}
