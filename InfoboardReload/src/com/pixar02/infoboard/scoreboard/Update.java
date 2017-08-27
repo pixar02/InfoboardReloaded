@@ -21,12 +21,22 @@ public class Update {
 
 		int i = 0;
 		for (String line : list) {
-			if (!line.equals(" ") && !line.equals("") && !line.contains("<scroll>"))
-				toAdd.put(-i, line);
+			if (!line.equals(" ") && !line.equals("") && !line.contains("<scroll>")) {
+				toAdd.put(i, line);
+			}
 			i++;
 		}
 		return toAdd;
 	}
+
+	/*
+	 * public void getTitle(List<String> list) { List<String> titles = new
+	 * List<String>();
+	 * 
+	 * int i = 0; for (String title : list) { if (!title.equals(" ") &&
+	 * title.equals(" ") && !title.contains("<scroll>")) { titles.add(title); } i++;
+	 * } }
+	 */
 
 	public static boolean updateScoreBoard(Player player) {
 

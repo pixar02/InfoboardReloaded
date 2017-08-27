@@ -1,6 +1,5 @@
 package com.pixar02.infoboard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -249,11 +248,11 @@ public class Commands implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
 		} else if (!(sender instanceof Player)) {
 			sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
-		} else if (!InfoBoardReloaded.hidefrom.contains(sender.getName())) {
+		} else if (!plugin.hidefrom.contains(sender.getName())) {
 			sender.sendMessage(plugin.fm.getFile("messages").getString("already-shown"));
 
 		} else {
-			InfoBoardReloaded.hidefrom.remove(sender.getName());
+			plugin.hidefrom.remove(sender.getName());
 			sender.sendMessage(plugin.fm.getFile("messages").getString("showing"));
 		}
 	}
@@ -268,11 +267,11 @@ public class Commands implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
 		} else if (!(sender instanceof Player)) {
 			sender.sendMessage(plugin.fm.getFile("messages").getString("not-player"));
-		} else if (InfoBoardReloaded.hidefrom.contains(sender.getName())) {
+		} else if (plugin.hidefrom.contains(sender.getName())) {
 			sender.sendMessage(plugin.fm.getFile("messages").getString("already-hidden"));
 
 		} else {
-			InfoBoardReloaded.hidefrom.add(sender.getName());
+			plugin.hidefrom.add(sender.getName());
 			sender.sendMessage(plugin.fm.getFile("messages").getString("hiding"));
 			((Player) sender).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 		}

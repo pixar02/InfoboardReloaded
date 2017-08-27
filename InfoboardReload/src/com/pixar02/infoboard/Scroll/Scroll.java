@@ -24,8 +24,8 @@ public class Scroll {
 	 * @param width
 	 */
 	public Scroll(String message, int row, int width) {
-		row = row;
-		width = width;
+		this.row = row;
+		this.width = width;
 		origionalMessage = message;
 		StringBuilder builder = new StringBuilder(message);
 		while (builder.length() <= (width * 2))

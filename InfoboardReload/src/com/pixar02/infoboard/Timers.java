@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.Utils.UpdateChecker;
 import com.pixar02.infoboard.scoreboard.Create;
 import com.pixar02.infoboard.scoreboard.Update;
 
@@ -15,8 +14,8 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-	private HashMap<String, String> chanText = new HashMap<>();
-	private HashMap<String, Integer> chanTextInt = new HashMap<>();
+	// private HashMap<String, String> chanText = new HashMap<>();
+	// private HashMap<String, Integer> chanTextInt = new HashMap<>();
 
 	public InfoBoardReloaded plugin;
 
@@ -145,7 +144,6 @@ public class Timers {
 		 * CHECKING FOR UPDATES ON SPIGOT
 		 * =========================================================================
 		 */
-		
 
 	}
 

@@ -3,7 +3,6 @@ package com.pixar02.infoboard;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Utils.Messages;
-import com.pixar02.infoboard.Utils.Settings;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 

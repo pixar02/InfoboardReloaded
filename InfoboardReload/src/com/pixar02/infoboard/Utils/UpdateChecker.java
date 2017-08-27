@@ -29,14 +29,10 @@ public class UpdateChecker {
 			plugin.getLogger().info(currentVersion);
 		}
 		if (checkHigher(currentVersion, version) == false) {
-			if (Settings.debug()) {
-				plugin.getLogger().info("You are running the most recent version!");
-			}
+			plugin.getLogger().info("You are running the most recent version!");
 			plugin.update = true;
 		} else {
-			if (Settings.debug()) {
-				plugin.getLogger().info("There is an update aviable!");
-			}
+			plugin.getLogger().info("There is an update aviable!");
 			plugin.update = false;
 		}
 	}

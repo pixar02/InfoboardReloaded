@@ -1,9 +1,5 @@
 package com.pixar02.infoboard;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +27,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public boolean update = false;
 	public boolean debug = false;
 
-	public static ArrayList<String> hidefrom = new ArrayList<String>();
+	public ArrayList<String> hidefrom = new ArrayList<String>();
 
 	public static Economy economy;
 	public static Permission permission;

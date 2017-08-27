@@ -8,10 +8,11 @@ import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.scoreboard.Board;
 
 public class ScrollText {
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static void scroll(Player player) {
 		// Make sure the user can see the board
-		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !InfoBoardReloaded.hidefrom.contains(player.getName())
+		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			if (ScrollManager.getScrollers(player) != null)

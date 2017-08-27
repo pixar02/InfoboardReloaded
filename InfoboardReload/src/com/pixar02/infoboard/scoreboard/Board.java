@@ -3,6 +3,7 @@ package com.pixar02.infoboard.scoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+
 public class Board {
 
 	private Scoreboard scoreboard;
@@ -56,8 +57,8 @@ public class Board {
 	}
 
 	/**
-	 * Add a line well creating a team to go with it(Allows for up to 48
-	 * characters in a line(Prefix and Suffix))
+	 * Add a line well creating a team to go with it(Allows for up to 48 characters
+	 * in a line(Prefix and Suffix))
 	 *
 	 * @param line
 	 * @param row

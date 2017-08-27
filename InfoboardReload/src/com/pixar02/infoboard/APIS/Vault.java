@@ -34,7 +34,8 @@ public class Vault {
 	 * @return true/false
 	 */
 	private static boolean hasVaultOnServer() {
-		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (InfoBoardReloaded.permission != null) && (InfoBoardReloaded.permissionB);
+		return (Bukkit.getPluginManager().getPlugin("Vault") != null) && (InfoBoardReloaded.permission != null)
+				&& (InfoBoardReloaded.permissionB);
 	}
 
 	/**
