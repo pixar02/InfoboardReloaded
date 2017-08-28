@@ -24,6 +24,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public Timers timers;
 	public FileManager fm;
+	public UpdateChecker uc = new UpdateChecker(this);;
 	public boolean update = false;
 	public boolean debug = false;
 
@@ -44,7 +45,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		dependencies();
 		loadFileManager();
 		loadMetrics();
-		UpdateCheck();
 
 		timers = new Timers(this);
 		timers.start();
@@ -110,20 +110,4 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 	}
 
-	public void UpdateCheck() {
-		UpdateChecker updateChecker = new UpdateChecker(this);
-		if (Settings.updater()) {
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-				public void run() {
-					logger.info("Checking for updates...");
-					try {
-						updateChecker.checkUpdate(pdfFile.getVersion());
-					} catch (Exception e) {
-						logger.warning("Failed to check for updates, because: " + e);
-
-					}
-				}
-			}, 0, 3600 * 20);
-		}
-	}
 }
