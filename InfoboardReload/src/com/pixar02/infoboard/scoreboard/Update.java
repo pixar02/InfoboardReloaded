@@ -22,7 +22,7 @@ public class Update {
 		int i = 0;
 		for (String line : list) {
 			if (!line.equals(" ") && !line.equals("") && !line.contains("<scroll>")) {
-				toAdd.put(i, line);
+				toAdd.put(-i, line);
 			}
 			i++;
 		}
