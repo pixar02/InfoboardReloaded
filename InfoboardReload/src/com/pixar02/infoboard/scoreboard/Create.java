@@ -27,12 +27,13 @@ public class Create {
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name
-			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName()))
+			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName())) {
 				worldName = player.getWorld().getName();
-			else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage()))
+			} else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
 				worldName = "global";
-			else
+			} else {
 				return false;
+			}
 
 			// Get the players rank name
 			String rank = Vault.getRank(player);
@@ -71,7 +72,7 @@ public class Create {
 				ShouldSet set = new ShouldSet(player, line);
 				line = set.getLine();
 
-				if (set.getBoolean())
+				if (set.getBoolean()) {
 					// If the line is empty just assume it's an empty line
 					if (line.equals(" ") || line.equals("")) {
 						String space = "§" + spaces;
@@ -104,8 +105,10 @@ public class Create {
 						}
 					}
 					// Just a regular line
-					else
+					else {
 						board.add(Messages.getLine(line, player), row);
+					}
+				}
 			}
 			// then we just set the scoreboard for the player
 			player.setScoreboard(board.getScoreboard());
@@ -116,13 +119,15 @@ public class Create {
 
 	public static int getLongestLine(List<String> lines, Player player) {
 		int longest = 0;
-		for (String line : lines)
+		for (String line : lines) {
 			if (!line.contains("<scroll>")) {
 				String string = Messages.getReplacements(line, player);
-				if (string.length() > longest)
+				if (string.length() > longest) {
 					longest = string.length();
+				}
 
 			}
+		}
 		return longest;
 	}
 }

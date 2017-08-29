@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
+import com.pixar02.infoboard.scoreboard.Board;
 import com.pixar02.infoboard.scoreboard.Create;
 import com.pixar02.infoboard.scoreboard.Update;
 
@@ -14,6 +15,7 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
+	private int counter;
 	// private HashMap<String, String> chanText = new HashMap<>();
 	// private HashMap<String, Integer> chanTextInt = new HashMap<>();
 
@@ -92,14 +94,17 @@ public class Timers {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
 			public void run() {
+				// TODO create changeable counter
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					if (p.hasPermission("ibr.View")) {
+						Update.updateTitle(p, "test");
+					}
+				}
 
-				/*
-				 * for (Player p : Bukkit.getOnlinePlayers()) { if (p.hasPermission("ibr.View"))
-				 * { Update.updateScoreBoard(p); } }
-				 */
 			}
 
 		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Title") * 20);
+
 		/*
 		 * =========================================================================
 		 * SCROLLING TEXT

@@ -1,5 +1,6 @@
 package com.pixar02.infoboard.scoreboard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -29,14 +30,18 @@ public class Update {
 		return toAdd;
 	}
 
-	/*
-	 * public void getTitle(List<String> list) { List<String> titles = new
-	 * List<String>();
-	 * 
-	 * int i = 0; for (String title : list) { if (!title.equals(" ") &&
-	 * title.equals(" ") && !title.contains("<scroll>")) { titles.add(title); } i++;
-	 * } }
-	 */
+	public static List<String> getTitle(List<String> list) {
+		List<String> titles = new ArrayList<>();
+
+		int i = 0;
+		for (String title : list) {
+			if (!title.equals(" ") && title.equals(" ") && !title.contains("<scroll>")) {
+				titles.add(title);
+			}
+			i++;
+		}
+		return titles;
+	}
 
 	public static boolean updateScoreBoard(Player player) {
 
@@ -114,6 +119,15 @@ public class Update {
 					}
 				}
 			}
+		}
+		return true;
+	}
+
+	public static boolean updateTitle(Player player, String title) {
+		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
+				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
+						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
+
 		}
 		return true;
 	}
