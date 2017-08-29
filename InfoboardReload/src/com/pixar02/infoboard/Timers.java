@@ -94,7 +94,7 @@ public class Timers {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
 			public void run() {
-				// TODO create changeable counter
+				// TODO 
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (p.hasPermission("ibr.View")) {
 						Update.updateTitle(p, "test");

@@ -59,6 +59,8 @@ public class Create {
 			ScrollManager.reset(player);
 
 			// Now we go to the title setting method thats down below
+			List<String> titles = plugin.fm.getFile("board").getStringList("InfoBoard."
+					+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
 
 			// Loop through the lines
