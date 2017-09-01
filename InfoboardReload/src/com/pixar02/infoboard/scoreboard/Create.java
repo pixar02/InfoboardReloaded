@@ -27,25 +27,25 @@ public class Create {
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name
-			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName()))
+			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName())) {
 				worldName = player.getWorld().getName();
-			else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage()))
+			} else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
 				worldName = "global";
-			else
+			} else {
 				return false;
-
+			}
 			// Get the players rank name
 			String rank = Vault.getRank(player);
 
 			// Make sure the rank is on the board, if it is set that to the
 			// player's rankName
-			if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank))
+			if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
 				rankName = rank;
-
+			}
 			// Make sure there is a default for the board
-			if (!Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName))
+			if (!Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
 				return false;
-
+			}
 			// Remove any old objective from the sidebar
 			if (player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) != null) {
 				player.getScoreboard().getObjective(DisplaySlot.SIDEBAR).unregister();
@@ -116,13 +116,14 @@ public class Create {
 
 	public static int getLongestLine(List<String> lines, Player player) {
 		int longest = 0;
-		for (String line : lines)
+		for (String line : lines) {
 			if (!line.contains("<scroll>")) {
 				String string = Messages.getReplacements(line, player);
 				if (string.length() > longest)
 					longest = string.length();
 
 			}
+		}
 		return longest;
 	}
 }

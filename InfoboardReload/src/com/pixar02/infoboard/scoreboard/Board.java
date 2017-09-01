@@ -47,9 +47,9 @@ public class Board {
 
 		row = 15 - row;
 
-		if (line.length() > 16)
+		if (line.length() > 16) {
 			addCreatingTeam(line, row);
-		else {
+		} else {
 			Score score = objective.getScore(line);
 			score.setScore(1);
 			score.setScore(row);
@@ -66,13 +66,13 @@ public class Board {
 	private void addCreatingTeam(String line, int row) {
 		String prefix = null, name = null, suffix = null;
 
-		if (line.length() > 48)
+		if (line.length() > 48) {
 			line = line.substring(0, 47);
-
-		if (line.length() <= 16)
+		}
+		if (line.length() <= 16) {
 			name = line;
 
-		else if (line.length() <= 32) {
+		} else if (line.length() <= 32) {
 			name = line.substring(0, 16);
 			suffix = line.substring(16, line.length());
 		} else {
@@ -86,13 +86,13 @@ public class Board {
 		if ((prefix != null) || (suffix != null)) {
 			Team team = scoreboard.getPlayerTeam(op);
 
-			if (team == null)
+			if (team == null) {
 				team = scoreboard.registerNewTeam(name);
-
+			}
 			team.addPlayer(op);
-			if (prefix != null)
+			if (prefix != null) {
 				team.setPrefix(prefix);
-
+			}
 			team.setSuffix(suffix);
 		}
 		Score score = objective.getScore(name);
@@ -144,9 +144,9 @@ public class Board {
 	 */
 	public void remove(String line) {
 		scoreboard.resetScores(line);
-		if (scoreboard.getTeam(line) != null)
+		if (scoreboard.getTeam(line) != null) {
 			scoreboard.getTeam(line).unregister();
-
+		}
 	}
 
 	/**
@@ -166,21 +166,25 @@ public class Board {
 	public void update(String line, int row) {
 		String name = null;
 
-		if (line.length() <= 16)
+		if (line.length() <= 16) {
 			name = line;
 
-		else if (line.length() <= 32)
+		} else if (line.length() <= 32) {
 			name = line.substring(0, 16);
 
-		else
+		} else {
 			name = line.substring(16, 32);
+		}
 
 		if (!scoreboard.getEntries().contains(name)) {
-			for (String op : scoreboard.getEntries())
+
+			for (String op : scoreboard.getEntries()) {
+
 				if (objective.getScore(op).getScore() == 15 - row) {
 					remove(op);
 					break;
 				}
+			}
 			add(line, row);
 		}
 	}
