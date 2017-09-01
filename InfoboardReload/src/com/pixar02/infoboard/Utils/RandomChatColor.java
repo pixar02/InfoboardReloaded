@@ -19,8 +19,9 @@ public class RandomChatColor {
 			colors = chatColors;
 		}
 		int i = r.nextInt(colors.length);
-		while (!colors[i].isColor())
+		while (!colors[i].isColor()) {
 			i = r.nextInt(colors.length);
+		}
 		return colors[i];
 	}
 
@@ -33,8 +34,9 @@ public class RandomChatColor {
 			colors = chatColors;
 		}
 		int i = r.nextInt(colors.length);
-		while (!colors[i].isFormat())
+		while (!colors[i].isFormat()) {
 			i = r.nextInt(colors.length);
+		}
 		return colors[i];
 	}
 }

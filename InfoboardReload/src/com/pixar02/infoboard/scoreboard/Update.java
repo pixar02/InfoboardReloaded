@@ -30,8 +30,8 @@ public class Update {
 		return toAdd;
 	}
 
-	public static List<String> getTitle(List<String> list) {
-		List<String> titles = new ArrayList<>();
+	public void getTitle(List<String> list) {
+		ArrayList<String> titles = new ArrayList<String>();
 
 		int i = 0;
 		for (String title : list) {
@@ -40,7 +40,6 @@ public class Update {
 			}
 			i++;
 		}
-		return titles;
 	}
 
 	public static boolean updateScoreBoard(Player player) {
@@ -123,12 +122,8 @@ public class Update {
 		return true;
 	}
 
-	public static boolean updateTitle(Player player, String title) {
-		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
-				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
-						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
+	public static boolean updateTitle(Player player, String s) {
 
-		}
 		return true;
 	}
 }

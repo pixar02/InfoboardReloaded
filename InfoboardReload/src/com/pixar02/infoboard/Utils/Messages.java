@@ -32,10 +32,12 @@ public class Messages {
 	 */
 	public static String getLine(String line, Player player) {
 
-		if (line.contains("%"))
+		if (line.contains("%")) {
 			line = getReplacements(line, player);
-		if (line.contains("<") && line.contains(">"))
+		}
+		if (line.contains("<") && line.contains(">")) {
 			line = getReplacements(line, player);
+		}
 
 		line = getColored(line);
 
