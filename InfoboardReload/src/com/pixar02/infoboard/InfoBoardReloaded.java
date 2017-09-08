@@ -1,8 +1,6 @@
 package com.pixar02.infoboard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -13,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.pixar02.infoboard.APIS.Vault;
 import com.pixar02.infoboard.Utils.FileManager;
 import com.pixar02.infoboard.Utils.Metrics;
-import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.Utils.UpdateChecker;
 import com.pixar02.infoboard.events.PlayerJoin;
 import com.pixar02.infoboard.events.ChangeWorld;
@@ -35,8 +32,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public static boolean economyB;
 	public static boolean permissionB;
 
-	// public HashMap<String, List<String>> ChangeableText = new HashMap<>();
-	// public HashMap<String, Integer> ChangeableInt = new HashMap<>();
 	PluginDescriptionFile pdfFile = getDescription();
 	Logger logger = getLogger();
 
@@ -48,8 +43,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 		timers = new Timers(this);
 		timers.start();
-
-		// loadChangeables();
 
 		// events
 		registerEvents();
@@ -84,19 +77,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public void loadMetrics() {
 		Metrics metrics = new Metrics(this);
 	}
-
-	/*
-	 * public void loadChangeables() { if
-	 * (fm.getConfig().getConfigurationSection("Changeable Text.Changeables") !=
-	 * null) { for (String s :
-	 * fm.getBoard().getConfigurationSection("Changeable Text.Changeables").getKeys(
-	 * true)) { if
-	 * (fm.getBoard().getConfigurationSection("Changeable Text.Changeables." + s +
-	 * ".text") == null) { break; } else { ChangeableText.put(s,
-	 * fm.getBoard().getStringList("Changeable Text.Changeables" + s + ".text"));
-	 * ChangeableInt.put(s, fm.getBoard().getInt("Changeable Text.Changeables" + s +
-	 * ".interval")); } } } }
-	 */
 
 	public void dependencies() {
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {

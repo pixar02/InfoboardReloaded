@@ -61,6 +61,7 @@ public class Create {
 
 			// Remove and changeable texts that the player may have had
 			ChangeableManager.reset(player);
+			List<String> changeables = plugin.fm.getFile("config").getStringList("Changeable Text.Changeables");
 
 			// Now we go to the title setting method thats down below
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
@@ -99,12 +100,17 @@ public class Create {
 					} else// Manage all changeable lines
 					if (line.startsWith("<Changeable_")) {
 						if (Settings.changeableTextEnabled()) {
-							line = line.replaceAll("<Changeable_", "");
-							// TODO NOT FINISHED
-							String string = Messages.getLine(line, player);
-							Changeable ch = ChangeableManager.createChangeables(player, row);
-							line = ch.getMessage();
-							board.add(line, row);
+							if (changeables.contains(line)) {
+								line = line.replaceAll("<Changeable_", "");
+								// TODO NOT FINISHED
+								String string = Messages.getLine(line, player);
+								Changeable ch = ChangeableManager.createChangeables(player, string, row);
+								line = ch.getMessage();
+								board.add(line, row);
+							} else {
+								line = "Unknow Changeable";
+								board.add(line, row);
+							}
 						} else {
 							line = "Enable Changeable Text";
 							board.add(line, row);

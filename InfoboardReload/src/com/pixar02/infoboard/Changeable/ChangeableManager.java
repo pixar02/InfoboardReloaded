@@ -15,13 +15,20 @@ public class ChangeableManager {
 	 * Create a Changeable
 	 *
 	 * @param p
-	 * @param message
-	 *            ?
+	 * @param message?
 	 * @param row
 	 * @return
 	 */
-	public static Changeable createChangeables(Player p, int row) {
-		// TODO all
+	public static Changeable createChangeables(Player p, String message, int row) {
+		Changeable ch = new Changeable(message, row);
+		ArrayList<Changeable> chs;
+		if (ChangeableManager.changeables.containsKey(p)) {
+			chs = ChangeableManager.changeables.get(p);
+		} else {
+			chs = new ArrayList<Changeable>();
+		}
+		chs.add(ch);
+		ChangeableManager.changeables.put(p, chs);
 		return null;
 	}
 
@@ -29,13 +36,13 @@ public class ChangeableManager {
 	 * Create a Changeable
 	 *
 	 * @param p
-	 * @param message
-	 *            ?
+	 * @param message?
 	 * @return
 	 */
-	public static Changeable createChangeableTitle(Player p) {
-		// TODO all
-		return null;
+	public static Changeable createChangeableTitle(Player p, String message) {
+		Changeable ch = new Changeable(message, 0);
+		ChangeableManager.title.put(p, ch);
+		return ch;
 	}
 
 	/**

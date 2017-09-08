@@ -1,7 +1,16 @@
 package com.pixar02.infoboard.Changeable;
 
 public class Changeable {
+	private String message;
+	private String origionalMessage;
 	private int row;
+
+
+
+	public Changeable(String message, int row) {
+		this.row = row;
+		this.origionalMessage = message;
+	}
 
 	public int getRow() {
 		return row;

@@ -1,14 +1,11 @@
 package com.pixar02.infoboard;
 
-import java.util.HashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Changeable.ChangeableText;
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.scoreboard.Board;
 import com.pixar02.infoboard.scoreboard.Create;
 import com.pixar02.infoboard.scoreboard.Update;
 
@@ -16,9 +13,6 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-	private int counter;
-	// private HashMap<String, String> chanText = new HashMap<>();
-	// private HashMap<String, Integer> chanTextInt = new HashMap<>();
 
 	public InfoBoardReloaded plugin;
 
