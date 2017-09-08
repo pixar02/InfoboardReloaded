@@ -15,12 +15,6 @@ public class GetVariables {
 		// setting all placeholders that are hooked in placeholder API
 		newString = PlaceholderAPI.setPlaceholders(player, string);
 
-		// if (Settings.changeableTextEnabled() == true) {
-		// if (newString.contains("%changeable_")) {
-		// newString = null;
-		// }
-		// }
-
 		// Bukkit.broadcastMessage(newString);
 
 		// Custom Variables

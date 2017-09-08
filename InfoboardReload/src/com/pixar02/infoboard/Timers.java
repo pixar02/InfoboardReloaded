@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.pixar02.infoboard.Changeable.ChangeableText;
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.scoreboard.Board;
@@ -94,7 +95,7 @@ public class Timers {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
 			public void run() {
-				// TODO 
+				// TODO
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (p.hasPermission("ibr.View")) {
 						Update.updateTitle(p, "test");
@@ -126,7 +127,7 @@ public class Timers {
 		}
 		/*
 		 * =========================================================================
-		 * CHANGEABLE TEXT UPDATE.
+		 * CHANGEABLE TEXT
 		 * =========================================================================
 		 */
 		if (Settings.changeableTextEnabled()) {
@@ -134,7 +135,11 @@ public class Timers {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
 				public void run() {
-
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						if (p.hasPermission("ibr.view")) {
+							ChangeableText.change(p);
+						}
+					}
 				}
 
 			}, 0, (long) (plugin.fm.getFile("board")
@@ -142,7 +147,7 @@ public class Timers {
 		}
 		/*
 		 * =========================================================================
-		 * PAGE ROTATION
+		 * UPDATE TIMER
 		 * =========================================================================
 		 */
 		if (Settings.updater()) {

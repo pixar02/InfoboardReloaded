@@ -9,6 +9,8 @@ import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.APIS.WorldGuard;
+import com.pixar02.infoboard.Changeable.Changeable;
+import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.APIS.Vault;
 import java.util.List;
 
@@ -57,6 +59,9 @@ public class Create {
 			// Remove and scrolling texts that the player may have had
 			ScrollManager.reset(player);
 
+			// Remove and changeable texts that the player may have had
+			ChangeableManager.reset(player);
+
 			// Now we go to the title setting method thats down below
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
 
@@ -89,6 +94,19 @@ public class Create {
 							board.add(line, row);
 						} else {
 							line = "Enable Scroll";
+							board.add(line, row);
+						}
+					} else// Manage all changeable lines
+					if (line.startsWith("<Changeable_")) {
+						if (Settings.changeableTextEnabled()) {
+							line = line.replaceAll("<Changeable_", "");
+							// TODO NOT FINISHED
+							String string = Messages.getLine(line, player);
+							Changeable ch = ChangeableManager.createChangeables(player, row);
+							line = ch.getMessage();
+							board.add(line, row);
+						} else {
+							line = "Enable Changeable Text";
 							board.add(line, row);
 						}
 					}

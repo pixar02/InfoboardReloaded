@@ -26,11 +26,11 @@ public class Scroll {
 	public Scroll(String message, int row, int width) {
 		this.row = row;
 		this.width = width;
-		origionalMessage = message;
+		this.origionalMessage = message;
 		StringBuilder builder = new StringBuilder(message);
-		while (builder.length() <= (width * 2))
+		while (builder.length() <= (width * 2)) {
 			builder.append("          ").append(message);
-
+		}
 		String string = builder.toString();
 
 		string = Messages.getColored(string);
@@ -74,15 +74,15 @@ public class Scroll {
 	 */
 	public void next() {
 
-		if ((position == 0) && (pause != 3))
+		if ((position == 0) && (pause != 3)) {
 			pause++;
-		else {
+		} else {
 			position++;
 			pause = 0;
 
-			if (position == (origionalMessage.length() + 10))
+			if (position == (origionalMessage.length() + 10)) {
 				position = 0;
-
+			}
 		}
 
 	}
