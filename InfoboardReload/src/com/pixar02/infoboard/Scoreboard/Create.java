@@ -1,5 +1,6 @@
 package com.pixar02.infoboard.Scoreboard;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -77,7 +78,7 @@ public class Create {
 				ShouldSet set = new ShouldSet(player, line);
 				line = set.getLine();
 
-				if (set.getBoolean())
+				if (set.getBoolean()) {
 					// If the line is empty just assume it's an empty line
 					if (line.equals(" ") || line.equals("")) {
 						String space = "§" + spaces;
@@ -98,19 +99,20 @@ public class Create {
 							board.add(line, row);
 						}
 					} else// Manage all changeable lines
-					if (line.startsWith("<Changeable_")) {
+					if (line.startsWith("<changeable_")) {
 						if (Settings.changeableTextEnabled()) {
-							if (changeables.contains(line)) {
-								//leaves the changeable.
-								line = line.replaceAll("<Changeable_", "").replaceAll(">", "");
-								// TODO NOT FINISHED
-								String string = Messages.getLine(line, player);
-								Changeable ch = ChangeableManager.createChangeables(player, string, row);
-								line = ch.getMessage();
-								board.add(line, row);
-							} else {
-								line = "Unknow Changeable";
-								board.add(line, row);
+							for (String s : changeables) {
+								if (lines.contains(s)) {
+									// leaves the changeable.
+									line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
+									Changeable ch = ChangeableManager.createChangeables(player, line, row);
+									String l = ch.getMessage();
+									l = Messages.getLine(l, player);
+									board.add(l, row);
+								} else {
+									line = "Unknown Changeable";
+									board.add(line, row);
+								}
 							}
 						} else {
 							line = "Enable Changeable Text";
@@ -129,8 +131,10 @@ public class Create {
 						}
 					}
 					// Just a regular line
-					else
+					else {
 						board.add(Messages.getLine(line, player), row);
+					}
+				}
 			}
 			// then we just set the scoreboard for the player
 			player.setScoreboard(board.getScoreboard());
@@ -144,9 +148,9 @@ public class Create {
 		for (String line : lines) {
 			if (!line.contains("<scroll>")) {
 				String string = Messages.getReplacements(line, player);
-				if (string.length() > longest)
+				if (string.length() > longest) {
 					longest = string.length();
-
+				}
 			}
 		}
 		return longest;

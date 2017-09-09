@@ -3,13 +3,16 @@ package com.pixar02.infoboard.Changeable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Scoreboard.Board;
+import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableManager {
 	private static HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
 	private static HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
+	public static HashMap<String, ArrayList<String>> variable = Settings.getChangeables();
 
 	/**
 	 * Create a Changeable
@@ -19,8 +22,10 @@ public class ChangeableManager {
 	 * @param row
 	 * @return
 	 */
-	public static Changeable createChangeables(Player p, String message, int row) {
-		Changeable ch = new Changeable(message, row);
+	public static Changeable createChangeables(Player p, String changeable, int row) {
+		ArrayList<String> lines = variable.get(changeable);
+		Bukkit.getServer().getConsoleSender().sendMessage(changeable);
+		Changeable ch = new Changeable(row, lines);
 		ArrayList<Changeable> chs;
 		if (ChangeableManager.changeables.containsKey(p)) {
 			chs = ChangeableManager.changeables.get(p);
@@ -36,17 +41,18 @@ public class ChangeableManager {
 	 * Create a Changeable
 	 *
 	 * @param p
-	 * @param message?
+	 * @param changeable
 	 * @return
 	 */
-	public static Changeable createChangeableTitle(Player p, String message) {
-		Changeable ch = new Changeable(message, 0);
+	public static Changeable createChangeableTitle(Player p, String changeable) {
+		ArrayList<String> lines = variable.get(changeable);
+		Changeable ch = new Changeable(0, lines);
 		ChangeableManager.title.put(p, ch);
 		return ch;
 	}
 
 	/**
-	 * Get the players changeables
+	 * Get the players changeable title
 	 * 
 	 * @param p
 	 * @return
@@ -56,7 +62,7 @@ public class ChangeableManager {
 	}
 
 	/**
-	 * Get the players title changeables
+	 * Get the players changeables
 	 * 
 	 * @param p
 	 * @return

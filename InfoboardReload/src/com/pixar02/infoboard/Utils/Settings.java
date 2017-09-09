@@ -1,13 +1,15 @@
 package com.pixar02.infoboard.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.bukkit.Bukkit;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Settings {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
-	public HashMap<String, List<String>> temp = new HashMap<String, List<String>>();
 
 	/**
 	 * Determines if the rank has valid scoreboard
@@ -127,21 +129,28 @@ public class Settings {
 		return plugin.fm.getFile("config").getBoolean("Debug");
 	}
 
-	public void setupTemp() {
-		for (int i = 0; i <= plugin.fm.getFile("config").getStringList("Changeable Text.Changeables").size(); i++) {
-			List<String> changeables = plugin.fm.getFile("config").getStringList("Changeable Text.Changeables");
-			String changeable = changeables.get(i);
-			List<String> lines = plugin.fm.getFile("config")
-					.getStringList("Changeable Text.Changeables." + changeable + ".text");
-			temp.put(changeable, lines);
-
-			// for (int u = 0; u <= plugin.fm.getFile("config")
-			// .getStringList("Changeable Text.Changeables." + changeable + ".text").size();
-			// u++) {
-			// lines.add(plugin.fm.getFile("config").getString("Changeable
-			// Text.Changeables." + changeable + ".text"));
-			// }
-
+	public static HashMap<String, ArrayList<String>> getChangeables() {
+		HashMap<String, ArrayList<String>> changeables = new HashMap<String, ArrayList<String>>();
+		for (String s : plugin.fm.getFile("config").getStringList("Changeable Text.changeables")) {
+			changeables.put(s, getText(s));
 		}
+		return changeables;
+
+	}
+
+	/**
+	 * get the lines for give Changeable
+	 * 
+	 * @return List
+	 */
+	public static ArrayList<String> getText(String changeable) {
+		ArrayList<String> lines = new ArrayList<String>();
+		for (String s : plugin.fm.getFile("config")
+				.getStringList("Changeable Text.changeables" + changeable + ".text")) {
+			Bukkit.getServer().getConsoleSender().sendMessage(s);
+			lines.add(s);
+		}
+		return lines;
+
 	}
 }

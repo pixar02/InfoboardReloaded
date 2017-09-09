@@ -1,19 +1,19 @@
 package com.pixar02.infoboard.Changeable;
 
-import com.pixar02.infoboard.Utils.Messages;
+import java.util.ArrayList;
 
 public class Changeable {
 	private int counter = 0;
 	private String message;
-	// private String origionalMessage;
 	private int row;
+	private ArrayList<String> lines;
 
-	public Changeable(String changeable, int row) {
+	public Changeable(int row, ArrayList<String> lines) {
 		this.row = row;
-		// this.origionalMessage = changeable;
-		String line = changeable.replaceAll(changeable, "");
-		line = Messages.getColored(line);
-		this.message = line;
+		this.lines = lines;
+		// String line = changeable.replaceAll(changeable, "");
+		// line = Messages.getColored(line);
+		 this.message = lines.get(0);
 	}
 
 	public int getRow() {
@@ -21,17 +21,16 @@ public class Changeable {
 	}
 
 	public String getMessage() {
-
-		String message = this.message;
-		return message;
+		// String message = this.message;
+		return this.message;
 	}
 
 	public void next() {
-		// TODO check if the Amount of lines equals the counter
-		// if(/*.length ==*/ counter){
-		counter = 0;
-		// } else {
-		counter++;
-		// }
+		if (lines.size() == counter) {
+			counter = 0;
+		} else {
+			message = lines.get(counter);
+			counter++;
+		}
 	}
 }
