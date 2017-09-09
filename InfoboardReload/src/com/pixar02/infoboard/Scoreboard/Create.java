@@ -90,7 +90,7 @@ public class Create {
 							line = line.replaceAll("<scroll>", "");
 							int longestLine = getLongestLine(lines, player);
 							String string = Messages.getLine(line, player);
-							Scroll sc = ScrollManager.createScroller(player, string, -row, longestLine);
+							Scroll sc = ScrollManager.createScroller(player, string, row, longestLine);
 							line = sc.getMessage();
 							board.add(line, row);
 						} else {
@@ -101,7 +101,8 @@ public class Create {
 					if (line.startsWith("<Changeable_")) {
 						if (Settings.changeableTextEnabled()) {
 							if (changeables.contains(line)) {
-								line = line.replaceAll("<Changeable_", "");
+								//leaves the changeable.
+								line = line.replaceAll("<Changeable_", "").replaceAll(">", "");
 								// TODO NOT FINISHED
 								String string = Messages.getLine(line, player);
 								Changeable ch = ChangeableManager.createChangeables(player, string, row);

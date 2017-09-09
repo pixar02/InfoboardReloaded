@@ -22,7 +22,7 @@ public class ScrollManager {
 	 * @return
 	 */
 	public static Scroll createScroller(Player p, String message, int row, int width) {
-		Scroll sc = new Scroll(message, -row, width);
+		Scroll sc = new Scroll(message, row, width);
 		ArrayList<Scroll> scs;
 		if (ScrollManager.scrollers.containsKey(p)) {
 			scs = ScrollManager.scrollers.get(p);
