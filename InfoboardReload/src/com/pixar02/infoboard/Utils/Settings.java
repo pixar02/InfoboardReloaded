@@ -1,11 +1,13 @@
 package com.pixar02.infoboard.Utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Settings {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	public HashMap<String, List<String>> temp = new HashMap<String, List<String>>();
 
 	/**
 	 * Determines if the rank has valid scoreboard
@@ -27,6 +29,14 @@ public class Settings {
 		return hasBoard;
 	}
 
+	/**
+	 * Determines if the rank has valid scoreboard
+	 *
+	 * @param rotation
+	 * @param world
+	 * @param rank
+	 * @return true/false
+	 */
 	public static boolean doesRankHaveScoreBoard(int rotation, String world, String rank) {
 		boolean hasBoard = false;
 		for (String s : plugin.fm.getFile("board")
@@ -90,16 +100,16 @@ public class Settings {
 		return plugin.fm.getFile("config").getBoolean("Scrolling Text.Enable");
 	}
 
-	/*
+	/**
 	 * Get if changeable text is enabled
 	 * 
 	 * @return true/false
 	 */
 	public static boolean changeableTextEnabled() {
-		return plugin.fm.getFile("config").getBoolean("Changeable Text.Enabled");
+		return plugin.fm.getFile("config").getBoolean("Changeable Text.Enable");
 	}
 
-	/*
+	/**
 	 * Get if updater is enabled
 	 * 
 	 * @return true/false
@@ -108,12 +118,30 @@ public class Settings {
 		return plugin.fm.getFile("config").getBoolean("Updater");
 	}
 
-	/*
+	/**
 	 * Get if Debugger is enabled
 	 * 
 	 * @return true/false
 	 */
 	public static boolean debug() {
 		return plugin.fm.getFile("config").getBoolean("Debug");
+	}
+
+	public void setupTemp() {
+		for (int i = 0; i <= plugin.fm.getFile("config").getStringList("Changeable Text.Changeables").size(); i++) {
+			List<String> changeables = plugin.fm.getFile("config").getStringList("Changeable Text.Changeables");
+			String changeable = changeables.get(i);
+			List<String> lines = plugin.fm.getFile("config")
+					.getStringList("Changeable Text.Changeables." + changeable + ".text");
+			temp.put(changeable, lines);
+
+			// for (int u = 0; u <= plugin.fm.getFile("config")
+			// .getStringList("Changeable Text.Changeables." + changeable + ".text").size();
+			// u++) {
+			// lines.add(plugin.fm.getFile("config").getString("Changeable
+			// Text.Changeables." + changeable + ".text"));
+			// }
+
+		}
 	}
 }

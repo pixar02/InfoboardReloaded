@@ -41,7 +41,7 @@ Scrolling Text:
 #Comming soon:  
 #
 Changeable Text:
-  Enabled : false   
+  Enable: false   
   Changeables:
     healthloc:
       text:

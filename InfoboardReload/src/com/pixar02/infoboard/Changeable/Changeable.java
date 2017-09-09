@@ -3,6 +3,7 @@ package com.pixar02.infoboard.Changeable;
 import com.pixar02.infoboard.Utils.Messages;
 
 public class Changeable {
+	private int counter;
 	private String message;
 	private String origionalMessage;
 	private int row;
@@ -26,6 +27,11 @@ public class Changeable {
 	}
 
 	public void next() {
-		// TODO Auto-generated method stub
+		// TODO check if the Amount of lines equals the counter
+		// if(/*.length ==*/ counter){
+			 counter = 0;
+		// } else {
+			 counter++;
+		// }
 	}
 }

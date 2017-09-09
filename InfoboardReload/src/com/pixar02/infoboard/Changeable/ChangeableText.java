@@ -45,6 +45,8 @@ public class ChangeableText {
 				}
 
 			}
+		} else {
+			ChangeableManager.reset(player);
 		}
 
 	}
