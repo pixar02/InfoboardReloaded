@@ -1,4 +1,4 @@
-package com.pixar02.infoboard.events;
+package com.pixar02.infoboard.Events;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

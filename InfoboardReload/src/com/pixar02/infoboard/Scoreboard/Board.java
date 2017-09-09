@@ -1,4 +1,4 @@
-package com.pixar02.infoboard.scoreboard;
+package com.pixar02.infoboard.Scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

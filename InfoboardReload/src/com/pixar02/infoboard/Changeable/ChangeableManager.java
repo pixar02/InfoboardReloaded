@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
-import com.pixar02.infoboard.scoreboard.Board;
+import com.pixar02.infoboard.Scoreboard.Board;
 
 public class ChangeableManager {
 	private static HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();

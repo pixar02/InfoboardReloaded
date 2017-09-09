@@ -9,11 +9,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pixar02.infoboard.APIS.Vault;
+import com.pixar02.infoboard.Events.ChangeWorld;
+import com.pixar02.infoboard.Events.PlayerJoin;
 import com.pixar02.infoboard.Utils.FileManager;
 import com.pixar02.infoboard.Utils.Metrics;
 import com.pixar02.infoboard.Utils.UpdateChecker;
-import com.pixar02.infoboard.events.PlayerJoin;
-import com.pixar02.infoboard.events.ChangeWorld;
+
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 

@@ -1,4 +1,4 @@
-package com.pixar02.infoboard.events;
+package com.pixar02.infoboard.Events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;

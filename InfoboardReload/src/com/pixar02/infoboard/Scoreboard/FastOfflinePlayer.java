@@ -1,4 +1,4 @@
-package com.pixar02.infoboard.scoreboard;
+package com.pixar02.infoboard.Scoreboard;
 
 import com.google.common.base.Charsets;
 import org.bukkit.Location;

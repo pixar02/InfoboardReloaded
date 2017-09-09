@@ -4,15 +4,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.Changeable.ChangeableText;
+import com.pixar02.infoboard.Scoreboard.Create;
+import com.pixar02.infoboard.Scoreboard.Update;
 import com.pixar02.infoboard.Scroll.ScrollText;
 import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.scoreboard.Create;
-import com.pixar02.infoboard.scoreboard.Update;
 
 public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
+	private String changeable;
 
 	public InfoBoardReloaded plugin;
 
@@ -136,8 +137,8 @@ public class Timers {
 					}
 				}
 
-			}, 0, (long) (plugin.fm.getFile("board")
-					.getDouble("InfoBoard." + rotation + ".Changeable" + "" + ".interval") * 20));
+			}, 0, (long) (plugin.fm.getFile("board").getDouble("Changeable Text.Changeables" + changeable + ".interval")
+					* 20));
 		}
 		/*
 		 * =========================================================================

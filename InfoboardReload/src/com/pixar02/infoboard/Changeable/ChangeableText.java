@@ -4,8 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
+import com.pixar02.infoboard.Scoreboard.Board;
 import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.scoreboard.Board;
 
 public class ChangeableText {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
@@ -18,6 +18,7 @@ public class ChangeableText {
 			if (ChangeableManager.getChangeables(player) != null) {
 				for (Changeable ch : ChangeableManager.getChangeables(player)) {
 					try {
+
 						ch.next();
 						String newLine = ch.getMessage();
 

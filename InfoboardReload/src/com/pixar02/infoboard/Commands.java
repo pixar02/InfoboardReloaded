@@ -11,8 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
+import com.pixar02.infoboard.Scoreboard.Create;
 import com.pixar02.infoboard.Scroll.ScrollManager;
-import com.pixar02.infoboard.scoreboard.Create;
 
 public class Commands implements CommandExecutor {
 

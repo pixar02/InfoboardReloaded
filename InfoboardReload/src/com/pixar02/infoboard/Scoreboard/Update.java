@@ -1,4 +1,4 @@
-package com.pixar02.infoboard.scoreboard;
+package com.pixar02.infoboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
