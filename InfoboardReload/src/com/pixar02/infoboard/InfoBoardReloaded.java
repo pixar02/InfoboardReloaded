@@ -51,9 +51,8 @@ public class InfoBoardReloaded extends JavaPlugin {
 		dependencies();
 		loadFileManager();
 		loadMetrics();
-		// loadChangeable();
-		// loadChangeables();
 
+		Settings.loadChangeable();
 		timers = new Timers(this);
 		timers.start();
 
@@ -66,6 +65,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 		Vault.load();
 		if (Settings.changeableTextEnabled()) {
 			logger.info("Feature: Changeable Text is enbaled!");
+			logger.info(Settings.getChangeable().size() + " Changeable(s) loaded");
 		}
 		if (Settings.scrollingEnabled()) {
 			logger.info("Feature: Scrolling is enabled!");

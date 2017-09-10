@@ -10,10 +10,8 @@ public class Changeable {
 
 	public Changeable(int row, ArrayList<String> lines) {
 		this.row = row;
-		this.lines = lines;
-		// String line = changeable.replaceAll(changeable, "");
-		// line = Messages.getColored(line);
-		 this.message = lines.get(0);
+		this.lines = new ArrayList<String>(lines);
+		this.message = lines.get(0);
 	}
 
 	public int getRow() {
@@ -21,8 +19,7 @@ public class Changeable {
 	}
 
 	public String getMessage() {
-		// String message = this.message;
-		return this.message;
+		return message;
 	}
 
 	public void next() {

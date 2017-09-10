@@ -1,10 +1,7 @@
 package com.pixar02.infoboard.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import org.bukkit.Bukkit;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 
@@ -12,7 +9,6 @@ public class Settings {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static List<String> changeable = new ArrayList<String>();
-	public static HashMap<String, ArrayList<String>> changeables = new HashMap<String, ArrayList<String>>();
 
 	/**
 	 * Determines if the rank has valid scoreboard
@@ -132,14 +128,6 @@ public class Settings {
 		return plugin.fm.getFile("config").getBoolean("Debug");
 	}
 
-	public static void loadChangeables() {
-		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
-				.getKeys(false)) {
-			Bukkit.broadcastMessage(s);
-			changeables.put(s, getText(s));
-		}
-	}
-
 	/**
 	 * FINISED! get the lines for give Changeable
 	 * 
@@ -150,19 +138,20 @@ public class Settings {
 		ArrayList<String> lines = new ArrayList<String>();
 		for (String s : plugin.fm.getFile("config")
 				.getStringList("Changeable Text.Changeables." + changeable + ".text")) {
-			Bukkit.broadcastMessage(s);
+			// Bukkit.broadcastMessage(s);
 			lines.add(s);
 		}
 		return lines;
 	}
 
 	public static void loadChangeable() {
+		changeable.clear();
 		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
 				.getKeys(false)) {
-			Bukkit.broadcastMessage("variable " + s);
+			// Bukkit.broadcastMessage("variable " + s);
 			changeable.add(s);
 		}
-		Bukkit.broadcastMessage("size " + changeable.size());
+		// Bukkit.broadcastMessage("size " + changeable.size());
 	}
 
 	public static List<String> getChangeable() {

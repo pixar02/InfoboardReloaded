@@ -25,7 +25,6 @@ public class ChangeableManager {
 	 * @return
 	 */
 	public static Changeable createChangeables(Player p, String changeable, int row) {
-		Settings.loadChangeables();
 		ArrayList<String> lines = Settings.getText(changeable);
 		Bukkit.getServer().getConsoleSender().sendMessage(changeable);
 		Changeable ch = new Changeable(row, lines);
@@ -37,7 +36,7 @@ public class ChangeableManager {
 		}
 		chs.add(ch);
 		ChangeableManager.changeables.put(p, chs);
-		return null;
+		return ch;
 	}
 
 	/**
@@ -48,7 +47,6 @@ public class ChangeableManager {
 	 * @return
 	 */
 	public static Changeable createChangeableTitle(Player p, String changeable) {
-		Settings.loadChangeables();
 		ArrayList<String> lines = Settings.getText(changeable);
 		Changeable ch = new Changeable(0, lines);
 		ChangeableManager.title.put(p, ch);
