@@ -127,6 +127,7 @@ public class Timers {
 		 */
 		if (Settings.changeableTextEnabled()) {
 
+			String changeable = null;
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
 				public void run() {
@@ -137,9 +138,8 @@ public class Timers {
 					}
 				}
 
-			}, 0, (long) (plugin.fm.getFile("board")
-					.getDouble("Changeable Text.Changeables" + "healthloc" + ".interval") * 20));
-			//TODO change Healthloc back to a variable.
+			}, 0, (long) (plugin.fm.getFile("config")
+					.getDouble("Changeable Text.Changeables." + changeable + ".interval") * 20));
 		}
 		/*
 		 * =========================================================================

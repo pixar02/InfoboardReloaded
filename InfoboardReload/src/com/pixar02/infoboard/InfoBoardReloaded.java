@@ -1,8 +1,6 @@
 package com.pixar02.infoboard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -33,10 +31,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 	public boolean debug = false;
 
 	public ArrayList<String> hidefrom = new ArrayList<String>();
-
-	// public List<String> changeable = new ArrayList<String>();
-	// public HashMap<String, ArrayList<String>> changeables = new HashMap<String,
-	// ArrayList<String>>();
 
 	public static Economy economy;
 	public static Permission permission;

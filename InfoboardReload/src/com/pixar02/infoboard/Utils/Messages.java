@@ -76,7 +76,7 @@ public class Messages {
 
 		} else if (title.startsWith("<changeable_")) {
 			title.replaceAll("<changeable_", "").replaceAll(">", "");
-			// title = ChangeableManager.createChangeableTitle(player, title)
+			title = ChangeableManager.createChangeableTitle(player, title).getMessage();
 
 		} else {
 			title = getLine(title.substring(0, Math.min(title.length(), 32)), player);

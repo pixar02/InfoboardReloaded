@@ -106,14 +106,10 @@ public class Create {
 						if (Settings.changeableTextEnabled()) {
 							// leaves the changeable.
 							line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
-							Bukkit.broadcastMessage("line: " + line);
 							if (changeables.contains(line)) {
-
 								Changeable ch = ChangeableManager.createChangeables(player, line, row);
-
 								String l = ch.getMessage();
-								Bukkit.broadcastMessage(l);
-								// replace placeholders and custom variables
+								// replace placeholders, custom variables and colors
 								l = Messages.getLine(l, player);
 								board.add(l, row);
 							} else {

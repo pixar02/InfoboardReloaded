@@ -37,9 +37,7 @@ WorldGuard:
 Scrolling Text:
   Enable: false
   Shift Time: 0.25
-#
-#Comming soon:  
-#
+
 Changeable Text:
   Enable: false   
   Changeables:

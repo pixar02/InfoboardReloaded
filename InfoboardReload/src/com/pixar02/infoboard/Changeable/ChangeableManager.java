@@ -26,7 +26,7 @@ public class ChangeableManager {
 	 */
 	public static Changeable createChangeables(Player p, String changeable, int row) {
 		ArrayList<String> lines = Settings.getText(changeable);
-		Bukkit.getServer().getConsoleSender().sendMessage(changeable);
+		// Bukkit.getServer().getConsoleSender().sendMessage(changeable);
 		Changeable ch = new Changeable(row, lines);
 		ArrayList<Changeable> chs;
 		if (ChangeableManager.changeables.containsKey(p)) {
