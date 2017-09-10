@@ -64,7 +64,6 @@ public class Create {
 
 			// Remove and changeable texts that the player may have had
 			ChangeableManager.reset(player);
-			Settings.loadChangeable();
 			List<String> changeables = Settings.getChangeable();
 
 			// Now we go to the title setting method thats down below

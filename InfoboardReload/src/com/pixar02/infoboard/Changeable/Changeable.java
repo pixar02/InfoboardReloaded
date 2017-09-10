@@ -21,6 +21,8 @@ public class Changeable {
 	public String getMessage() {
 		if (message == null) {
 			message = lines.get(0);
+		} else {
+			message = lines.get(counter);
 		}
 		return message;
 	}

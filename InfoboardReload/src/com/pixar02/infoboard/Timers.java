@@ -13,7 +13,7 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-	// private String changeable;
+	private String changeable;
 
 	public InfoBoardReloaded plugin;
 
@@ -127,7 +127,6 @@ public class Timers {
 		 */
 		if (Settings.changeableTextEnabled()) {
 
-			String changeable = null;
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
 				public void run() {
