@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.GetVariables;
 import com.pixar02.infoboard.InfoBoardReloaded;
+import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
@@ -73,9 +74,13 @@ public class Messages {
 			// and create a Title scroller
 			title = ScrollManager.createTitleScroller(player, getLine(title, player)).getMessage();
 
-		} else
-			title = getLine(title.substring(0, Math.min(title.length(), 32)), player);
+		} else if (title.startsWith("<changeable_")) {
+			title.replaceAll("<changeable_", "").replaceAll(">", "");
+			// title = ChangeableManager.createChangeableTitle(player, title)
 
+		} else {
+			title = getLine(title.substring(0, Math.min(title.length(), 32)), player);
+		}
 		return title;
 
 	}

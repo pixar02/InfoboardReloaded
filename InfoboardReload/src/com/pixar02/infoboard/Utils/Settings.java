@@ -11,6 +11,9 @@ import com.pixar02.infoboard.InfoBoardReloaded;
 public class Settings {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
+	public static List<String> changeable = new ArrayList<String>();
+	public static HashMap<String, ArrayList<String>> changeables = new HashMap<String, ArrayList<String>>();
+
 	/**
 	 * Determines if the rank has valid scoreboard
 	 *
@@ -129,28 +132,40 @@ public class Settings {
 		return plugin.fm.getFile("config").getBoolean("Debug");
 	}
 
-	public static HashMap<String, ArrayList<String>> getChangeables() {
-		HashMap<String, ArrayList<String>> changeables = new HashMap<String, ArrayList<String>>();
-		for (String s : plugin.fm.getFile("config").getStringList("Changeable Text.changeables")) {
+	public static void loadChangeables() {
+		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
+				.getKeys(false)) {
+			Bukkit.broadcastMessage(s);
 			changeables.put(s, getText(s));
 		}
-		return changeables;
-
 	}
 
 	/**
-	 * get the lines for give Changeable
+	 * FINISED! get the lines for give Changeable
 	 * 
-	 * @return List
+	 * @return ArrayList
+	 * 
 	 */
 	public static ArrayList<String> getText(String changeable) {
 		ArrayList<String> lines = new ArrayList<String>();
 		for (String s : plugin.fm.getFile("config")
-				.getStringList("Changeable Text.changeables" + changeable + ".text")) {
-			Bukkit.getServer().getConsoleSender().sendMessage(s);
+				.getStringList("Changeable Text.Changeables." + changeable + ".text")) {
+			Bukkit.broadcastMessage(s);
 			lines.add(s);
 		}
 		return lines;
+	}
 
+	public static void loadChangeable() {
+		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
+				.getKeys(false)) {
+			Bukkit.broadcastMessage("variable " + s);
+			changeable.add(s);
+		}
+		Bukkit.broadcastMessage("size " + changeable.size());
+	}
+
+	public static List<String> getChangeable() {
+		return changeable;
 	}
 }

@@ -13,7 +13,7 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-//	private String changeable;
+	// private String changeable;
 
 	public InfoBoardReloaded plugin;
 
@@ -137,8 +137,9 @@ public class Timers {
 					}
 				}
 
-			}, 0, (long) (plugin.fm.getFile("board").getDouble("Changeable Text.Changeables" + "healthloc" + ".interval")
-					* 20));
+			}, 0, (long) (plugin.fm.getFile("board")
+					.getDouble("Changeable Text.Changeables" + "healthloc" + ".interval") * 20));
+			//TODO change Healthloc back to a variable.
 		}
 		/*
 		 * =========================================================================

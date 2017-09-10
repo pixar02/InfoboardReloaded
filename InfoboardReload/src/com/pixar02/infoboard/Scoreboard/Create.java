@@ -13,6 +13,8 @@ import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Changeable.Changeable;
 import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.APIS.Vault;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Create {
@@ -62,7 +64,8 @@ public class Create {
 
 			// Remove and changeable texts that the player may have had
 			ChangeableManager.reset(player);
-			List<String> changeables = plugin.fm.getFile("config").getStringList("Changeable Text.Changeables");
+			Settings.loadChangeable();
+			List<String> changeables = Settings.getChangeable();
 
 			// Now we go to the title setting method thats down below
 			board.setTitle(Messages.getTitle(player, worldName, rankName));
@@ -101,19 +104,23 @@ public class Create {
 					} else// Manage all changeable lines
 					if (line.startsWith("<changeable_")) {
 						if (Settings.changeableTextEnabled()) {
-							for (String s : changeables) {
-								if (lines.contains(s)) {
-									// leaves the changeable.
-									line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
-									Changeable ch = ChangeableManager.createChangeables(player, line, row);
-									String l = ch.getMessage();
-									l = Messages.getLine(l, player);
-									board.add(l, row);
-								} else {
-									line = "Unknown Changeable";
-									board.add(line, row);
-								}
+							// leaves the changeable.
+							line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
+							Bukkit.broadcastMessage("line: " + line);
+							if (changeables.contains(line)) {
+
+								Changeable ch = ChangeableManager.createChangeables(player, line, row);
+
+								String l = ch.getMessage();
+								Bukkit.broadcastMessage(l);
+								// replace placeholders and custom variables
+								l = Messages.getLine(l, player);
+								board.add(l, row);
+							} else {
+								line = "Unknown Changeable";
+								board.add(line, row);
 							}
+
 						} else {
 							line = "Enable Changeable Text";
 							board.add(line, row);

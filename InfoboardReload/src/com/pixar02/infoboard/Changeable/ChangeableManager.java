@@ -6,24 +6,27 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
 import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableManager {
+
+	// TODO FINISH
 	private static HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
 	private static HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
-	public static HashMap<String, ArrayList<String>> variable = Settings.getChangeables();
 
 	/**
 	 * Create a Changeable
 	 *
 	 * @param p
-	 * @param message?
+	 * @param changeable
 	 * @param row
 	 * @return
 	 */
 	public static Changeable createChangeables(Player p, String changeable, int row) {
-		ArrayList<String> lines = variable.get(changeable);
+		Settings.loadChangeables();
+		ArrayList<String> lines = Settings.getText(changeable);
 		Bukkit.getServer().getConsoleSender().sendMessage(changeable);
 		Changeable ch = new Changeable(row, lines);
 		ArrayList<Changeable> chs;
@@ -38,14 +41,15 @@ public class ChangeableManager {
 	}
 
 	/**
-	 * Create a Changeable
+	 * Create a Changeable Title
 	 *
 	 * @param p
 	 * @param changeable
 	 * @return
 	 */
 	public static Changeable createChangeableTitle(Player p, String changeable) {
-		ArrayList<String> lines = variable.get(changeable);
+		Settings.loadChangeables();
+		ArrayList<String> lines = Settings.getText(changeable);
 		Changeable ch = new Changeable(0, lines);
 		ChangeableManager.title.put(p, ch);
 		return ch;
