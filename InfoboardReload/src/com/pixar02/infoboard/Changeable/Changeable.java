@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Changeable {
-	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 	private int counter = 0;
 	private String message;
 	private int row;
@@ -20,7 +20,11 @@ public class Changeable {
 		this.row = row;
 		this.lines = new ArrayList<String>(lines);
 		this.message = lines.get(0);
-
+		/*
+		 * =========================================================================
+		 * CHANGEABLE TEXT UPDATES VALUE
+		 * =========================================================================
+		 */
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 
 			@Override

@@ -3,7 +3,6 @@ package com.pixar02.infoboard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.pixar02.infoboard.Changeable.ChangeableText;
 import com.pixar02.infoboard.Scoreboard.Create;
 import com.pixar02.infoboard.Scoreboard.Update;
 import com.pixar02.infoboard.Scroll.ScrollText;
@@ -13,7 +12,6 @@ public class Timers {
 	private int showtime;
 	private int time;
 	private int rotation;
-	private String changeable;
 
 	public InfoBoardReloaded plugin;
 
@@ -73,7 +71,6 @@ public class Timers {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
 			public void run() {
-
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (p.hasPermission("ibr.View")) {
 						Update.updateScoreBoard(p);
@@ -120,26 +117,7 @@ public class Timers {
 
 			}, 0, (long) (plugin.fm.getFile("config").getDouble("Scrolling Text.Shift Time") * 20));
 		}
-		/*
-		 * =========================================================================
-		 * CHANGEABLE TEXT
-		 * =========================================================================
-		 */
-		/*if (Settings.changeableTextEnabled()) {
 
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-				@Override
-				public void run() {
-					for (Player p : Bukkit.getOnlinePlayers()) {
-						if (p.hasPermission("ibr.view")) {
-							ChangeableText.change(p);
-						}
-					}
-				}
-
-			}, 0, (long) (plugin.fm.getFile("config")
-					.getDouble("Changeable Text.Changeables." + changeable + ".interval") * 20));
-		}*/
 		/*
 		 * =========================================================================
 		 * UPDATE TIMER

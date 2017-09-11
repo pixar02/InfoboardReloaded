@@ -13,8 +13,10 @@
 # |       Shift Time - How long between the text scrolling in seconds         |
 # |---------------------------------------------------------------------------|
 # |                             Changeable text:                              |
+# |                      Use like: <changeable_<variable>>                    |
 # |                       Enabled- enable or disable                          |
-# |                  Changeables - Custom Changeable lines                    |
+# |                  Changeables - Custom changeable variables                |
+# |	             interval- how fast the lines should update in seconds        | 
 # |---------------------------------------------------------------------------|
 # |          Update Time how fast you scoreboard updates in seconds           |
 # =============================================================================
@@ -46,8 +48,8 @@ Changeable Text:
       - '&a&lHealth: ; &e%player_health%&a/&c%player_max_health%'
       - '&5&lLocation: ; &a%player_x%&7, &a%player_y%&7, &a%player_z%'
       - '&e&lDate Joined: ; &l%player_first_join_date%'
-      interval: 5 
+      interval: 1 
         
 Update Time:
-  Lines: 2
+  Lines: .5
   
