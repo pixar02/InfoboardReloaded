@@ -129,7 +129,7 @@ public class Settings {
 	}
 
 	/**
-	 * FINISED! get the lines for give Changeable
+	 * get the lines for give Changeable
 	 * 
 	 * @return ArrayList
 	 * 
@@ -148,13 +148,22 @@ public class Settings {
 		changeable.clear();
 		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
 				.getKeys(false)) {
-			// Bukkit.broadcastMessage("variable " + s);
 			changeable.add(s);
 		}
-		// Bukkit.broadcastMessage("size " + changeable.size());
 	}
 
 	public static List<String> getChangeable() {
 		return changeable;
+	}
+
+	/**
+	 * gets the time for the given changeable
+	 * 
+	 * @return integer
+	 */
+	public static Integer getInterval(String changeable) {
+		int time = plugin.fm.getFile("config").getInt("Changeable Text.Changeables." + changeable + ".interval");
+		return time;
+
 	}
 }

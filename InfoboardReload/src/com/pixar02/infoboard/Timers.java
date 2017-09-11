@@ -125,7 +125,7 @@ public class Timers {
 		 * CHANGEABLE TEXT
 		 * =========================================================================
 		 */
-		if (Settings.changeableTextEnabled()) {
+		/*if (Settings.changeableTextEnabled()) {
 
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
@@ -139,7 +139,7 @@ public class Timers {
 
 			}, 0, (long) (plugin.fm.getFile("config")
 					.getDouble("Changeable Text.Changeables." + changeable + ".interval") * 20));
-		}
+		}*/
 		/*
 		 * =========================================================================
 		 * UPDATE TIMER

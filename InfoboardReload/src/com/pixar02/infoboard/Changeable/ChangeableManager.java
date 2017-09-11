@@ -3,16 +3,13 @@ package com.pixar02.infoboard.Changeable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
 import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableManager {
 
-	// TODO FINISH
 	private static HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
 	private static HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
 
@@ -26,8 +23,8 @@ public class ChangeableManager {
 	 */
 	public static Changeable createChangeables(Player p, String changeable, int row) {
 		ArrayList<String> lines = Settings.getText(changeable);
-		// Bukkit.getServer().getConsoleSender().sendMessage(changeable);
-		Changeable ch = new Changeable(row, lines);
+		int time = Settings.getInterval(changeable);
+		Changeable ch = new Changeable(p, row, lines, time);
 		ArrayList<Changeable> chs;
 		if (ChangeableManager.changeables.containsKey(p)) {
 			chs = ChangeableManager.changeables.get(p);
@@ -48,7 +45,8 @@ public class ChangeableManager {
 	 */
 	public static Changeable createChangeableTitle(Player p, String changeable) {
 		ArrayList<String> lines = Settings.getText(changeable);
-		Changeable ch = new Changeable(0, lines);
+		int time = Settings.getInterval(changeable);
+		Changeable ch = new Changeable(p, 0, lines, time);
 		ChangeableManager.title.put(p, ch);
 		return ch;
 	}

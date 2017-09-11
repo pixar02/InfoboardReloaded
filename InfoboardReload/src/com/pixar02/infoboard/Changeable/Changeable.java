@@ -2,16 +2,34 @@ package com.pixar02.infoboard.Changeable;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import com.pixar02.infoboard.InfoBoardReloaded;
+
 public class Changeable {
+	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 	private int counter = 0;
 	private String message;
 	private int row;
+	private int interval;
 	private ArrayList<String> lines;
 
-	public Changeable(int row, ArrayList<String> lines) {
+	public Changeable(Player p, int row, ArrayList<String> lines, int interval) {
+		this.interval = interval;
 		this.row = row;
 		this.lines = new ArrayList<String>(lines);
 		this.message = lines.get(0);
+
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+
+			@Override
+			public void run() {
+				ChangeableText.change(p);
+			}
+
+		}, 0, (long) this.interval * 20);
+
 	}
 
 	public int getRow() {
@@ -19,11 +37,6 @@ public class Changeable {
 	}
 
 	public String getMessage() {
-		if (message == null) {
-			message = lines.get(0);
-		} else {
-			message = lines.get(counter);
-		}
 		return message;
 	}
 
@@ -35,4 +48,9 @@ public class Changeable {
 			counter++;
 		}
 	}
+
+	public int getInterval() {
+		return interval;
+	}
+
 }

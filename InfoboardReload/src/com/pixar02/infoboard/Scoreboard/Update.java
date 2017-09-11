@@ -22,7 +22,7 @@ public class Update {
 
 		int i = 0;
 		for (String line : list) {
-			if (!line.equals(" ") && !line.equals("") && !line.contains("<scroll>")) {
+			if (!line.equals(" ") && !line.equals("") && !line.contains("<scroll>") && !line.contains("<changeable_")) {
 				toAdd.put(-i, line);
 			}
 			i++;
@@ -35,7 +35,8 @@ public class Update {
 
 		int i = 0;
 		for (String title : list) {
-			if (!title.equals(" ") && title.equals(" ") && !title.contains("<scroll>")) {
+			if (!title.equals(" ") && title.equals(" ") && !title.contains("<scroll>")
+					&& !title.contains("<changeable_")) {
 				titles.add(title);
 			}
 			i++;
