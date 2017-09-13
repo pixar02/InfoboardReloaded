@@ -89,8 +89,6 @@ public class FileManager {
 		}
 		messages = YamlConfiguration.loadConfiguration(messagesFile);
 		plugin.getConfig().options().copyDefaults(true);
-		// Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "The
-		// config.yml file has been created");
 		plugin.saveConfig();
 	}
 

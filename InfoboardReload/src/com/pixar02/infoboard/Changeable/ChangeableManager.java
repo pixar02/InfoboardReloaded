@@ -65,12 +65,17 @@ public class ChangeableManager {
 	 * Get the players changeables
 	 * 
 	 * @param p
-	 * @return
+	 * @return players changeables
 	 */
 	public static ArrayList<Changeable> getChangeables(Player p) {
 		return ChangeableManager.changeables.get(p);
 	}
 
+	/**
+	 * Resets the players changeable
+	 * 
+	 * @param p
+	 */
 	public static void reset(Player p) {
 		if (getChangeables(p) != null) {
 			for (Changeable ch : getChangeables(p)) {

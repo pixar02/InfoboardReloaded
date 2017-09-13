@@ -41,7 +41,6 @@ public class Messages {
 		}
 
 		line = getColored(line);
-
 		return line;
 	}
 

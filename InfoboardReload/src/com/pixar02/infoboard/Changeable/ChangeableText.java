@@ -12,6 +12,7 @@ public class ChangeableText {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static void change(Player player) {
+		// Make sure the user can see the board
 		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
@@ -19,7 +20,7 @@ public class ChangeableText {
 			if (ChangeableManager.getChangeables(player) != null) {
 				for (Changeable ch : ChangeableManager.getChangeables(player)) {
 					try {
-
+						// Move changeable over one, and add the new line
 						ch.next();
 						String newLine = ch.getMessage();
 
@@ -35,6 +36,7 @@ public class ChangeableText {
 
 				try {
 					Changeable ch = ChangeableManager.getChangeableTitle(player);
+					// Move changeable over one, and add the new line
 					ch.next();
 					String newLine = ch.getMessage();
 

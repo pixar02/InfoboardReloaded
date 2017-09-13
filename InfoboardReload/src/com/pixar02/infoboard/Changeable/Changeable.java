@@ -15,6 +15,14 @@ public class Changeable {
 	private int interval;
 	private ArrayList<String> lines;
 
+	/**
+	 * Create a new changealbe
+	 * 
+	 * @param p
+	 * @param row
+	 * @param lines
+	 * @param interval
+	 */
 	public Changeable(Player p, int row, ArrayList<String> lines, int interval) {
 		this.interval = interval;
 		this.row = row;
@@ -36,14 +44,27 @@ public class Changeable {
 
 	}
 
+	/**
+	 * Gets the row
+	 * 
+	 * @return row (Integer)
+	 */
 	public int getRow() {
 		return row;
 	}
 
+	/**
+	 * Gets the Message
+	 * 
+	 * @return message (String)
+	 */
 	public String getMessage() {
 		return message;
 	}
 
+	/**
+	 * Moves to the next line
+	 */
 	public void next() {
 		if (lines.size() == counter) {
 			counter = 0;
@@ -53,6 +74,11 @@ public class Changeable {
 		}
 	}
 
+	/**
+	 * Gets the changeable interval
+	 * 
+	 * @return interval (Integer)
+	 */
 	public int getInterval() {
 		return interval;
 	}

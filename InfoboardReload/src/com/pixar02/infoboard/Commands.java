@@ -117,6 +117,11 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * ADD <LINE/TITLE> <PAGE> <WORLD> <RANK> <LINE>
 	 * =============================================================================
+	 *
+	 */
+	/**
+	 * @param sender
+	 * @param args
 	 */
 	public void addCmd(CommandSender sender, String[] args) {
 		if (!(sender.hasPermission("ibr.Create"))) {
@@ -186,6 +191,10 @@ public class Commands implements CommandExecutor {
 	 * CREATE <PAGE> <SHOWTIME>
 	 * =============================================================================
 	 */
+	/**
+	 * @param sender
+	 * @param args
+	 */
 	public void createCmd(CommandSender sender, String[] args) {
 		if (!(sender.hasPermission("ibr.Create"))) {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
@@ -214,6 +223,10 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * Set <PAGE>
 	 * =============================================================================
+	 */
+	/**
+	 * @param sender
+	 * @param args
 	 */
 	public void setCmd(CommandSender sender, String[] args) {
 		if (!sender.hasPermission("ibr.Set")) {
@@ -245,6 +258,9 @@ public class Commands implements CommandExecutor {
 	 * SHOW
 	 * =============================================================================
 	 */
+	/**
+	 * @param sender
+	 */
 	public void showCmd(CommandSender sender) {
 		if (!sender.hasPermission("ibr.Toggle")) {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
@@ -263,6 +279,9 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * HIDE
 	 * =============================================================================
+	 */
+	/**
+	 * @param sender
 	 */
 	public void hideCmd(CommandSender sender) {
 		if (!sender.hasPermission("ibr.Toggle")) {
@@ -283,6 +302,10 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * RELOAD [file]
 	 * =============================================================================
+	 */
+	/**
+	 * @param sender
+	 * @param file
 	 */
 	public void reloadCmd(CommandSender sender, String file) {
 		if (!sender.hasPermission("ibr.Reload")) {

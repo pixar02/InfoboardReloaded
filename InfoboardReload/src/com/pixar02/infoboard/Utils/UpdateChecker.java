@@ -16,12 +16,24 @@ public class UpdateChecker {
 		plugin = pl;
 	}
 
+	/**
+	 * 
+	 * @param currentVersion
+	 * @param newVersion
+	 * @return
+	 */
+
 	private boolean checkHigher(String currentVersion, String newVersion) {
 		String current = toReadable(currentVersion);
 		String newVers = toReadable(newVersion);
 		return current.compareTo(newVers) < 0;
 	}
 
+	/**
+	 * 
+	 * @param currentVersion
+	 * @throws Exception
+	 */
 	public void checkUpdate(String currentVersion) throws Exception {
 		String version = getVersion("98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4", 44270);
 		if (Settings.debug()) {
@@ -37,6 +49,12 @@ public class UpdateChecker {
 		}
 	}
 
+	/**
+	 * 
+	 * @param key
+	 * @param resourceId
+	 * @return
+	 */
 	private String getVersion(String key, int resourceId) {
 		String version = null;
 		try {
@@ -56,6 +74,11 @@ public class UpdateChecker {
 		return version;
 	}
 
+	/**
+	 * 
+	 * @param version
+	 * @return
+	 */
 	public String toReadable(String version) {
 		String[] split = Pattern.compile(".", Pattern.LITERAL).split(version.replace("v", ""));
 		version = "";

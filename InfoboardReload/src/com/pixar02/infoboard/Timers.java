@@ -26,10 +26,16 @@ public class Timers {
 
 	}
 
+	/**
+	 * @return
+	 */
 	public int getPage() {
 		return rotation;
 	}
 
+	/**
+	 * @param page
+	 */
 	public void setPage(int page) {
 		rotation = page;
 		time = -1;
