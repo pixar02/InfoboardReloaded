@@ -19,7 +19,7 @@ public class Changeable {
 		this.interval = interval;
 		this.row = row;
 		this.lines = new ArrayList<String>(lines);
-		this.message = lines.get(0);
+		this.message = this.lines.get(0);
 		/*
 		 * =========================================================================
 		 * CHANGEABLE TEXT UPDATES VALUE

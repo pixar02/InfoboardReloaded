@@ -39,7 +39,7 @@ public class ChangeableText {
 					String newLine = ch.getMessage();
 
 					Board board = new Board(player);
-
+					newLine = Messages.getLine(newLine, player);
 					board.setTitle(newLine);
 				} catch (Exception ex) {
 

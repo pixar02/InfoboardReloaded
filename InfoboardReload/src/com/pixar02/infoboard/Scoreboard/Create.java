@@ -1,6 +1,5 @@
 package com.pixar02.infoboard.Scoreboard;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -14,7 +13,6 @@ import com.pixar02.infoboard.Changeable.Changeable;
 import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.APIS.Vault;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Create {

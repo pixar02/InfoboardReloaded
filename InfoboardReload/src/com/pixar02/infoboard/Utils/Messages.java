@@ -15,7 +15,7 @@ public class Messages {
 	 * Get the message in color
 	 *
 	 * @param line
-	 * @return new line
+	 * @return new line (String)
 	 */
 	public static String getColored(String line) {
 		line = ChatColor.translateAlternateColorCodes('&', line);
@@ -29,7 +29,7 @@ public class Messages {
 	 *
 	 * @param line
 	 * @param player
-	 * @return new line
+	 * @return new line (String)
 	 */
 	public static String getLine(String line, Player player) {
 
@@ -50,7 +50,7 @@ public class Messages {
 	 *
 	 * @param line
 	 * @param player
-	 * @return new line
+	 * @return new line (String)
 	 */
 	public static String getReplacements(String line, Player player) {
 		return GetVariables.replaceVariables(line, player);
@@ -62,7 +62,7 @@ public class Messages {
 	 * @param player
 	 * @param worldName
 	 * @param rankName
-	 * @return
+	 * @return title (String)
 	 */
 	public static String getTitle(Player player, String worldName, String rankName) {
 
@@ -74,7 +74,7 @@ public class Messages {
 			// and create a Title scroller
 			title = ScrollManager.createTitleScroller(player, getLine(title, player)).getMessage();
 
-		} else if (title.startsWith("<changeable_")) {
+		} else if (title.startsWith("<changeable_") && Settings.changeableTextEnabled()) {
 			title.replaceAll("<changeable_", "").replaceAll(">", "");
 			title = ChangeableManager.createChangeableTitle(player, title).getMessage();
 

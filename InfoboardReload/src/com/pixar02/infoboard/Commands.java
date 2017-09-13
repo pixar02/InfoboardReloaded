@@ -11,8 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
+import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Scoreboard.Create;
 import com.pixar02.infoboard.Scroll.ScrollManager;
+import com.pixar02.infoboard.Utils.Settings;
 
 public class Commands implements CommandExecutor {
 
@@ -297,6 +299,7 @@ public class Commands implements CommandExecutor {
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
 				plugin.fm.reloadFile("board");
 				plugin.timers.reset();
@@ -318,9 +321,12 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
 
 				plugin.fm.reloadFile("config");
+				Settings.changeable.clear();
+				Settings.loadChangeable();
 				plugin.timers.reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
@@ -337,9 +343,6 @@ public class Commands implements CommandExecutor {
 			 */
 			else if (file == "messages") {
 				Bukkit.getScheduler().cancelTasks(plugin);
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					ScrollManager.reset(player);
-				}
 
 				plugin.fm.reloadFile("messages");
 				plugin.timers.reset();
@@ -363,13 +366,16 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
-
 				plugin.fm.reloadFile("board");
 				plugin.fm.reloadFile("config");
 				plugin.fm.reloadFile("messages");
 
+				Settings.changeable.clear();
+				Settings.loadChangeable();
 				plugin.timers.reset();
+
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("ibr.View")) {
 						Create.createScoreBoard(player);
