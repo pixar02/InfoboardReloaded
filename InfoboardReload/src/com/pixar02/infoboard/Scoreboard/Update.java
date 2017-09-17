@@ -30,6 +30,11 @@ public class Update {
 		return toAdd;
 	}
 
+	/**
+	 * Gets the title
+	 * 
+	 * @param list
+	 */
 	public void getTitle(List<String> list) {
 		ArrayList<String> titles = new ArrayList<String>();
 
@@ -43,6 +48,12 @@ public class Update {
 		}
 	}
 
+	/**
+	 * updates the scoreboard
+	 * 
+	 * @param player
+	 * @return true/false (boolean)
+	 */
 	public static boolean updateScoreBoard(Player player) {
 
 		String worldName = "global";
@@ -74,8 +85,7 @@ public class Update {
 					String rank = Vault.getRank(player);
 
 					// Make sure the rank is on the board, if it is set that to
-					// the
-					// player's rankName
+					// the player's rankName
 					if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
 						rankName = rank;
 					}
@@ -123,6 +133,12 @@ public class Update {
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param player
+	 * @param s
+	 * @return true/false (boolean)
+	 */
 	public static boolean updateTitle(Player player, String s) {
 
 		return true;

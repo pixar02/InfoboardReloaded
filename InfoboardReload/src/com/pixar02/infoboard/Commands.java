@@ -11,8 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
+import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Scoreboard.Create;
 import com.pixar02.infoboard.Scroll.ScrollManager;
+import com.pixar02.infoboard.Utils.Settings;
 
 public class Commands implements CommandExecutor {
 
@@ -115,6 +117,11 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * ADD <LINE/TITLE> <PAGE> <WORLD> <RANK> <LINE>
 	 * =============================================================================
+	 *
+	 */
+	/**
+	 * @param sender
+	 * @param args
 	 */
 	public void addCmd(CommandSender sender, String[] args) {
 		if (!(sender.hasPermission("ibr.Create"))) {
@@ -184,6 +191,10 @@ public class Commands implements CommandExecutor {
 	 * CREATE <PAGE> <SHOWTIME>
 	 * =============================================================================
 	 */
+	/**
+	 * @param sender
+	 * @param args
+	 */
 	public void createCmd(CommandSender sender, String[] args) {
 		if (!(sender.hasPermission("ibr.Create"))) {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
@@ -212,6 +223,10 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * Set <PAGE>
 	 * =============================================================================
+	 */
+	/**
+	 * @param sender
+	 * @param args
 	 */
 	public void setCmd(CommandSender sender, String[] args) {
 		if (!sender.hasPermission("ibr.Set")) {
@@ -243,6 +258,9 @@ public class Commands implements CommandExecutor {
 	 * SHOW
 	 * =============================================================================
 	 */
+	/**
+	 * @param sender
+	 */
 	public void showCmd(CommandSender sender) {
 		if (!sender.hasPermission("ibr.Toggle")) {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
@@ -261,6 +279,9 @@ public class Commands implements CommandExecutor {
 	 * =============================================================================
 	 * HIDE
 	 * =============================================================================
+	 */
+	/**
+	 * @param sender
 	 */
 	public void hideCmd(CommandSender sender) {
 		if (!sender.hasPermission("ibr.Toggle")) {
@@ -282,6 +303,10 @@ public class Commands implements CommandExecutor {
 	 * RELOAD [file]
 	 * =============================================================================
 	 */
+	/**
+	 * @param sender
+	 * @param file
+	 */
 	public void reloadCmd(CommandSender sender, String file) {
 		if (!sender.hasPermission("ibr.Reload")) {
 			sender.sendMessage(ChatColor.RED + plugin.fm.getFile("messages").getString("no-permission"));
@@ -297,6 +322,7 @@ public class Commands implements CommandExecutor {
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
 				plugin.fm.reloadFile("board");
 				plugin.timers.reset();
@@ -318,9 +344,12 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
 
 				plugin.fm.reloadFile("config");
+				Settings.changeable.clear();
+				Settings.loadChangeable();
 				plugin.timers.reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
@@ -337,9 +366,6 @@ public class Commands implements CommandExecutor {
 			 */
 			else if (file == "messages") {
 				Bukkit.getScheduler().cancelTasks(plugin);
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					ScrollManager.reset(player);
-				}
 
 				plugin.fm.reloadFile("messages");
 				plugin.timers.reset();
@@ -363,13 +389,16 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					ScrollManager.reset(player);
+					ChangeableManager.reset(player);
 				}
-
 				plugin.fm.reloadFile("board");
 				plugin.fm.reloadFile("config");
 				plugin.fm.reloadFile("messages");
 
+				Settings.changeable.clear();
+				Settings.loadChangeable();
 				plugin.timers.reset();
+
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("ibr.View")) {
 						Create.createScoreBoard(player);
