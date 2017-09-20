@@ -33,8 +33,9 @@ public class ShouldSet {
 			String l1 = Messages.getLine("%" + l + "%", player);
 			return l1.equalsIgnoreCase("Unknown") || l1.equalsIgnoreCase("false") || l1.equalsIgnoreCase("None")
 					|| l1.equalsIgnoreCase("") || l1.equalsIgnoreCase("0") || l1.equalsIgnoreCase("-1");
-		} else
+		} else {
 			return true;
+		}
 
 	}
 

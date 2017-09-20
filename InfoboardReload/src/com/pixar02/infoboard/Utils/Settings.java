@@ -173,4 +173,5 @@ public class Settings {
 		int time = plugin.fm.getFile("config").getInt("Changeable Text.Changeables." + changeable + ".interval");
 		return time;
 	}
+
 }

@@ -101,19 +101,16 @@ public class Create {
 					} else// Manage all changeable lines
 					if (line.startsWith("<changeable_")) {
 						if (Settings.changeableTextEnabled()) {
-							// leaves the changeable.
 							line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
 							if (changeables.contains(line)) {
 								Changeable ch = ChangeableManager.createChangeables(player, line, row);
-								String l = ch.getMessage();
-								// replace placeholders, custom variables and colors
-								l = Messages.getLine(l, player);
-								board.add(l, row);
+								line = ch.getMessage();
+								line = Messages.getLine(line, player);
+								board.add(line, row);
 							} else {
 								line = "Unknown Changeable";
 								board.add(line, row);
 							}
-
 						} else {
 							line = "Enable Changeable Text";
 							board.add(line, row);
@@ -127,7 +124,7 @@ public class Create {
 						try {
 							board.add(Messages.getLine(a, player), Integer.valueOf(Messages.getLine(b, player)));
 						} catch (NumberFormatException ne) {
-							board.add(Messages.getLine(a, player), 0);
+							board.add(Messages.getLine(a, player), row);
 						}
 					}
 					// Just a regular line
