@@ -1,6 +1,9 @@
 package com.pixar02.infoboard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -44,9 +47,9 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 		dependencies();
 		loadFileManager();
+		Settings.loadChangeable();
 		loadMetrics();
 
-		Settings.loadChangeable();
 		timers = new Timers(this);
 		timers.start();
 
@@ -78,6 +81,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 			}
 		}
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
+		
 
 	}
 
@@ -93,9 +97,25 @@ public class InfoBoardReloaded extends JavaPlugin {
 		pm.registerEvents(new PlayerJoin(this), this);
 	}
 
-	@SuppressWarnings("unused")
 	public void loadMetrics() {
 		Metrics metrics = new Metrics(this);
+		metrics.addCustomChart(new Metrics.AdvancedBarChart("features", new Callable<Map<String, int[]>>() {
+			@Override
+			public Map<String, int[]> call() throws Exception {
+				Map<String, int[]> map = new HashMap<String, int[]>();
+				if (Settings.changeableTextEnabled()) {
+					map.put("Changeables", new int[] { 0, 1 });
+				} else {
+					map.put("Changeables", new int[] { 1, 0 });
+				}
+				if (Settings.scrollingEnabled()) {
+					map.put("Scroll", new int[] { 0, 1 });
+				} else {
+					map.put("Scroll", new int[] { 1, 0 });
+				}
+				return map;
+			}
+		}));
 	}
 
 	public void dependencies() {

@@ -51,7 +51,7 @@ public class Board {
 			addCreatingTeam(line, row);
 		} else {
 			Score score = objective.getScore(line);
-			score.setScore(1);
+			//score.setScore(1);
 			score.setScore(row);
 		}
 	}
