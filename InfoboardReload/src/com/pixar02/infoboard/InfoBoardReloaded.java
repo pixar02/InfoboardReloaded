@@ -81,7 +81,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 			}
 		}
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
-		
 
 	}
 
@@ -99,19 +98,15 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public void loadMetrics() {
 		Metrics metrics = new Metrics(this);
-		metrics.addCustomChart(new Metrics.AdvancedBarChart("features", new Callable<Map<String, int[]>>() {
+		metrics.addCustomChart(new Metrics.SimpleBarChart("features", new Callable<Map<String, Integer>>() {
 			@Override
-			public Map<String, int[]> call() throws Exception {
-				Map<String, int[]> map = new HashMap<String, int[]>();
+			public Map<String, Integer> call() throws Exception {
+				Map<String, Integer> map = new HashMap<String, Integer>();
 				if (Settings.changeableTextEnabled()) {
-					map.put("Changeables", new int[] { 0, 1 });
-				} else {
-					map.put("Changeables", new int[] { 1, 0 });
+					map.put("Changeables", 1);
 				}
 				if (Settings.scrollingEnabled()) {
-					map.put("Scroll", new int[] { 0, 1 });
-				} else {
-					map.put("Scroll", new int[] { 1, 0 });
+					map.put("Scroll", 1);
 				}
 				return map;
 			}

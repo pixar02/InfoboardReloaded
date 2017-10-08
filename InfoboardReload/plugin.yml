@@ -5,6 +5,7 @@ author: pixar02
 website : bit.ly/InfoBoardReloaded
 description: Show a scoreboard
 depend: [PlaceholderAPI, Vault, WorldGuard]
+softdepend: [ProtocolLib]
 
 commands:
   InfoBoardReloaded:
