@@ -11,10 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Scoreboard.Create;
-import com.pixar02.infoboard.Scroll.ScrollManager;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class Commands implements CommandExecutor {
 
@@ -322,7 +319,7 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					ScrollManager.reset(player);
+					plugin.getSM().reset(player);
 					plugin.getCM().reset(player);
 				}
 				plugin.getFm().reloadFile("board");
@@ -344,7 +341,7 @@ public class Commands implements CommandExecutor {
 
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					ScrollManager.reset(player);
+					plugin.getSM().reset(player);
 					plugin.getCM().reset(player);
 				}
 
@@ -389,7 +386,7 @@ public class Commands implements CommandExecutor {
 
 				Bukkit.getScheduler().cancelTasks(plugin);
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					ScrollManager.reset(player);
+					plugin.getSM().reset(player);
 					plugin.getCM().reset(player);
 				}
 				plugin.getFm().reloadFile("board");

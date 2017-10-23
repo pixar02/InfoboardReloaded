@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import com.pixar02.infoboard.Scoreboard.Create;
 import com.pixar02.infoboard.Scoreboard.Update;
 import com.pixar02.infoboard.Scroll.ScrollText;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class Timers {
 	private int showtime;

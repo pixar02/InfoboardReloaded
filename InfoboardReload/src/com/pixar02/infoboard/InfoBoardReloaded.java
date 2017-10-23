@@ -18,6 +18,7 @@ import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Events.ChangeWorld;
 import com.pixar02.infoboard.Events.PlayerJoin;
+import com.pixar02.infoboard.Scroll.ScrollManager;
 import com.pixar02.infoboard.Utils.FileManager;
 import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Metrics;
@@ -34,6 +35,8 @@ public class InfoBoardReloaded extends JavaPlugin {
 	private Settings settings;
 	private Messages msgs;
 	private ChangeableManager CM;
+	private ScrollManager SM;
+
 	private WorldGuard WG;
 	private Vault V;
 
@@ -112,7 +115,24 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}));
 	}
 
-	public void dependencies() {
+	private void Instance() {
+
+		this.fm = new FileManager(this);
+		this.settings = new Settings(this);
+		this.msgs = new Messages(this);
+		this.timers = new Timers(this);
+		this.CM = new ChangeableManager(this);
+		this.SM = new ScrollManager(this);
+		this.V = new Vault();
+		this.WG = new WorldGuard();
+
+		fm.setup();
+		settings.loadChangeable();
+		timers.start();
+		V.load();
+	}
+
+	private void dependencies() {
 		if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
 		}
@@ -122,21 +142,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 			throw new RuntimeException("Could not find Vault!! Plugin can not work without it!");
 		}
-	}
-
-	private void Instance() {
-
-		this.fm = new FileManager(this);
-		this.settings = new Settings(this);
-		this.msgs = new Messages(this);
-		this.timers = new Timers(this);
-		this.V = new Vault();
-		this.WG = new WorldGuard();
-
-		fm.setup();
-		settings.loadChangeable();
-		timers.start();
-		V.load();
 	}
 
 	public FileManager getFm() {
@@ -153,6 +158,10 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public ChangeableManager getCM() {
 		return this.CM;
+	}
+
+	public ScrollManager getSM() {
+		return this.SM;
 	}
 
 	public WorldGuard getWG() {

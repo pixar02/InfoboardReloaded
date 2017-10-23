@@ -3,15 +3,9 @@ package com.pixar02.infoboard.Scoreboard;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.pixar02.infoboard.Scroll.Scroll;
-import com.pixar02.infoboard.Scroll.ScrollManager;
-import com.pixar02.infoboard.Utils.Messages;
-import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.InfoBoardReloaded;
-import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Changeable.Changeable;
-import com.pixar02.infoboard.Changeable.ChangeableManager;
-import com.pixar02.infoboard.APIS.Vault;
+import com.pixar02.infoboard.Scroll.Scroll;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 import java.util.List;
 
@@ -59,10 +53,12 @@ public class Create {
 			Board board = new Board();
 
 			// Remove and scrolling texts that the player may have had
-			ScrollManager.reset(player);
+			plugin.getSM().reset(player);
 
 			// Remove and changeable texts that the player may have had
-			plugin.getCM().reset(player);
+			if (!(plugin.getCM().getChangeables(player) == null)) {
+				plugin.getCM().reset(player);
+			}
 			List<String> changeables = plugin.getSettings().getChangeable();
 
 			// Now we go to the title setting method thats down below
@@ -92,7 +88,7 @@ public class Create {
 							line = line.replaceAll("<scroll>", "");
 							int longestLine = getLongestLine(lines, player);
 							String string = plugin.getMessages().getLine(line, player);
-							Scroll sc = ScrollManager.createScroller(player, string, row, longestLine);
+							Scroll sc = plugin.getSM().createScroller(player, string, row, longestLine);
 							line = sc.getMessage();
 							board.add(line, row);
 						} else {

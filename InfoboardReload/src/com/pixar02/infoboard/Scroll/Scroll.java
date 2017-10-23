@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Scroll {
-	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	private InfoBoardReloaded plugin;
 	private String message;
 	private String origionalMessage;
 
@@ -23,7 +23,8 @@ public class Scroll {
 	 * @param row
 	 * @param width
 	 */
-	public Scroll(String message, int row, int width) {
+	public Scroll(InfoBoardReloaded plugin, String message, int row, int width) {
+		this.plugin = plugin;
 		this.row = row;
 		this.width = width;
 		this.origionalMessage = message;

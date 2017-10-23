@@ -12,6 +12,7 @@ public class Settings {
 
 	public Settings(InfoBoardReloaded plugin) {
 		this.plugin = plugin;
+		loadChangeable();
 	}
 
 	/**
@@ -165,7 +166,7 @@ public class Settings {
 	 * @return List
 	 */
 	public List<String> getChangeable() {
-		return changeable;
+		return this.changeable;
 	}
 
 	/**

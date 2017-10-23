@@ -7,13 +7,16 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableManager {
-	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
-	
+	private InfoBoardReloaded plugin;
+
 	private HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
 	private HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
+
+	public ChangeableManager(InfoBoardReloaded plugin) {
+		this.plugin = plugin;
+	}
 
 	/**
 	 * Create a Changeable

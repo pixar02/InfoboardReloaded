@@ -5,8 +5,6 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.GetVariables;
 import com.pixar02.infoboard.InfoBoardReloaded;
-import com.pixar02.infoboard.Changeable.ChangeableManager;
-import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
 	private InfoBoardReloaded plugin;
@@ -75,7 +73,7 @@ public class Messages {
 		if (title.startsWith("<scroll>") && plugin.getSettings().scrollingEnabled()) {
 			title = title.replaceAll("<scroll>", "");
 			// and create a Title scroller
-			title = ScrollManager.createTitleScroller(player, getLine(title, player)).getMessage();
+			title = plugin.getSM().createTitleScroller(player, getLine(title, player)).getMessage();
 
 		} else if (title.startsWith("<changeable_") && plugin.getSettings().changeableTextEnabled()) {
 			title.replaceAll("<changeable_", "").replaceAll(">", "");
