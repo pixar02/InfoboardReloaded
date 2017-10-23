@@ -2,10 +2,10 @@ package com.pixar02.infoboard.Scroll;
 
 import org.bukkit.ChatColor;
 
-import com.pixar02.infoboard.Utils.Messages;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Scroll {
-
+	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 	private String message;
 	private String origionalMessage;
 
@@ -33,7 +33,7 @@ public class Scroll {
 		}
 		String string = builder.toString();
 
-		string = Messages.getColored(string);
+		string = plugin.getMessages().getColored(string);
 
 		this.message = string;
 	}

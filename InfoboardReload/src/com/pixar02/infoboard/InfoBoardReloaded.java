@@ -14,9 +14,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.APIS.Vault;
+import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Events.ChangeWorld;
 import com.pixar02.infoboard.Events.PlayerJoin;
 import com.pixar02.infoboard.Utils.FileManager;
+import com.pixar02.infoboard.Utils.Messages;
 import com.pixar02.infoboard.Utils.Metrics;
 import com.pixar02.infoboard.Utils.Settings;
 import com.pixar02.infoboard.Utils.UpdateChecker;
@@ -27,7 +29,10 @@ import net.milkbowl.vault.permission.Permission;
 public class InfoBoardReloaded extends JavaPlugin {
 
 	public Timers timers;
-	public FileManager fm;
+	private FileManager fm;
+	private Settings settings;
+	private Messages msgs;
+	private ChangeableManager CM;
 
 	public UpdateChecker uc = new UpdateChecker(this);;
 	public boolean update = false;
@@ -44,14 +49,10 @@ public class InfoBoardReloaded extends JavaPlugin {
 	Logger logger = getLogger();
 
 	public void onEnable() {
-
 		dependencies();
-		loadFileManager();
-		Settings.loadChangeable();
-		loadMetrics();
+		this.Instance();
 
-		timers = new Timers(this);
-		timers.start();
+		loadMetrics();
 
 		// events
 		registerEvents();
@@ -60,11 +61,11 @@ public class InfoBoardReloaded extends JavaPlugin {
 		getCommand("InfoBoardReloaded").setExecutor(new Commands(this));
 
 		Vault.load();
-		if (Settings.changeableTextEnabled()) {
+		if (settings.changeableTextEnabled()) {
 			logger.info("Feature: Changeable Text is enbaled!");
-			logger.info(Settings.getChangeable().size() + " Changeable(s) loaded");
+			logger.info(settings.getChangeable().size() + " Changeable(s) loaded");
 		}
-		if (Settings.scrollingEnabled()) {
+		if (settings.scrollingEnabled()) {
 			logger.info("Feature: Scrolling is enabled!");
 		}
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
@@ -72,6 +73,7 @@ public class InfoBoardReloaded extends JavaPlugin {
 	}
 
 	public void onDisable() {
+		timers.stop();
 		Bukkit.getScheduler().cancelTasks(this);
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) != null) {
@@ -82,11 +84,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
 
-	}
-
-	private void loadFileManager() {
-		fm = new FileManager();
-		fm.setup();
 	}
 
 	private void registerEvents() {
@@ -102,10 +99,10 @@ public class InfoBoardReloaded extends JavaPlugin {
 			@Override
 			public Map<String, Integer> call() throws Exception {
 				Map<String, Integer> map = new HashMap<String, Integer>();
-				if (Settings.changeableTextEnabled()) {
+				if (settings.changeableTextEnabled()) {
 					map.put("Changeables", 1);
 				}
-				if (Settings.scrollingEnabled()) {
+				if (settings.scrollingEnabled()) {
 					map.put("Scroll", 1);
 				}
 				return map;
@@ -125,4 +122,31 @@ public class InfoBoardReloaded extends JavaPlugin {
 		}
 	}
 
+	private void Instance() {
+
+		fm = new FileManager(this);
+		settings = new Settings(this);
+		msgs = new Messages(this);
+		timers = new Timers(this);
+
+		fm.setup();
+		settings.loadChangeable();
+		timers.start();
+	}
+
+	public FileManager getFm() {
+		return this.fm;
+	}
+
+	public Settings getSettings() {
+		return this.settings;
+	}
+
+	public Messages getMessages() {
+		return this.msgs;
+	}
+
+	public ChangeableManager getCM() {
+		return this.CM;
+	}
 }

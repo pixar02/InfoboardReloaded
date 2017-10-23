@@ -5,13 +5,15 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
 import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableManager {
-
-	private static HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
-	private static HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
+	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	
+	private HashMap<Player, ArrayList<Changeable>> changeables = new HashMap<Player, ArrayList<Changeable>>();
+	private HashMap<Player, Changeable> title = new HashMap<Player, Changeable>();
 
 	/**
 	 * Create a Changeable
@@ -21,18 +23,18 @@ public class ChangeableManager {
 	 * @param row
 	 * @return
 	 */
-	public static Changeable createChangeables(Player p, String changeable, int row) {
-		ArrayList<String> lines = Settings.getText(changeable);
-		int time = Settings.getInterval(changeable);
+	public Changeable createChangeables(Player p, String changeable, int row) {
+		ArrayList<String> lines = plugin.getSettings().getText(changeable);
+		int time = plugin.getSettings().getInterval(changeable);
 		Changeable ch = new Changeable(p, row, lines, time);
 		ArrayList<Changeable> chs;
-		if (ChangeableManager.changeables.containsKey(p)) {
-			chs = ChangeableManager.changeables.get(p);
+		if (this.changeables.containsKey(p)) {
+			chs = this.changeables.get(p);
 		} else {
 			chs = new ArrayList<Changeable>();
 		}
 		chs.add(ch);
-		ChangeableManager.changeables.put(p, chs);
+		this.changeables.put(p, chs);
 		return ch;
 	}
 
@@ -43,11 +45,11 @@ public class ChangeableManager {
 	 * @param changeable
 	 * @return
 	 */
-	public static Changeable createChangeableTitle(Player p, String changeable) {
-		ArrayList<String> lines = Settings.getText(changeable);
-		int time = Settings.getInterval(changeable);
+	public Changeable createChangeableTitle(Player p, String changeable) {
+		ArrayList<String> lines = plugin.getSettings().getText(changeable);
+		int time = plugin.getSettings().getInterval(changeable);
 		Changeable ch = new Changeable(p, 0, lines, time);
-		ChangeableManager.title.put(p, ch);
+		this.title.put(p, ch);
 		return ch;
 	}
 
@@ -57,8 +59,8 @@ public class ChangeableManager {
 	 * @param p
 	 * @return
 	 */
-	public static Changeable getChangeableTitle(Player p) {
-		return ChangeableManager.title.get(p);
+	public Changeable getChangeableTitle(Player p) {
+		return this.title.get(p);
 	}
 
 	/**
@@ -67,8 +69,8 @@ public class ChangeableManager {
 	 * @param p
 	 * @return players changeables
 	 */
-	public static ArrayList<Changeable> getChangeables(Player p) {
-		return ChangeableManager.changeables.get(p);
+	public ArrayList<Changeable> getChangeables(Player p) {
+		return this.changeables.get(p);
 	}
 
 	/**
@@ -76,14 +78,14 @@ public class ChangeableManager {
 	 * 
 	 * @param p
 	 */
-	public static void reset(Player p) {
+	public void reset(Player p) {
 		if (getChangeables(p) != null) {
 			for (Changeable ch : getChangeables(p)) {
 				String lastString = ch.getMessage();
 				new Board(p).remove(lastString);
 			}
 		}
-		ChangeableManager.changeables.remove(p);
-		ChangeableManager.title.remove(p);
+		this.changeables.remove(p);
+		this.title.remove(p);
 	}
 }

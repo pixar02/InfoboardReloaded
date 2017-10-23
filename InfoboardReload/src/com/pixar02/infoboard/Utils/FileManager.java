@@ -14,7 +14,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class FileManager {
-	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	private InfoBoardReloaded plugin;
 
 	// Files & configs
 	private FileConfiguration board;
@@ -24,6 +24,10 @@ public class FileManager {
 	private File boardFile;
 	private File variableFile;
 	private File messagesFile;
+
+	public FileManager(InfoBoardReloaded plugin) {
+		this.plugin = plugin;
+	}
 
 	public void setup() {
 		if (!plugin.getDataFolder().exists()) {
@@ -40,12 +44,12 @@ public class FileManager {
 			try {
 				boardFile.createNewFile();
 				copy(plugin.getResource("board.yml"), boardFile);
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.GREEN + "The board.yml file has been created");
 				}
 			} catch (IOException e) {
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.RED + "Could not create the board.yml file" + e);
 				}
@@ -59,12 +63,12 @@ public class FileManager {
 			try {
 				variableFile.createNewFile();
 				copy(plugin.getResource("variables.yml"), variableFile);
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.GREEN + "The variables.yml file has been created");
 				}
 			} catch (IOException e) {
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.RED + "Could not create the variables.yml file" + e);
 				}
@@ -76,12 +80,12 @@ public class FileManager {
 			try {
 				messagesFile.createNewFile();
 				copy(plugin.getResource("messages.yml"), messagesFile);
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.GREEN + "The messages.yml file has been created");
 				}
 			} catch (IOException e) {
-				if (Settings.debug()) {
+				if (plugin.getSettings().debug()) {
 					Bukkit.getServer().getConsoleSender()
 							.sendMessage(ChatColor.RED + "Could not create the messages.yml file" + e);
 				}
@@ -110,12 +114,12 @@ public class FileManager {
 			} else if (s == "config") {
 				plugin.saveConfig();
 			}
-			if (Settings.debug()) {
+			if (plugin.getSettings().debug()) {
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.AQUA + "The " + s + ".yml file has been saved");
 			}
 		} catch (IOException e) {
-			if (Settings.debug()) {
+			if (plugin.getSettings().debug()) {
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(ChatColor.RED + "Could not save the " + s + ".yml file" + e);
 			}

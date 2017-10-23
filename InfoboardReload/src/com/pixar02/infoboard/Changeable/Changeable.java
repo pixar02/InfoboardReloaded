@@ -9,6 +9,7 @@ import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Changeable {
 	private InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	
 	private int counter = 0;
 	private String message;
 	private int row;

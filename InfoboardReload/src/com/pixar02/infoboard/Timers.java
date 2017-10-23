@@ -22,7 +22,7 @@ public class Timers {
 	public Timers() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
+		showtime = plugin.getFm().getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
 
 	}
 
@@ -39,7 +39,7 @@ public class Timers {
 	public void setPage(int page) {
 		rotation = page;
 		time = -1;
-		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
+		showtime = plugin.getFm().getFile("board").getInt("InfoBoard." + rotation + ".ShowTime");
 	}
 
 	public void start() {
@@ -84,7 +84,7 @@ public class Timers {
 				}
 			}
 
-		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Lines") * 20);
+		}, 0, (long) plugin.getFm().getFile("config").getDouble("Update Time.Lines") * 20);
 		/*
 		 * =========================================================================
 		 * UPDATES BOARD TITLE VALUE
@@ -102,14 +102,14 @@ public class Timers {
 
 			}
 
-		}, 0, (long) plugin.fm.getFile("config").getDouble("Update Time.Title") * 20);
+		}, 0, (long) plugin.getFm().getFile("config").getDouble("Update Time.Title") * 20);
 
 		/*
 		 * =========================================================================
 		 * SCROLLING TEXT
 		 * =========================================================================
 		 */
-		if (Settings.scrollingEnabled()) {
+		if (plugin.getSettings().scrollingEnabled()) {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				@Override
 				public void run() {
@@ -121,7 +121,7 @@ public class Timers {
 
 				}
 
-			}, 0, (long) (plugin.fm.getFile("config").getDouble("Scrolling Text.Shift Time") * 20));
+			}, 0, (long) (plugin.getFm().getFile("config").getDouble("Scrolling Text.Shift Time") * 20));
 		}
 
 		/*
@@ -129,7 +129,7 @@ public class Timers {
 		 * UPDATE TIMER
 		 * =========================================================================
 		 */
-		if (Settings.updater()) {
+		if (plugin.getSettings().updater()) {
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				public void run() {
 					plugin.logger.info("Checking for updates...");
@@ -148,7 +148,7 @@ public class Timers {
 	public void stop() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
+		showtime = plugin.getFm().getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
 
 		Bukkit.getScheduler().cancelTasks(plugin);
 	}
@@ -156,7 +156,7 @@ public class Timers {
 	public void reset() {
 		time = 0;
 		rotation = 1;
-		showtime = plugin.fm.getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
+		showtime = plugin.getFm().getFile("board").getInt("InfoBoard." + String.valueOf(rotation) + ".ShowTime");
 
 		Bukkit.getScheduler().cancelTasks(plugin);
 		start();

@@ -36,7 +36,7 @@ public class UpdateChecker {
 	 */
 	public void checkUpdate(String currentVersion) throws Exception {
 		String version = getVersion("98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4", 44270);
-		if (Settings.debug()) {
+		if (plugin.getSettings().debug()) {
 			plugin.getLogger().info("online: " + version);
 			plugin.getLogger().info("plugin: " + currentVersion);
 		}
@@ -65,7 +65,7 @@ public class UpdateChecker {
 			con.getOutputStream().write(("key=" + key + "&resource=" + resourceId).getBytes("UTF-8"));
 			version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
 		} catch (IOException ex) {
-			if (Settings.debug()) {
+			if (plugin.getSettings().debug()) {
 				plugin.getLogger().warning("Could not connect to Spigot!");
 				ex.printStackTrace();
 			}
