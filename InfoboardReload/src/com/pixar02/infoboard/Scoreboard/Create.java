@@ -25,7 +25,7 @@ public class Create {
 		int row, spaces = 0;
 
 		// Make sure the player is allowed to see the scoreboard
-		if (WorldGuard.boardsAllowedHere(player.getLocation())
+		if (plugin.getWG().boardsAllowedHere(player.getLocation())
 				&& !plugin.getSettings().isWorldDisabled(player.getWorld().getName())
 				&& player.hasPermission("ibr.View") && !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
@@ -39,7 +39,7 @@ public class Create {
 				return false;
 			}
 			// Get the players rank name
-			String rank = Vault.getRank(player);
+			String rank = plugin.getV().getRank(player);
 
 			// Make sure the rank is on the board, if it is set that to the
 			// player's rankName

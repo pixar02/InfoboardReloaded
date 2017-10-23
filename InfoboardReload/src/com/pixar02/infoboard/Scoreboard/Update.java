@@ -63,7 +63,7 @@ public class Update {
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// If the player no longer has permissions to see the board, remove
 			// it
-			if (!player.hasPermission("ibr.View") || !WorldGuard.boardsAllowedHere(player.getLocation())) {
+			if (!player.hasPermission("ibr.View") || !plugin.getWG().boardsAllowedHere(player.getLocation())) {
 				player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 			} else {// If the player doesn't have a scoreboard, then just create
 					// one
@@ -81,7 +81,7 @@ public class Update {
 						return false;
 					}
 					// Get the players rank name
-					String rank = Vault.getRank(player);
+					String rank = plugin.getV().getRank(player);
 
 					// Make sure the rank is on the board, if it is set that to
 					// the player's rankName

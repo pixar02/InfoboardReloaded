@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.APIS.Vault;
+import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Changeable.ChangeableManager;
 import com.pixar02.infoboard.Events.ChangeWorld;
 import com.pixar02.infoboard.Events.PlayerJoin;
@@ -33,6 +34,8 @@ public class InfoBoardReloaded extends JavaPlugin {
 	private Settings settings;
 	private Messages msgs;
 	private ChangeableManager CM;
+	private WorldGuard WG;
+	private Vault V;
 
 	public UpdateChecker uc = new UpdateChecker(this);;
 	public boolean update = false;
@@ -40,10 +43,10 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public ArrayList<String> hidefrom = new ArrayList<String>();
 
-	public static Economy economy;
-	public static Permission permission;
-	public static boolean economyB;
-	public static boolean permissionB;
+	public Economy economy;
+	public Permission permission;
+	public boolean economyB;
+	public boolean permissionB;
 
 	PluginDescriptionFile pdfFile = getDescription();
 	Logger logger = getLogger();
@@ -60,7 +63,6 @@ public class InfoBoardReloaded extends JavaPlugin {
 		// commands
 		getCommand("InfoBoardReloaded").setExecutor(new Commands(this));
 
-		Vault.load();
 		if (settings.changeableTextEnabled()) {
 			logger.info("Feature: Changeable Text is enbaled!");
 			logger.info(settings.getChangeable().size() + " Changeable(s) loaded");
@@ -124,14 +126,17 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	private void Instance() {
 
-		fm = new FileManager(this);
-		settings = new Settings(this);
-		msgs = new Messages(this);
-		timers = new Timers(this);
+		this.fm = new FileManager(this);
+		this.settings = new Settings(this);
+		this.msgs = new Messages(this);
+		this.timers = new Timers(this);
+		this.V = new Vault();
+		this.WG = new WorldGuard();
 
 		fm.setup();
 		settings.loadChangeable();
 		timers.start();
+		V.load();
 	}
 
 	public FileManager getFm() {
@@ -148,5 +153,13 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public ChangeableManager getCM() {
 		return this.CM;
+	}
+
+	public WorldGuard getWG() {
+		return this.WG;
+	}
+
+	public Vault getV() {
+		return this.V;
 	}
 }
