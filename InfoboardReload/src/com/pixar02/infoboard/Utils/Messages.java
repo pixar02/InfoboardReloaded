@@ -67,8 +67,8 @@ public class Messages {
 	 */
 	public String getTitle(Player player, String worldName, String rankName) {
 
-		String title = plugin.getFm().getFile("board").getString(
-				"InfoBoard." + String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
+		String title = plugin.getFm().getFile("board").getString("InfoBoard."
+				+ String.valueOf(plugin.getTimers().getPage()) + "." + worldName + "." + rankName + ".Title");
 
 		if (title.startsWith("<scroll>") && plugin.getSettings().scrollingEnabled()) {
 			title = title.replaceAll("<scroll>", "");

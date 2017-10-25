@@ -16,7 +16,6 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-
 		if (event.getPlayer().isOp() && plugin.update == true) {
 			event.getPlayer().sendMessage(ChatColor.DARK_AQUA + plugin.getFm().getFile("messages").getString("update"));
 		}

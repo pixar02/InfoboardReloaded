@@ -234,7 +234,7 @@ public class Commands implements CommandExecutor {
 
 			if (plugin.getFm().getFile("board").getInt("InfoBoard." + rotate + ".ShowTime") != 0) {
 
-				plugin.timers.setPage(Integer.valueOf(rotate));
+				plugin.getTimers().setPage(Integer.valueOf(rotate));
 				sender.sendMessage(plugin.getFm().getFile("messages").getString("set-page") + args[1]);
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (p.hasPermission("ibr.View")) {
@@ -323,7 +323,7 @@ public class Commands implements CommandExecutor {
 					plugin.getCM().reset(player);
 				}
 				plugin.getFm().reloadFile("board");
-				plugin.timers.reset();
+				plugin.getTimers().reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("InfoBoard.View")) {
@@ -348,7 +348,7 @@ public class Commands implements CommandExecutor {
 				plugin.getFm().reloadFile("config");
 				plugin.getSettings().changeable.clear();
 				plugin.getSettings().loadChangeable();
-				plugin.timers.reset();
+				plugin.getTimers().reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("InfoBoard.View")) {
@@ -366,7 +366,7 @@ public class Commands implements CommandExecutor {
 				Bukkit.getScheduler().cancelTasks(plugin);
 
 				plugin.getFm().reloadFile("messages");
-				plugin.timers.reset();
+				plugin.getTimers().reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("InfoBoard.View")) {
@@ -395,7 +395,7 @@ public class Commands implements CommandExecutor {
 
 				plugin.getSettings().changeable.clear();
 				plugin.getSettings().loadChangeable();
-				plugin.timers.reset();
+				plugin.getTimers().reset();
 
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					if (player.hasPermission("ibr.View")) {

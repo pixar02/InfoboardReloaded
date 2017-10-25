@@ -30,7 +30,7 @@ import net.milkbowl.vault.permission.Permission;
 
 public class InfoBoardReloaded extends JavaPlugin {
 
-	public Timers timers;
+	private Timers timers;
 	private FileManager fm;
 	private Settings settings;
 	private Messages msgs;
@@ -170,5 +170,9 @@ public class InfoBoardReloaded extends JavaPlugin {
 
 	public Vault getV() {
 		return this.V;
+	}
+
+	public Timers getTimers() {
+		return this.timers;
 	}
 }

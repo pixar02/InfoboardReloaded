@@ -5,8 +5,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
-import com.pixar02.infoboard.Utils.Messages;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class ChangeableText {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);

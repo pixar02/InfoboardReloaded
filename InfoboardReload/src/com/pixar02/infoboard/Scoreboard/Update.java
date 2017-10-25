@@ -68,10 +68,10 @@ public class Update {
 				} else {
 
 					// Get the board's world name
-					if (plugin.getSettings().doesWorldHaveScoreBoard(plugin.timers.getPage(),
+					if (plugin.getSettings().doesWorldHaveScoreBoard(plugin.getTimers().getPage(),
 							player.getWorld().getName())) {
 						worldName = player.getWorld().getName();
-					} else if (plugin.getSettings().doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
+					} else if (plugin.getSettings().doesGlobalHaveScoreBoard(plugin.getTimers().getPage())) {
 						worldName = "global";
 					} else {
 						return false;
@@ -81,18 +81,20 @@ public class Update {
 
 					// Make sure the rank is on the board, if it is set that to
 					// the player's rankName
-					if (plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
+					if (plugin.getSettings().doesRankHaveScoreBoard(plugin.getTimers().getPage(), worldName, rank)) {
 						rankName = rank;
 					}
 					// Make sure there is a default for the board
-					if (!plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
+					if (!plugin.getSettings().doesRankHaveScoreBoard(plugin.getTimers().getPage(), worldName,
+							rankName)) {
 						player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 						return false;
 					}
 					Board board = new Board(player);
 
-					HashMap<Integer, String> toAdd = getLines(plugin.getFm().getFile("board").getStringList("InfoBoard."
-							+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows"));
+					HashMap<Integer, String> toAdd = getLines(plugin.getFm().getFile("board")
+							.getStringList("InfoBoard." + String.valueOf(plugin.getTimers().getPage()) + "." + worldName
+									+ "." + rankName + ".Rows"));
 
 					for (Entry<Integer, String> e : toAdd.entrySet()) {
 

@@ -34,7 +34,7 @@ public class Scroll {
 		}
 		String string = builder.toString();
 
-		string = plugin.getMessages().getColored(string);
+		string = this.plugin.getMessages().getColored(string);
 
 		this.message = string;
 	}
