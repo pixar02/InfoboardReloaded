@@ -6,9 +6,14 @@ import java.util.List;
 import com.pixar02.infoboard.InfoBoardReloaded;
 
 public class Settings {
-	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	private InfoBoardReloaded plugin;
 
-	public static List<String> changeable = new ArrayList<String>();
+	public List<String> changeable = new ArrayList<String>();
+
+	public Settings(InfoBoardReloaded plugin) {
+		this.plugin = plugin;
+		loadChangeable();
+	}
 
 	/**
 	 * Determines if the rank has valid scoreboard
@@ -16,9 +21,9 @@ public class Settings {
 	 * @param rotation
 	 * @return true/false
 	 */
-	public static boolean doesGlobalHaveScoreBoard(int rotation) {
+	public boolean doesGlobalHaveScoreBoard(int rotation) {
 		boolean hasBoard = false;
-		for (String s : plugin.fm.getFile("board").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
+		for (String s : plugin.getFm().getFile("board").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
 				.getKeys(true)) {
 			if (!s.contains(".")) {
 				if (s.equals("global")) {
@@ -38,9 +43,9 @@ public class Settings {
 	 * @param rank
 	 * @return true/false
 	 */
-	public static boolean doesRankHaveScoreBoard(int rotation, String world, String rank) {
+	public boolean doesRankHaveScoreBoard(int rotation, String world, String rank) {
 		boolean hasBoard = false;
-		for (String s : plugin.fm.getFile("board")
+		for (String s : plugin.getFm().getFile("board")
 				.getConfigurationSection("InfoBoard." + String.valueOf(rotation) + "." + world).getKeys(true)) {
 			if (!s.contains(".")) {
 				if (s.equals(rank)) {
@@ -59,9 +64,9 @@ public class Settings {
 	 * @param world
 	 * @return true/false
 	 */
-	public static boolean doesWorldHaveScoreBoard(int rotation, String world) {
+	public boolean doesWorldHaveScoreBoard(int rotation, String world) {
 		boolean hasBoard = false;
-		for (String s : plugin.fm.getFile("board").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
+		for (String s : plugin.getFm().getFile("board").getConfigurationSection("InfoBoard." + String.valueOf(rotation))
 				.getKeys(true)) {
 			if (!s.contains(".")) {
 				if (s.equalsIgnoreCase(world)) {
@@ -78,8 +83,8 @@ public class Settings {
 	 *
 	 * @return list
 	 */
-	public static List<String> getRegionsDisabled() {
-		return plugin.fm.getFile("config").getStringList("WorldGuard.Prevent Showing In");
+	public List<String> getRegionsDisabled() {
+		return plugin.getFm().getFile("config").getStringList("WorldGuard.Prevent Showing In");
 	}
 
 	/**
@@ -88,8 +93,8 @@ public class Settings {
 	 * @param world
 	 * @return
 	 */
-	public static boolean isWorldDisabled(String world) {
-		return plugin.fm.getFile("config").getStringList("Disabled Worlds").contains(world) || (world == null);
+	public boolean isWorldDisabled(String world) {
+		return plugin.getFm().getFile("config").getStringList("Disabled Worlds").contains(world) || (world == null);
 	}
 
 	/**
@@ -97,8 +102,8 @@ public class Settings {
 	 *
 	 * @return true/false
 	 */
-	public static boolean scrollingEnabled() {
-		return plugin.fm.getFile("config").getBoolean("Scrolling Text.Enable");
+	public boolean scrollingEnabled() {
+		return plugin.getFm().getFile("config").getBoolean("Scrolling Text.Enable");
 	}
 
 	/**
@@ -106,8 +111,8 @@ public class Settings {
 	 * 
 	 * @return true/false
 	 */
-	public static boolean changeableTextEnabled() {
-		return plugin.fm.getFile("config").getBoolean("Changeable Text.Enable");
+	public boolean changeableTextEnabled() {
+		return plugin.getFm().getFile("config").getBoolean("Changeable Text.Enable");
 	}
 
 	/**
@@ -115,8 +120,8 @@ public class Settings {
 	 * 
 	 * @return true/false
 	 */
-	public static boolean updater() {
-		return plugin.fm.getFile("config").getBoolean("Updater");
+	public boolean updater() {
+		return plugin.getFm().getFile("config").getBoolean("Updater");
 	}
 
 	/**
@@ -124,8 +129,8 @@ public class Settings {
 	 * 
 	 * @return true/false
 	 */
-	public static boolean debug() {
-		return plugin.fm.getFile("config").getBoolean("Debug");
+	public boolean debug() {
+		return plugin.getFm().getFile("config").getBoolean("Debug");
 	}
 
 	/**
@@ -134,9 +139,9 @@ public class Settings {
 	 * @return ArrayList
 	 * 
 	 */
-	public static ArrayList<String> getText(String changeable) {
+	public ArrayList<String> getText(String changeable) {
 		ArrayList<String> lines = new ArrayList<String>();
-		for (String s : plugin.fm.getFile("config")
+		for (String s : plugin.getFm().getFile("config")
 				.getStringList("Changeable Text.Changeables." + changeable + ".text")) {
 			lines.add(s);
 		}
@@ -147,9 +152,9 @@ public class Settings {
 	 * Loads the changeable's in a list.
 	 * 
 	 */
-	public static void loadChangeable() {
+	public void loadChangeable() {
 		changeable.clear();
-		for (String s : plugin.fm.getFile("config").getConfigurationSection("Changeable Text.Changeables")
+		for (String s : plugin.getFm().getFile("config").getConfigurationSection("Changeable Text.Changeables")
 				.getKeys(false)) {
 			changeable.add(s);
 		}
@@ -160,8 +165,8 @@ public class Settings {
 	 * 
 	 * @return List
 	 */
-	public static List<String> getChangeable() {
-		return changeable;
+	public List<String> getChangeable() {
+		return this.changeable;
 	}
 
 	/**
@@ -169,8 +174,9 @@ public class Settings {
 	 * 
 	 * @return integer
 	 */
-	public static Integer getInterval(String changeable) {
-		int time = plugin.fm.getFile("config").getInt("Changeable Text.Changeables." + changeable + ".interval");
+	public Integer getInterval(String changeable) {
+		int time = plugin.getFm().getFile("config").getInt("Changeable Text.Changeables." + changeable + ".interval");
 		return time;
 	}
+
 }

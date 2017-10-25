@@ -1,10 +1,11 @@
 name: InfoBoardReloaded
 main: com.pixar02.infoboard.InfoBoardReloaded
-version: 1.6.0
+version: 1.6.1
 author: pixar02
 website : bit.ly/InfoBoardReloaded
 description: Show a scoreboard
 depend: [PlaceholderAPI, Vault, WorldGuard]
+softdepend: [ProtocolLib]
 
 commands:
   InfoBoardReloaded:

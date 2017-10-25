@@ -3,15 +3,9 @@ package com.pixar02.infoboard.Scoreboard;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import com.pixar02.infoboard.Scroll.Scroll;
-import com.pixar02.infoboard.Scroll.ScrollManager;
-import com.pixar02.infoboard.Utils.Messages;
-import com.pixar02.infoboard.Utils.Settings;
-import com.pixar02.infoboard.InfoBoardReloaded;
-import com.pixar02.infoboard.APIS.WorldGuard;
 import com.pixar02.infoboard.Changeable.Changeable;
-import com.pixar02.infoboard.Changeable.ChangeableManager;
-import com.pixar02.infoboard.APIS.Vault;
+import com.pixar02.infoboard.Scroll.Scroll;
+import com.pixar02.infoboard.InfoBoardReloaded;
 
 import java.util.List;
 
@@ -25,28 +19,29 @@ public class Create {
 		int row, spaces = 0;
 
 		// Make sure the player is allowed to see the scoreboard
-		if (WorldGuard.boardsAllowedHere(player.getLocation()) && !Settings.isWorldDisabled(player.getWorld().getName())
+		if (plugin.getWG().boardsAllowedHere(player.getLocation())
+				&& !plugin.getSettings().isWorldDisabled(player.getWorld().getName())
 				&& player.hasPermission("ibr.View") && !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// Get the board's world name
-			if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName())) {
+			if (plugin.getSettings().doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName())) {
 				worldName = player.getWorld().getName();
-			} else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
+			} else if (plugin.getSettings().doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
 				worldName = "global";
 			} else {
 				return false;
 			}
 			// Get the players rank name
-			String rank = Vault.getRank(player);
+			String rank = plugin.getV().getRank(player);
 
 			// Make sure the rank is on the board, if it is set that to the
 			// player's rankName
-			if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
+			if (plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
 				rankName = rank;
 			}
 			// Make sure there is a default for the board
-			if (!Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
+			if (!plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
 				return false;
 			}
 			// Remove any old objective from the sidebar
@@ -58,17 +53,19 @@ public class Create {
 			Board board = new Board();
 
 			// Remove and scrolling texts that the player may have had
-			ScrollManager.reset(player);
+			plugin.getSM().reset(player);
 
 			// Remove and changeable texts that the player may have had
-			ChangeableManager.reset(player);
-			List<String> changeables = Settings.getChangeable();
+			if (!(plugin.getCM().getChangeables(player) == null)) {
+				plugin.getCM().reset(player);
+			}
+			List<String> changeables = plugin.getSettings().getChangeable();
 
 			// Now we go to the title setting method thats down below
-			board.setTitle(Messages.getTitle(player, worldName, rankName));
+			board.setTitle(plugin.getMessages().getTitle(player, worldName, rankName));
 
 			// Loop through the lines
-			List<String> lines = plugin.fm.getFile("board").getStringList("InfoBoard."
+			List<String> lines = plugin.getFm().getFile("board").getStringList("InfoBoard."
 					+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows");
 
 			for (row = 0; row != lines.size(); row++) {
@@ -83,15 +80,15 @@ public class Create {
 					if (line.equals(" ") || line.equals("")) {
 						String space = "§" + spaces;
 						spaces++;
-						board.add(Messages.getColored(space), row);
+						board.add(plugin.getMessages().getColored(space), row);
 					} else // Manage all scrolling lines
 					if (line.startsWith("<scroll>")) {
 
-						if (Settings.scrollingEnabled()) {
+						if (plugin.getSettings().scrollingEnabled()) {
 							line = line.replaceAll("<scroll>", "");
 							int longestLine = getLongestLine(lines, player);
-							String string = Messages.getLine(line, player);
-							Scroll sc = ScrollManager.createScroller(player, string, row, longestLine);
+							String string = plugin.getMessages().getLine(line, player);
+							Scroll sc = plugin.getSM().createScroller(player, string, row, longestLine);
 							line = sc.getMessage();
 							board.add(line, row);
 						} else {
@@ -100,20 +97,17 @@ public class Create {
 						}
 					} else// Manage all changeable lines
 					if (line.startsWith("<changeable_")) {
-						if (Settings.changeableTextEnabled()) {
-							// leaves the changeable.
+						if (plugin.getSettings().changeableTextEnabled()) {
 							line = line.replaceAll("<changeable_", "").replaceAll(">", "").replaceAll(" ", "");
 							if (changeables.contains(line)) {
-								Changeable ch = ChangeableManager.createChangeables(player, line, row);
-								String l = ch.getMessage();
-								// replace placeholders, custom variables and colors
-								l = Messages.getLine(l, player);
-								board.add(l, row);
+								Changeable ch = plugin.getCM().createChangeables(player, line, row);
+								line = ch.getMessage();
+								line = plugin.getMessages().getLine(line, player);
+								board.add(line, row);
 							} else {
 								line = "Unknown Changeable";
 								board.add(line, row);
 							}
-
 						} else {
 							line = "Enable Changeable Text";
 							board.add(line, row);
@@ -125,14 +119,15 @@ public class Create {
 						String b = line.split(";")[1];
 
 						try {
-							board.add(Messages.getLine(a, player), Integer.valueOf(Messages.getLine(b, player)));
+							board.add(plugin.getMessages().getLine(a, player),
+									Integer.valueOf(plugin.getMessages().getLine(b, player)));
 						} catch (NumberFormatException ne) {
-							board.add(Messages.getLine(a, player), 0);
+							board.add(plugin.getMessages().getLine(a, player), row);
 						}
 					}
 					// Just a regular line
 					else {
-						board.add(Messages.getLine(line, player), row);
+						board.add(plugin.getMessages().getLine(line, player), row);
 					}
 				}
 			}
@@ -143,11 +138,11 @@ public class Create {
 		return true;
 	}
 
-	public static int getLongestLine(List<String> lines, Player player) {
+	private static int getLongestLine(List<String> lines, Player player) {
 		int longest = 0;
 		for (String line : lines) {
 			if (!line.contains("<scroll>")) {
-				String string = Messages.getReplacements(line, player);
+				String string = plugin.getMessages().getReplacements(line, player);
 				if (string.length() > longest) {
 					longest = string.length();
 				}

@@ -9,10 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
-import com.pixar02.infoboard.APIS.Vault;
-import com.pixar02.infoboard.APIS.WorldGuard;
-import com.pixar02.infoboard.Utils.Messages;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class Update {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
@@ -35,16 +31,13 @@ public class Update {
 	 * 
 	 * @param list
 	 */
-	public void getTitle(List<String> list) {
+	public static void getTitle(List<String> list) {
 		ArrayList<String> titles = new ArrayList<String>();
-
-		int i = 0;
 		for (String title : list) {
 			if (!title.equals(" ") && title.equals(" ") && !title.contains("<scroll>")
 					&& !title.contains("<changeable_")) {
 				titles.add(title);
 			}
-			i++;
 		}
 	}
 
@@ -60,12 +53,13 @@ public class Update {
 		String rankName = "default";
 
 		// Make sure the player is allowed to see the board
-		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
+		if (!plugin.getSettings().isWorldDisabled(player.getWorld().getName())
+				&& !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
 			// If the player no longer has permissions to see the board, remove
 			// it
-			if (!player.hasPermission("ibr.View") || !WorldGuard.boardsAllowedHere(player.getLocation())) {
+			if (!player.hasPermission("ibr.View") || !plugin.getWG().boardsAllowedHere(player.getLocation())) {
 				player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 			} else {// If the player doesn't have a scoreboard, then just create
 					// one
@@ -74,29 +68,30 @@ public class Update {
 				} else {
 
 					// Get the board's world name
-					if (Settings.doesWorldHaveScoreBoard(plugin.timers.getPage(), player.getWorld().getName())) {
+					if (plugin.getSettings().doesWorldHaveScoreBoard(plugin.timers.getPage(),
+							player.getWorld().getName())) {
 						worldName = player.getWorld().getName();
-					} else if (Settings.doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
+					} else if (plugin.getSettings().doesGlobalHaveScoreBoard(plugin.timers.getPage())) {
 						worldName = "global";
 					} else {
 						return false;
 					}
 					// Get the players rank name
-					String rank = Vault.getRank(player);
+					String rank = plugin.getV().getRank(player);
 
 					// Make sure the rank is on the board, if it is set that to
 					// the player's rankName
-					if (Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
+					if (plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rank)) {
 						rankName = rank;
 					}
 					// Make sure there is a default for the board
-					if (!Settings.doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
+					if (!plugin.getSettings().doesRankHaveScoreBoard(plugin.timers.getPage(), worldName, rankName)) {
 						player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 						return false;
 					}
 					Board board = new Board(player);
 
-					HashMap<Integer, String> toAdd = getLines(plugin.fm.getFile("board").getStringList("InfoBoard."
+					HashMap<Integer, String> toAdd = getLines(plugin.getFm().getFile("board").getStringList("InfoBoard."
 							+ String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Rows"));
 
 					for (Entry<Integer, String> e : toAdd.entrySet()) {
@@ -112,19 +107,19 @@ public class Update {
 								String b = line.split(";")[1];
 
 								try {
-									board.remove(Messages.getLine(a, player));
-									board.add(Messages.getLine(a, player),
-											Integer.valueOf(Messages.getLine(b, player)));
+									board.remove(plugin.getMessages().getLine(a, player));
+									board.add(plugin.getMessages().getLine(a, player),
+											Integer.valueOf(plugin.getMessages().getLine(b, player)));
 								} catch (NumberFormatException ne) {
-									board.remove(Messages.getLine(a, player));
-									board.add(Messages.getLine(a, player),
-											Integer.valueOf(Messages.getLine(b, player)));
+									board.remove(plugin.getMessages().getLine(a, player));
+									board.add(plugin.getMessages().getLine(a, player),
+											Integer.valueOf(plugin.getMessages().getLine(b, player)));
 								}
 							}
 							// Just a regular line
 							else {
 
-								board.update(Messages.getLine(line, player), -row);
+								board.update(plugin.getMessages().getLine(line, player), -row);
 							}
 					}
 				}
@@ -140,7 +135,6 @@ public class Update {
 	 * @return true/false (boolean)
 	 */
 	public static boolean updateTitle(Player player, String s) {
-
 		return true;
 	}
 }

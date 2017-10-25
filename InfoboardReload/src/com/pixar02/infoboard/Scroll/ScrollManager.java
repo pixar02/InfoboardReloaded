@@ -5,12 +5,18 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
 
 public class ScrollManager {
+	private InfoBoardReloaded plugin;
 
-	private static HashMap<Player, ArrayList<Scroll>> scrollers = new HashMap<Player, ArrayList<Scroll>>();
-	private static HashMap<Player, Scroll> title = new HashMap<Player, Scroll>();
+	private HashMap<Player, ArrayList<Scroll>> scrollers = new HashMap<Player, ArrayList<Scroll>>();
+	private HashMap<Player, Scroll> title = new HashMap<Player, Scroll>();
+
+	public ScrollManager(InfoBoardReloaded plugin) {
+		this.plugin = plugin;
+	}
 
 	/**
 	 * Create a scroller
@@ -21,16 +27,16 @@ public class ScrollManager {
 	 * @param width
 	 * @return
 	 */
-	public static Scroll createScroller(Player p, String message, int row, int width) {
-		Scroll sc = new Scroll(message, row, width);
+	public Scroll createScroller(Player p, String message, int row, int width) {
+		Scroll sc = new Scroll(plugin, message, row, width);
 		ArrayList<Scroll> scs;
-		if (ScrollManager.scrollers.containsKey(p)) {
-			scs = ScrollManager.scrollers.get(p);
+		if (this.scrollers.containsKey(p)) {
+			scs = this.scrollers.get(p);
 		} else {
 			scs = new ArrayList<Scroll>();
 		}
 		scs.add(sc);
-		ScrollManager.scrollers.put(p, scs);
+		this.scrollers.put(p, scs);
 		return sc;
 	}
 
@@ -41,10 +47,10 @@ public class ScrollManager {
 	 * @param message
 	 * @return
 	 */
-	public static Scroll createTitleScroller(Player p, String message) {
+	public Scroll createTitleScroller(Player p, String message) {
 
-		Scroll sc = new Scroll(message, 0, 16);
-		ScrollManager.title.put(p, sc);
+		Scroll sc = new Scroll(plugin, message, 0, 16);
+		this.title.put(p, sc);
 
 		return sc;
 	}
@@ -55,8 +61,8 @@ public class ScrollManager {
 	 * @param p
 	 * @return
 	 */
-	public static ArrayList<Scroll> getScrollers(Player p) {
-		return ScrollManager.scrollers.get(p);
+	public ArrayList<Scroll> getScrollers(Player p) {
+		return this.scrollers.get(p);
 	}
 
 	/**
@@ -65,8 +71,8 @@ public class ScrollManager {
 	 * @param p
 	 * @return
 	 */
-	public static Scroll getTitleScroller(Player p) {
-		return ScrollManager.title.get(p);
+	public Scroll getTitleScroller(Player p) {
+		return this.title.get(p);
 	}
 
 	/**
@@ -74,15 +80,15 @@ public class ScrollManager {
 	 *
 	 * @param p
 	 */
-	public static void reset(Player p) {
+	public void reset(Player p) {
 		if (getScrollers(p) != null) {
 			for (Scroll sc : getScrollers(p)) {
 				String lastString = sc.getMessage();
 				new Board(p).remove(lastString);
 			}
 		}
-		ScrollManager.scrollers.remove(p);
-		ScrollManager.title.remove(p);
+		this.scrollers.remove(p);
+		this.title.remove(p);
 	}
 
 }

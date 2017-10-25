@@ -16,6 +16,7 @@
 # |                      Use like: <changeable_<variable>>                    |
 # |                       Enabled- enable or disable                          |
 # |                  Changeables - Custom changeable variables                |
+# |                  Text - the text lines you want to display                |
 # |	             interval- how fast the lines should update in seconds        | 
 # |---------------------------------------------------------------------------|
 # |          Update Time how fast you scoreboard updates in seconds           |
@@ -45,9 +46,9 @@ Changeable Text:
   Changeables:
     healthloc:
       text:
-      - '&a&lHealth: ; &e%player_health%&a/&c%player_max_health%'
-      - '&5&lLocation: ; &a%player_x%&7, &a%player_y%&7, &a%player_z%'
-      - '&e&lDate Joined: ; &l%player_first_join_date%'
+      - '&e%player_health%&a/&c%player_max_health%'
+      - '&a%player_x%&7, &a%player_y%&7, &a%player_z%'
+      - '&l%player_first_join_date%'
       interval: 1 
         
 Update Time:

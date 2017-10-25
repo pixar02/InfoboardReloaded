@@ -5,11 +5,13 @@ import org.bukkit.entity.Player;
 
 import com.pixar02.infoboard.GetVariables;
 import com.pixar02.infoboard.InfoBoardReloaded;
-import com.pixar02.infoboard.Changeable.ChangeableManager;
-import com.pixar02.infoboard.Scroll.ScrollManager;
 
 public class Messages {
-	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
+	private InfoBoardReloaded plugin;
+
+	public Messages(InfoBoardReloaded plugin) {
+		this.plugin = plugin;
+	}
 
 	/**
 	 * Get the message in color
@@ -17,7 +19,7 @@ public class Messages {
 	 * @param line
 	 * @return new line (String)
 	 */
-	public static String getColored(String line) {
+	public String getColored(String line) {
 		line = ChatColor.translateAlternateColorCodes('&', line);
 		line = line.replaceAll("&x", RandomChatColor.getColor().toString());
 		line = line.replaceAll("&y", RandomChatColor.getFormat().toString());
@@ -31,7 +33,7 @@ public class Messages {
 	 * @param player
 	 * @return new line (String)
 	 */
-	public static String getLine(String line, Player player) {
+	public String getLine(String line, Player player) {
 
 		if (line.contains("%")) {
 			line = getReplacements(line, player);
@@ -51,7 +53,7 @@ public class Messages {
 	 * @param player
 	 * @return new line (String)
 	 */
-	public static String getReplacements(String line, Player player) {
+	public String getReplacements(String line, Player player) {
 		return GetVariables.replaceVariables(line, player);
 	}
 
@@ -63,19 +65,19 @@ public class Messages {
 	 * @param rankName
 	 * @return title (String)
 	 */
-	public static String getTitle(Player player, String worldName, String rankName) {
+	public String getTitle(Player player, String worldName, String rankName) {
 
-		String title = plugin.fm.getFile("board").getString(
+		String title = plugin.getFm().getFile("board").getString(
 				"InfoBoard." + String.valueOf(plugin.timers.getPage()) + "." + worldName + "." + rankName + ".Title");
 
-		if (title.startsWith("<scroll>") && Settings.scrollingEnabled()) {
+		if (title.startsWith("<scroll>") && plugin.getSettings().scrollingEnabled()) {
 			title = title.replaceAll("<scroll>", "");
 			// and create a Title scroller
-			title = ScrollManager.createTitleScroller(player, getLine(title, player)).getMessage();
+			title = plugin.getSM().createTitleScroller(player, getLine(title, player)).getMessage();
 
-		} else if (title.startsWith("<changeable_") && Settings.changeableTextEnabled()) {
+		} else if (title.startsWith("<changeable_") && plugin.getSettings().changeableTextEnabled()) {
 			title.replaceAll("<changeable_", "").replaceAll(">", "");
-			title = ChangeableManager.createChangeableTitle(player, title).getMessage();
+			title = plugin.getCM().createChangeableTitle(player, title).getMessage();
 
 		} else {
 			title = getLine(title.substring(0, Math.min(title.length(), 32)), player);

@@ -5,18 +5,18 @@ import org.bukkit.scoreboard.DisplaySlot;
 
 import com.pixar02.infoboard.InfoBoardReloaded;
 import com.pixar02.infoboard.Scoreboard.Board;
-import com.pixar02.infoboard.Utils.Settings;
 
 public class ScrollText {
 	private static InfoBoardReloaded plugin = InfoBoardReloaded.getPlugin(InfoBoardReloaded.class);
 
 	public static void scroll(Player player) {
 		// Make sure the user can see the board
-		if (!Settings.isWorldDisabled(player.getWorld().getName()) && !plugin.hidefrom.contains(player.getName())
+		if (!plugin.getSettings().isWorldDisabled(player.getWorld().getName())
+				&& !plugin.hidefrom.contains(player.getName())
 				&& ((player.getScoreboard().getObjective(DisplaySlot.SIDEBAR) == null) || player.getScoreboard()
 						.getObjective(DisplaySlot.SIDEBAR).getName().equalsIgnoreCase("InfoBoard"))) {
-			if (ScrollManager.getScrollers(player) != null) {
-				for (Scroll sc : ScrollManager.getScrollers(player)) {
+			if (plugin.getSM().getScrollers(player) != null) {
+				for (Scroll sc : plugin.getSM().getScrollers(player)) {
 					try {
 						// Move scroller over one, and add the new line
 						sc.next();
@@ -30,9 +30,9 @@ public class ScrollText {
 				}
 			}
 
-			if (ScrollManager.getTitleScroller(player) != null) {
+			if (plugin.getSM().getTitleScroller(player) != null) {
 				try {
-					Scroll sc = ScrollManager.getTitleScroller(player);
+					Scroll sc = plugin.getSM().getTitleScroller(player);
 
 					// Change the boards title to the next scroller
 					sc.next();
@@ -46,7 +46,7 @@ public class ScrollText {
 			}
 
 		} else {
-			ScrollManager.reset(player);
+			plugin.getSM().reset(player);
 		}
 
 	}
