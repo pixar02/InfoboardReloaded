@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.jar"/>
 	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.1.jar"/>
 	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Update 1.11.2/Bungee_5.1/BungeeCord.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
