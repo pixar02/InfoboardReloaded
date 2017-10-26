@@ -27,12 +27,12 @@ all-reload: 'All configs have been reloaded'
 
 #Create command
 page-exists: 'This page already exists!'
-created-success: 'The page was successfully created'
+create-success: 'The page was successfully created'
 
 #Add command
 #add-success adds the the page number after the messages and the line on the second line
 page-doesnot-exist: 'This Page does not exist'
-add-success: 'Added a new line to page:'
+add-success: 'Added a new line to page: '
 title-exists: 'A title has already been set for the page'
 max-lines: 'You can only have 15 lines per scoreboard!'
 

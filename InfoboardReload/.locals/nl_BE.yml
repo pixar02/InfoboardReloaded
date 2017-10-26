@@ -16,8 +16,8 @@ showing: 'scorebord zichtbaar'
 #Set command
 #deze lijnen sturen the lijn en the nummer dat je hebt ingevoerd
 #voorbeeld: /ibr set 5 -> 'Pagina niet gevonden: 5' or 'Pagina getzet naar: 5'
-invalid-page: 'Pagina niet gevonden:'
-set-page: 'Pagina getzet naar:'
+invalid-page: 'Pagina niet gevonden: '
+set-page: 'Pagina getzet naar: '
 
 #Reload command
 board-reload: 'board.yml is herladen'
@@ -27,12 +27,12 @@ all-reload: 'Alle configs zijn herladen'
 
 #Create command
 page-exists: 'Deze pagina bestaat al!'
-created-success: 'Deze pagina is succesvol gemaakt'
+create-success: 'Deze pagina is succesvol gemaakt'
 
 #Add command
 #add-success voegt na de lijn de pagina nummer bij en op de volgende lijn de text van de lijn.
 page-doesnot-exist: 'Deze pagina bestaat niet!'
-add-success: 'Niewe lijn toegevoegd aan pagina:'
+add-success: 'Niewe lijn toegevoegd aan pagina: '
 title-exists: 'Deze pagina heeft al een titel'
 max-lines: 'Je kan maximaal 15 lijnen met text hebben per scorebord!'
 
