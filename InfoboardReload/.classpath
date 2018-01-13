@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/PlaceholderAPI-2.8.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/Vault.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldedit-bukkit-6.1.7.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldguard-6.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.8.8.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.4.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Pixar/Documents/Minecraft/Server_files/Update 1.11.2/Bungee_5.1/BungeeCord.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src" />
+	<classpathentry kind="con"
+		path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/PlaceholderAPI-2.8.2.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/Vault.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldedit-bukkit-6.1.7.2.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/Buildpath/ibr/worldguard-6.2.1.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.8.8.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.2.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.4.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.9.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.2.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.10.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.2.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.11.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.1.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/server Buildtools/craftbukkit-1.12.jar" />
+	<classpathentry kind="lib"
+		path="D:/Users/Pixar/Documents/Minecraft/Server_files/Update 1.11.2/Bungee_5.1/BungeeCord.jar" />
+	<classpathentry kind="output" path="bin" />
 </classpath>
